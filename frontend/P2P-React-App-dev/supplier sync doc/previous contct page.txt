@@ -1,0 +1,175 @@
+import React, { useState, useRef, MutableRefObject } from 'react'
+import InputLebel from '../../common_component/InputLebel'
+import CommonInputField from '../../common_component/CommonInputField';
+import FilePickerInput from '../../common_component/FilePickerInput';
+import CommonButton from '../../common_component/CommonButton';
+
+import Tooltip from '@mui/material/Tooltip';
+
+
+
+
+
+
+export default function ContactPersonPage() {
+    const [components, setComponents] = useState<JSX.Element[]>([
+        <ContactPersonPage key="1" />,
+
+    ]);
+    const handleAddComponent = () => {
+        const newComponents = [
+            ...components,
+            <ContactPersonPage key={components.length + 1} />,
+        ];
+        setComponents(newComponents);
+    };
+
+    const handleRemoveComponent = (index: number) => {
+        const newComponents = [...components];
+        newComponents.splice(index, 1);
+        setComponents(newComponents);
+    };
+
+    const refs: Array<MutableRefObject<HTMLInputElement | null>> = Array(5)
+        .fill(null)
+        .map(() => ({ current: null }));
+
+    const [names, setNames] = useState<string[]>(Array(5).fill(''));
+    const [postions, setPostions] = useState<string[]>(Array(5).fill(''));
+    const [mobiles, setMobiles] = useState<string[]>(Array(5).fill(''));
+    const [emails, setEmails] = useState<string[]>(Array(5).fill(''));
+    const [contacts, setContacts] = useState<string[]>(Array(5).fill(''));
+    const [nid, setNid] = useState<boolean[]>(Array(5).fill(false));
+    const [passport, setPassport] = useState<boolean[]>(Array(5).fill(false));
+    //true means nid //false means passport
+    const handleNameChange = (value: string) => {
+        setNames([value, ...names.slice(1)]);
+        console.log(names[0]);
+    };
+    const handlePositionChange = (value: string) => {
+        setPostions([value, ...postions.slice(1)]);
+        console.log(postions[0]);
+    };
+    const handleMobileChange = (value: string) => {
+        setMobiles([value, ...postions.slice(1)]);
+        console.log(mobiles[0]);
+    };
+    const handleEmailChange = (value: string) => {
+        setEmails([value, ...postions.slice(1)]);
+
+    };
+    const handleContactChange = (value: string) => {
+        setContacts([value, ...postions.slice(1)]);
+
+    };
+    const handleNidChange = (value: boolean) => {
+        // setNid([value, ...postions.slice(1)])
+    }
+
+    const nameChangeHandlers: ((value: string) => void)[] = Array(5).fill(
+        handleNameChange
+    );
+    const positionChangeHandlers: ((value: string) => void)[] = Array(5).fill(
+        handlePositionChange
+    );
+    const mobileChangeHandlers: ((value: string) => void)[] = Array(5).fill(
+        handleMobileChange
+    );
+    const emailChangeHandlers: ((value: string) => void)[] = Array(5).fill(
+        handleEmailChange
+    );
+    const contactChangeHandlers: ((value: string) => void)[] = Array(5).fill(
+        handleEmailChange
+    );
+
+    const handleSignature = (file: File | null) => {
+        if (file) {
+            // Handle the selected file here
+            console.log('Selected file:', file);
+        } else {
+            // No file selected
+            console.log('No file selected');
+        }
+    };
+
+    const submit = async () => {
+
+    }
+
+    const handleSignatureArray = new Array(5).fill(handleSignature);
+    return (
+        <div className=' m-8 flex flex-col items-start '>
+            {components.map((component, index) => (
+                <div key={index} className=' flex flex-col items-start space-y-4 w-full my-8'>
+                    <div className=' flex flex-row justify-between w-full'>
+                        <h3 className=' font-semibold font-lg text-hintColor'>Contact person-{index + 1}</h3>
+                        {
+                            index === 0 ? null :
+                                <Tooltip title="DELETE">
+                                    <button onClick={() => { handleRemoveComponent(index) }} className=' bg-hintColor w-6 h-6 text-whiteColor text-xl font-bold shadow-sm rounded-sm flex justify-center items-center pb-1'>
+                                        {/* <img src="/images/trash.png" alt="trash" className='w-4 h-4 text-whiteColor' /> */}
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-5 pt-1 text-whiteColor font-bold">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                        </svg>
+
+                                    </button>
+                                </Tooltip>
+                        }
+                    </div>
+                    <div className=' w-full flex flex-row justify-between'>
+                        <div className=' flex flex-col items-start space-y-2'>
+                            <InputLebel titleText="Name" />
+                            <CommonInputField inputRef={refs[index]} hint='Name' onChangeData={nameChangeHandlers[index]} type='text' />
+
+                        </div>
+                        <div className=' flex flex-col items-start space-y-2'>
+                            <InputLebel titleText="Position" />
+                            <CommonInputField inputRef={refs[index]} hint='Position' onChangeData={positionChangeHandlers[index]} type='text' />
+
+                        </div>
+                    </div>
+                    <div className=' w-full flex flex-row justify-between'>
+                        <div className=' flex flex-col items-start space-y-2'>
+                            <InputLebel titleText="Contact Number" />
+                            <CommonInputField inputRef={refs[index]} hint='+880-1XXXXXXXX' onChangeData={contactChangeHandlers[index]} type='number' />
+
+                        </div>
+                        <div className=' flex flex-col items-start space-y-2'>
+                            <InputLebel titleText="Mobile" />
+                            <CommonInputField inputRef={refs[index]} hint='+880-1XXXXXXXX' onChangeData={mobileChangeHandlers[index]} type='number' />
+
+                        </div>
+
+                    </div>
+                    <div className=' w-full flex flex-row justify-between'>
+                        <div className=' flex flex-col items-start space-y-2'>
+                            <InputLebel titleText="Email" />
+                            <CommonInputField inputRef={refs[index]} hint='Email' onChangeData={emailChangeHandlers[index]} type='text' />
+
+                        </div>
+
+                        <div className=' flex flex-col items-start space-y-2'>
+                            <InputLebel titleText="Signature" />
+                            <FilePickerInput width='w-96' onFileSelect={handleSignatureArray[index]} />
+
+                        </div>
+                    </div>
+
+                </div>
+            ))}
+
+            <div className='my-8 w-full flex flex-row  items-center'>
+                <div className=' bg-hintColor h-1 w-full'></div>
+                <Tooltip title='ADD'>
+                    <button disabled={(components.length <= 5) ? false : true} onClick={handleAddComponent} className=' bg-hintColor w-6 h-6 text-whiteColor text-xl font-bold shadow-sm rounded-sm flex justify-center items-center pb-1'>
+                        +
+                    </button>
+                </Tooltip>
+            </div>
+            <div className='w-full  mt-4 flex flex-row justify-end items-end'>
+                <CommonButton titleText="Submit" onClick={submit} />
+            </div>
+
+        </div>
+    )
+}

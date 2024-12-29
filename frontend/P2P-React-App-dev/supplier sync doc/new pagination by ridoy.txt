@@ -1,0 +1,138 @@
+
+  // new pagination start
+  const renderPageNumbers = () => {
+    const totalPages = total ?? 0;
+    const pageWindow = 5;
+    const halfWindow = Math.floor(pageWindow / 2);
+    let startPage = Math.max(1, pageNo2 - halfWindow);
+    let endPage = Math.min(totalPages, startPage + pageWindow - 1);
+
+    if (endPage - startPage + 1 < pageWindow) {
+      startPage = Math.max(1, endPage - pageWindow + 1);
+    }
+
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => {
+            setPageNo2(i);
+            setOffSet((i - 1) * limit);
+            getBannerList((i - 1) * limit, limit);
+          }}
+          className={`w-6 h-6 text-[12px] border rounded-md ${
+            pageNo2 === i ? "border-sky-400" : "border-transparent"
+          }`}
+          disabled={pageNo2 === i}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pages;
+  };
+  // new pagination end
+
+  const next = async () => {
+    let newOff;
+
+    newOff = offset + limit;
+    console.log(newOff);
+    setOffSet(newOff);
+
+    setPageNo2((pre) => pre + 1);
+    console.log(limit);
+    // getHistory("", "", newOff, limit);
+    getBannerList(newOff, limit);
+  };
+
+  const previous = async () => {
+    let newOff = offset - limit;
+    console.log(newOff);
+    if (newOff < 0) {
+      newOff = 0;
+      console.log(newOff);
+    }
+
+    setOffSet(newOff);
+    setPageNo2((pre) => pre - 1);
+    console.log(limit);
+
+    // getHistory("", "", newOff, limit);
+    getBannerList(newOff, limit);
+  };
+
+  const dividePage = (number: number, lmt: number) => {
+    console.log(number);
+    if (typeof number !== "number") {
+      throw new Error("Input must be a number");
+    }
+
+    const re = Math.ceil(number / lmt);
+
+    setTotal(re);
+  };
+
+  const getBannerList = async (ofs: number, lmt: number) => {
+    try {
+      setIsLoading(true);
+
+      const result = await BannerListService(token!, "", "", null, ofs, lmt);
+
+      if (result.data.status === 200) {
+        dividePage(result.data.total, lmt);
+        setImageList(result.data.data);
+        setImagePath(result.data.path);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      showErrorToast("Banner Load Failed");
+    }
+  };
+
+  const [total, setTotal] = useState<number | null>(null);
+  const [limit, setLimit] = useState<number>(5);
+  const [pageNo2, setPageNo2] = useState<number>(1);
+  const [offset, setOffSet] = useState<number>(0);
+
+
+
+{pageNo2 !== total && (
+                    <button
+                      // disabled={pageNo === total ? true : false}
+                      onClick={next}
+                      className=" px-4 py-2 rounded-md flex space-x-2 items-center shadow-md border-[0.5px] border-borderColor "
+                      style={{
+                        boxShadow:
+                          "rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px",
+                      }}
+                    >
+                      <p className=" text-[12px] font-mon">Next</p>
+                      <div className="w-4 h-4 ">
+                        <ArrowRightIcon className=" w-full h-full " />
+                      </div>
+                    </button>
+                  )}
+
+
+{pageNo2 !== 1 && (
+                    <button
+                      // disabled={pageNo === 1 ? true : false}
+                      onClick={previous}
+                      className=" px-4 py-2 rounded-md flex space-x-2 items-center border-[0.5px] border-borderColor "
+                      style={{
+                        boxShadow:
+                          "rgba(145, 158, 171, 0.2) 0px 0px 2px 0px, rgba(145, 158, 171, 0.12) 0px 12px 24px -4px",
+                      }}
+                    >
+                      <div className="w-4 h-4 ">
+                        <ArrowLeftIcon className=" w-full h-full " />
+                      </div>
+                      <p className=" text-[12px] font-mon">Previous</p>
+                    </button>
+                  )}

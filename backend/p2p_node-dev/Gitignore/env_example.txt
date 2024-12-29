@@ -1,0 +1,155 @@
+PORT=3000
+#Production
+# DATABASE_URL='10.25.3.15:1521/SSGPROD'
+# SECRET_KEY='HAz3a9a#d0u5'
+#Dev
+# DATABASE_URL='10.27.1.148:1551/SSGPROD'
+# SECRET_KEY='xxp2p1234'
+#Dev2
+DATABASE_URL='10.27.1.174:1531/ebs_SSGPROD'
+SECRET_KEY='xxp2p1234'
+
+DB_USER= 'XXP2P'
+JWT_SECRET_KEY='xxp2pFusion1@#'
+JWT_EXPIR='720h'
+VERSION_1='/api/v1'
+DATABASE_NAME='XXP2P'
+#Local
+ORACLE_CLIENT_PATH_LOCAL = 'D:\\instantclient_19_20'
+#Dev
+ORACLE_CLIENT_PATH_DEV = '/opt/oracle/instantclient_19_20'
+#Production
+ORACLE_CLIENT_PATH_PROD = '/opt/oracle/instantclient_19_20'
+#npm v 8.5.5
+
+frontend_url="http://localhost:3012"
+#backend_url="http://localhost:3000"
+#Dev
+backend_url="http://10.27.1.83:3000"
+#Production
+#backend_url="http://10.35.1.20:3000"
+
+document_file_path_name = "/document"
+document_file_path = "public/upload/document/"
+
+supplier_check_file_path_name = "/supplier-check-file"
+supplier_check_file_path = "public/upload/supplier/check_file/"
+
+supplier_company_seal_file_path_name = "/supplier-company-seal-file"
+supplier_company_seal_file_path = "public/upload/supplier/company_seal/"
+
+supplier_signature_file_path_name = "/supplier-signature-file"
+supplier_signature_file_path = "public/upload/supplier/signature_file/"
+
+trade_or_export_license_file_path_name = "/trade-or-export-license-file"
+trade_or_export_license_file_path = "public/upload/supplier/trade-or-export-license-file/"
+
+ebin_file_path_name = "/ebin-file"
+ebin_file_path = "public/upload/supplier/ebin-file/"
+
+etin_file_path_name = "/etin-file"
+etin_file_path = "public/upload/supplier/etin-file/"
+
+agent_etin_file_path_name = "/agent-etin-file"
+agent_etin_file_path = "public/upload/supplier/agent-etin-file/"
+
+tax_rtn_ackn_slip_file_path_name = "/tax-rtn-ackn-slip-file"
+tax_rtn_ackn_slip_file_path = "public/upload/supplier/tax-rtn-ackn-slip-file/"
+
+
+incorporation_cirtificate_file_path_name = "/incorporation-cirtificate-file"
+incorporation_cirtificate_file_path = "public/upload/supplier/incorporation-cirtificate-file/"
+
+memorandum_association_file_path_name = "/memorandum-association-file"
+memorandum_association_file_path = "public/upload/supplier/memorandum-association-file/"
+
+authorized_signs_file_path_name = "/authorized-signs-file"
+authorized_signs_file_path = "public/upload/supplier/authorized-signs-file/"
+
+article_association_file_path_name = "/article-association-file"
+article_association_file_path = "public/upload/supplier/article-association-file/"
+
+prominent_clients_file_path_name = "/prominent-clients-file"
+prominent_clients_file_path = "public/upload/supplier/prominent-clients-file/"
+
+
+annual_turnover_file_path_name = "/annual-turnover-file"
+annual_turnover_file_path = "public/upload/supplier/annual-turnover-file/"
+
+qa_cirtificate_file_path_name = "/qa-cirtificate-file"
+qa_cirtificate_file_path = "public/upload/supplier/qa-cirtificate-file/"
+
+company_profile_file_path_name = "/company-profile-file"
+company_profile_file_path = "public/upload/supplier/company-profile-file/"
+
+recommendation_cirtificate_file_path_name = "/recommendation-cirtificate-file"
+recommendation_cirtificate_file_path = "public/upload/supplier/recommendation-cirtificate-file/"
+
+excellency_specialied_cirtificate_file_path_name = "/excellency-specialied-cirtificate-file"
+excellency_specialied_cirtificate_file_path = "public/upload/supplier/excellency-specialied-cirtificate-file/"
+
+company_bank_solvency_cirtificate_file_path_name = "/company-bank-solvency-cirtificate-file"
+company_bank_solvency_cirtificate_file_path = "public/upload/supplier/company-bank-solvency-cirtificate-file/"
+
+goods_list_file_path_name = "/goods-list-file"
+goods_list_file_path = "public/upload/supplier/goods-list-file/"
+
+
+business_premises_file_path_name = "/business-premises-file"
+business_premises_file_path = "public/upload/supplier/business-premises-file/"
+
+machine_manpower_list_file_path_name = "/machine-manpower-list-file"
+machine_manpower_list_file_path = "public/upload/supplier/machine-manpower-list-file/"
+
+profile_pic1_file_path_name = "/profile-pic1-file"
+profile_pic1_file_path = "public/upload/supplier/profile-pic1-file/"
+
+profile_pic2_file_path_name = "/profile-pic2-file"
+profile_pic2_file_path = "public/upload/supplier/profile-pic2-file/"
+
+signature_file_path_name = "/signature-file"
+signature_file_path = "public/upload/supplier/signature-file/"
+
+nid_or_passport_file_path_name = "/signature-file"
+nid_or_passport_file_path = "public/upload/supplier/signature-file/"
+
+profile_pic_file_path_name = "/profilepic-file"
+profile_pic_file_path = "public/upload/allusers/profile-pic-file/"
+
+# rfq_header_file_path_name = "/rfq-header-file"
+# rfq_header_file_path = "public/upload/allusers/rfq-header-file/"
+
+rfq_lines_file_path_name = "/rfq-lines-file"
+rfq_lines_file_path = "public/upload/allusers/rfq-lines-file/"
+
+rfq_all_file_path_name = "/rfq-lines-file"
+rfq_all_file_path = "public/upload/allusers/rfq-all-file/"
+
+rfq_header_file_path_name = "/rfq-header-file"
+rfq_header_file_path = "public/upload/allusers/rfq-header-files/rfq-header-file/"
+
+rfq_header_term_file_path_name = "/rfq-header-term-file"
+rfq_header_term_file_path = "public/upload/allusers/rfq-header-files/rfq-term-file/"
+
+rfq_buyer_lines_file_path_name = "/rfq-lines-file"
+rfq_buyer_lines_file_path = "public/upload/allusers/rfq-lines-file/buyer-files/"
+
+rfq_supplier_lines_file_path_name = "/rfq-lines-file"
+rfq_supplier_lines_file_path = "public/upload/supplier/rfq-lines-file/supplier-files/"
+
+rfq_supplier_term_file_path_name = "/rfq-term-file"
+rfq_supplier_term_file_path = "public/upload/supplier/supplier-term-files/"
+
+po_file_path_name = "/po"
+po_file_path = "public/upload/supplier/po/"
+
+banner_file_path_name = "/banner"
+banner_file_path = "public/upload/allusers/banner/"
+
+shipment_header_file_path_name = "/shipment-header-file"
+shipment_header_file_path = "public/upload/allusers/shipment-header-file/"
+
+invoice_mushok_file_path_name = "/supplier-mushok-file"
+invoice_mushok_file_path = "public/upload/supplier/supplier-mushok-files/"
+
+

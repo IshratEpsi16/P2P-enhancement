@@ -1,0 +1,17 @@
+
+let expenseType = async () => {
+  let query = `
+      SELECT LV.LOOKUP_CODE EXPNSE_TYPE, LV.MEANING
+  FROM FND_LOOKUP_TYPES_VL LT, FND_LOOKUP_VALUES_VL LV
+WHERE LT.LOOKUP_TYPE = LV.LOOKUP_TYPE
+  AND LT.LOOKUP_TYPE = 'XXP2P_INV_EXPENSE_TYPE'
+  AND NVL(LV.ENABLED_FLAG,'N') = 'Y'
+  AND LV.END_DATE_ACTIVE IS NULL
+ORDER BY 1
+    `;
+  return query;
+};
+
+module.exports = {
+  expenseType,
+};

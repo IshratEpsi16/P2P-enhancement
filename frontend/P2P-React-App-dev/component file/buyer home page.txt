@@ -1,0 +1,3473 @@
+// // import React, { useState, useEffect } from "react";
+// // import Avatar from "@mui/material/Avatar";
+// // import Badge from "@mui/material/Badge";
+// // import Popover from "@mui/material/Popover";
+// // import Box from "@mui/material/Box";
+// // import Drawer from "@mui/material/Drawer";
+
+// // import List from "@mui/material/List";
+// // import Divider from "@mui/material/Divider";
+// // import ListItem from "@mui/material/ListItem";
+// // import ListItemButton from "@mui/material/ListItemButton";
+// // import ListItemIcon from "@mui/material/ListItemIcon";
+// // import ListItemText from "@mui/material/ListItemText";
+
+// // import DeclarationPage from "../../registration/component/DeclarationPage";
+
+// // import GeneralTermsPage from "../../buyer_section/general_terms/components/GeneralTermsPage";
+// // import BuyerRfqTermPage from "../../buyer_section/buyer_term/component/BuyerRfqTermPage";
+// // import BuyerHome from "./BuyerHome";
+// // import CreateRolePage from "../../role_access/component/CreateRolePage";
+// // import RfqUnlockPage from "../../rfq_unlock/component/RfqUnlockPage";
+// // import SupplierListPage from "../../manage_supplier/component/SupplierListPage";
+// // import GetBuyerMenuService from "../service/GetBuyerMenuService";
+
+// // import BuyerMenuInterface from "../interface/BuyerMenuInterface";
+// // import ApprovedPrPage from "../../buyer_section/pr/component/ApprovedPrPage";
+// // import RoleMenuPermissionManager from "../../role_access/component/RoleMenuPermissionManager";
+// // import PrItemListPage from "../../buyer_section/pr_item_list/component/PrItemListPage";
+// // import PageTitle from "../../common_component/PageTitle";
+// // import { Dashboard } from "@mui/icons-material";
+// // import InviteSupplierForRfqPage from "../../buyer_section/invite_supplier_for_rfq/component/InviteSupplierForRfqPage";
+// // import RfqPreviewPage from "../../buyer_section/rfq_preview/component/RfqPreviewPage";
+// // import BuyerRfqCreateProcessPage from "../../buyer_rfq_create/component/BuyerRfqCreateProcessPage";
+// // import { RfqCreateProcessProvider } from "../../buyer_rfq_create/context/RfqCreateContext";
+// // import RfqListPage from "../../rfq/component/RfqListPage";
+// // import { RfqPageProvider } from "../../rfq/context/RfqPageContext";
+// // import RfqHomePage from "../../rfq/component/RfqHomePage";
+// // import CsListPage from "../../cs_admin_approval/component/CsListPage";
+// // import { CsApprovalProvider } from "../../cs_admin_approval/context/CsApprovalContext";
+// // import CsApprovalHomePage from "../../cs_admin_approval/component/CsApprovalHomePage";
+// // import { useNavigate } from "react-router-dom";
+// // import { useAuth } from "../../login_both/context/AuthContext";
+// // import { isTokenValid } from "../../utils/methods/TokenValidityCheck";
+
+// // import { RoleAccessProvider } from "../../role_access/context/RoleAccessContext";
+// // import UserRolePage from "../../role_access/component/UserRolePage";
+// // import RoleManagementHome from "../../role_access/component/RoleManagementHome";
+// // import MyInfoService from "../../my_info/service/MyInfoService";
+// // import {
+// //   MyMenuInterface,
+// //   MyPermissionInterface,
+// //   MyInfoInterface,
+// // } from "../../my_info/interface/MyInfoInterface";
+// // import InvitationPage from "../../invitation/component/InvitationPage";
+// // import { useMenuContext } from "../../my_info/context/MenuContext";
+// // import CircularProgressIndicator from "../../Loading_component/CircularProgressIndicator";
+
+// // import ErrorToast, { showErrorToast } from "../../Alerts_Component/ErrorToast";
+// // import EmployeeForSyncPage from "../../employee_sync/component/EmployeeForSyncPage";
+// // import { ManageSupplierProvider } from "../../manage_supplier/interface/ManageSupplierContext";
+// // import ManageSupplierHome from "../../manage_supplier/component/ManageSupplierHome";
+// // import SupplierProfilePage from "../../supplier_profile/component/SupplierProfilePage";
+// // import SearchIcon from "../../icons/SearchIcon";
+// // import InviteHomePage from "../../invitation/component/InviteHomePage";
+// // import { Link, useParams } from "react-router-dom";
+// // import BarRightIcon from "../../icons/BarRightIcon";
+// // import BarLeftIcon from "../../icons/BarLeftIcon";
+// // import BellIcon from "../../icons/BellIcon";
+// // import ApprovalSetupPage from "../../approval_setup/component/ApprovalSetupPage";
+// // import { ApprovalSetupProvider } from "../../approval_setup/context/ApprovalSetupContext";
+// // import ApprovalSetupHomePage from "../../approval_setup/component/ApprovalSetupHomePage";
+// // import deleteFromLocalStorage from "../../utils/methods/deleteFromLocalStorage";
+// // import { ManageSupplierProfileUpdateProvider } from "../../manage_supplier_profile_update/context/ManageSupplierProfileUpdateContext";
+// // import SupplierListHomeForUpdateSupplier from "../../manage_supplier_profile_update/component/SupplierListHomeForUpdateSupplier";
+// // import { RfiManageSupplierProvider } from "../../rfi_in_supplier_registration/context/RfiManageSupplierContext";
+// // import RfiHomeSupplierListPage from "../../rfi_in_supplier_registration/component/RfiHomeSupplierListPage";
+// // import { MouPageProvider } from "../../supplier_ou_manage/context/MouPageContext";
+// // import SupplierOuManageHomePage from "../../supplier_ou_manage/component/SupplierOuManageHomePage";
+// // import { PoPageProvider } from "../../po/context/PoPageContext";
+// // import PoHomePage from "../../po/component/PoHomePage";
+// // import LogOutModal from "../../common_component/LogoutModal";
+// // import GrnHomePage from "../../grn/component/GrnHomePage";
+// // import RfiSupplierInterface from "../../rfi_in_supplier_registration/interface/RfiSupplierInterface";
+// // import RfiSupplierListService from "../../rfi_in_supplier_registration/service/RfiSupplierListService";
+// // import useRfiStore from "../../rfi_in_supplier_registration/store/RfiStore";
+// // import RegisteredSupplierListNeedToApproveService from "../../manage_supplier/service/RegisteredSupplierListNeedToApproveService";
+// // import useManageSupplierStore from "../../manage_supplier/store/manageSupplierStore";
+// // import useProfileUpdateStore from "../../manage_supplier_profile_update/store/profileUpdateStore";
+// // import SupplierListForUpdateProfileApprovalService from "../../manage_supplier_profile_update/service/SupplierListForUpdateApprovalService";
+// // import BuyerProfilePage from "../../buyer_profile/component/BuyerProfilePage";
+// // import BuyerInvoiceHome from "../../buyer_invoice/component/BuyerInvoiceHome";
+// // import { log } from "console";
+// // import useAuthStore from "../../login_both/store/authStore";
+// // import BuyerCsListPage from "../../cs/component/BuyerCsListPage";
+// // import CreateCsPage from "../../cs/component/CreateCsPage";
+
+// // const menuIcons: { [key: number]: string } = {
+// //   520: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+// //   530: "M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25",
+// //   560: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+// //   570: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+// //   550: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+// //   500: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
+// //   540: "M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46",
+// //   510: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+// //   580: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+// //   600: "M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5",
+// //   610: "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3",
+// //   620: "M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z",
+// //   630: "M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z",
+
+// //   640: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+// //   660: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+// //   680: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+// //   700: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+// //   710: "M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z",
+// //   720: "M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75",
+// //   730: "M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25",
+// // };
+
+// // export default function BuyerHomePage() {
+// //   // const [menu, setMenu] = useState(1);
+// //   const [menuList, setMenuList] = useState<MyMenuInterface[] | []>([]);
+// //   const [menuList2, setMenuList2] = useState<MyMenuInterface[] | []>([]);
+// //   const [permissionList, setPermissionList] = useState<
+// //     MyPermissionInterface[] | []
+// //   >([]);
+// //   const [myInfo, setMyInfo] = useState<MyInfoInterface | null>(null);
+// //   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+// //   const { token, setIsBuyer, setToken, setUserId, userId, setBgId } = useAuth();
+// //   const { menu, setMenu } = useMenuContext();
+// //   const [isSmall, setIsSmall] = useState<boolean>(false);
+// //   const navigate = useNavigate();
+// //   const { bmId } = useParams();
+
+// //   //store
+// //   const { setLoggedInUserName } = useAuthStore();
+// //   //store
+
+// //   useEffect(() => {
+// //     const isTokenExpired = !isTokenValid(token!);
+// //     // console.log(isTokenExpired);
+// //     if (isTokenExpired) {
+// //       setTimeout(() => {
+// //         localStorage.removeItem("token");
+// //         localStorage.removeItem("isBuyer");
+// //         localStorage.removeItem("userId");
+// //         localStorage.removeItem("bgId");
+// //         // deleteFromLocalStorage("isBuyer");
+// //         setToken(null);
+// //         setIsBuyer(null);
+// //         setUserId(null);
+// //         navigate("/");
+// //       }, 999);
+
+// //       showErrorToast("Session Expired, Please Login");
+
+// //       setTimeout(() => {}, 1100);
+
+// //       console.log("expired");
+// //     } else {
+// //       getMyInfo();
+// //       getRfiSupplierList();
+// //       // getSupplierList();
+
+// //       console.log(isTokenExpired);
+// //     }
+
+// //     console.log(token);
+
+// //     // Perform any other initialization based on the token
+
+// //     // getMenu(); // You can uncomment this line if needed
+// //   }, []);
+
+// //   const [state, setState] = React.useState({
+// //     right: false,
+// //   });
+
+// //   const toggleDrawer = (open: any) => (event: any) => {
+// //     if (
+// //       event.type === "keydown" &&
+// //       (event.key === "Tab" || event.key === "Shift")
+// //     ) {
+// //       return;
+// //     }
+
+// //     setState({ right: open });
+// //   };
+
+// //   useEffect(() => {
+// //     // getMenu();
+// //     // const storedToken = localStorage.getItem("isBuyer");
+// //     console.log(token);
+
+// //     console.log(userId);
+// //   }, []);
+
+// //   const getMyInfo = async () => {
+// //     setIsLoading(true);
+// //     const result = await MyInfoService(token!);
+// //     if (result.data.status) {
+// //       setMenuList(result.data.Menu);
+// //       setMenuList2(result.data.Menu);
+// //       setPermissionList(result.data.Permission);
+// //       setMyInfo(result.data);
+// //       setBgId(result.data.data.BUSINESS_GROUP_ID);
+// //       console.log(result.data.data.BUSINESS_GROUP_ID);
+// //       // myInfo?.data.FULL_NAME
+// //       setLoggedInUserName(result.data.data.FULL_NAME);
+// //       setUserId(result.data.data.USER_ID);
+
+// //       localStorage.setItem(
+// //         "bgId",
+// //         result.data.data.BUSINESS_GROUP_ID.toString()
+// //       );
+// //       setIsLoading(false);
+// //     } else {
+// //       setIsLoading(false);
+// //     }
+// //   };
+
+// //   //rfilength
+// //   const { rfiSupplierListlength, setRfiSupplierListlength } = useRfiStore();
+
+// //   const getRfiSupplierList = async () => {
+// //     setIsLoading(true);
+// //     console.log(userId);
+
+// //     try {
+// //       const result = await RfiSupplierListService(
+// //         token!,
+// //         null,
+// //         userId,
+// //         0,
+// //         null
+// //       );
+// //       console.log(result.data);
+
+// //       if (result.data.status === 200) {
+// //         console.log(result.data.data);
+
+// //         setRfiSupplierListlength(result.data.data.length);
+// //         await getUpdateSupplierList();
+// //         setIsLoading(false);
+// //       } else {
+// //         setIsLoading(false);
+// //         showErrorToast(result.data.message);
+// //       }
+// //     } catch (error) {
+// //       setIsLoading(false);
+// //       showErrorToast("Something went wrong");
+// //     }
+// //   };
+
+// //   //rfiLength
+
+// //   //manager supplier list length
+
+// //   const pending = "IN PROCESS";
+// //   const approved = "APPROVED";
+
+// //   const { manageSupplierListLength, setManageSupplierListLength } =
+// //     useManageSupplierStore();
+
+// //   useEffect(() => {}, []);
+
+// //   const getSupplierList = async () => {
+// //     // setIsLoading(true);
+// //     try {
+// //       const result = await RegisteredSupplierListNeedToApproveService(
+// //         token!,
+// //         "IN PROCESS",
+// //         ""
+// //       );
+// //       if (result.data.status === 200) {
+// //         setManageSupplierListLength(result.data.data.length);
+// //       } else {
+// //         // setIsLoading(false);
+// //         showErrorToast(result.data.message);
+// //       }
+// //     } catch (error) {
+// //       // setIsLoading(false);
+// //       showErrorToast("Something went wrong");
+// //     }
+// //   };
+
+// //   //manager supplier list length
+
+// //   //profile update supplier list length
+
+// //   const {
+// //     profileUpdateSupplierListLength,
+// //     setProfileUpdateSupplierListLength,
+// //   } = useProfileUpdateStore();
+
+// //   const getUpdateSupplierList = async () => {
+// //     console.log("executed");
+
+// //     setIsLoading(true);
+// //     try {
+// //       const result = await SupplierListForUpdateProfileApprovalService(
+// //         token!,
+// //         "IN PROCESS",
+// //         ""
+// //       );
+
+// //       console.log(result.data);
+
+// //       if (result.data.status === 200) {
+// //       } else {
+// //         setIsLoading(false);
+// //         showErrorToast(result.data.message);
+// //         setProfileUpdateSupplierListLength(result.data.data.length);
+// //         await getSupplierList();
+// //         console.log(result.data.data.length);
+// //       }
+// //     } catch (error) {
+// //       setIsLoading(false);
+// //       showErrorToast("Something went wrong");
+// //     }
+// //   };
+
+// //   //profile update supplier list length
+
+// //   const list = (
+// //     <Box
+// //       sx={{ width: 250 }}
+// //       role="presentation"
+// //       onClick={toggleDrawer(false)}
+// //       onKeyDown={toggleDrawer(false)}
+// //     >
+// //       <List>
+// //         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+// //           <ListItem key={text} disablePadding>
+// //             <ListItemButton>
+// //               <ListItemIcon>
+// //                 {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+// //               </ListItemIcon>
+// //               <ListItemText primary={text} />
+// //             </ListItemButton>
+// //           </ListItem>
+// //         ))}
+// //       </List>
+// //       <Divider />
+// //       <List>
+// //         {["All mail", "Trash", "Spam"].map((text, index) => (
+// //           <ListItem key={text} disablePadding>
+// //             <ListItemButton>
+// //               <ListItemIcon>
+// //                 {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+// //               </ListItemIcon>
+// //               <ListItemText primary={text} />
+// //             </ListItemButton>
+// //           </ListItem>
+// //         ))}
+// //       </List>
+// //     </Box>
+// //   );
+
+// //   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+// //     null
+// //   );
+
+// //   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+// //     setAnchorEl(event.currentTarget);
+// //   };
+
+// //   const handleClose = () => {
+// //     setAnchorEl(null);
+// //   };
+
+// //   const open = Boolean(anchorEl);
+// //   const id = open ? "simple-popover" : undefined;
+
+// //   const logOut = () => {
+// //     localStorage.removeItem("token");
+// //     localStorage.removeItem("isBuyer");
+// //     localStorage.removeItem("userId");
+// //     setMenu(500);
+// //     setToken(null);
+// //     setIsBuyer(null);
+// //     setUserId(null);
+// //     navigate("/");
+// //   };
+
+// //   const handleIsSmall = () => {
+// //     setIsSmall(!isSmall);
+// //   };
+
+// //   const handleMenuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+// //     const value = event.target.value;
+// //     if (value !== null) {
+// //       const menus = menuList2.filter((menu) =>
+// //         menu.MENU_NAME.toLowerCase().includes(value)
+// //       );
+// //       setMenuList(menus);
+// //     } else {
+// //       setMenuList(menuList2);
+// //     }
+// //   };
+
+// //   useEffect(() => {
+// //     // Check if the id is present in the URL params
+// //     const menuId = parseInt(bmId ?? "", 10);
+
+// //     // If the id is valid, set the menu
+// //     if (!isNaN(menuId) && menuId >= 500 && menuId <= 100000) {
+// //       setMenu(menuId);
+// //     } else {
+// //       // If id is not valid, set a default menu (e.g., 1)
+// //       setMenu(500);
+// //     }
+// //   }, [bmId]);
+
+// //   //logout
+
+// //   const [isLogOutOpen, setIsLogOutOpen] = useState<boolean>(false);
+// //   const openLogOutModal = () => {
+// //     setIsLogOutOpen(true);
+// //   };
+// //   const closeModal = () => {
+// //     setIsLogOutOpen(false);
+// //   };
+
+// //   return (
+// //     <div>
+// //       <ErrorToast />
+// //       <LogOutModal
+// //         isOpen={isLogOutOpen}
+// //         doLogOut={logOut}
+// //         closeModal={closeModal}
+// //       />
+// //       {/* Navbar */}
+// //       <div className="fixed top-0 w-full h-16  flex  justify-between items-center z-10 bg-white border-b-[0.5px] border-borderColor shadow-sm">
+// //         <div className="mx-4  w-40">
+// //           <button
+// //             onClick={handleIsSmall}
+// //             className=" w-10 h-10 flex justify-center items-center bg-gray-200 rounded-full"
+// //           >
+// //             {isSmall ? <BarRightIcon /> : <BarLeftIcon />}
+// //           </button>
+// //         </div>
+// //         <div className="w-full h-full flex flex-row-reverse items-center  mx-16 space-x-reverse space-x-10">
+// //           <button onClick={handleClick}>
+// //             <Avatar alt="avatar" src="images/man.png" />
+// //           </button>
+
+// //           {/* <button onClick={toggleDrawer(true)}>
+// //                         <Badge color="warning" badgeContent={14}>
+// //                             <BellIcon />
+// //                         </Badge>
+// //                     </button> */}
+
+// //           <Drawer
+// //             anchor="right"
+// //             open={state.right}
+// //             onClose={toggleDrawer(false)}
+// //           >
+// //             {list}
+// //           </Drawer>
+
+// //           <Popover
+// //             id={id}
+// //             open={open}
+// //             anchorEl={anchorEl}
+// //             onClose={handleClose}
+// //             anchorOrigin={{
+// //               vertical: "bottom",
+// //               horizontal: "left",
+// //             }}
+// //           >
+// //             <div className=" flex flex-col items-start py-2  w-44  rounded-lg backdrop-blur-lg bg-opacity-50">
+// //               <p className="px-4 text-[16px] text-blackColor font-medium font-mon">
+// //                 {myInfo?.data.FULL_NAME}
+// //               </p>
+// //               <p className="px-4 text-sm text-graishColor font-mon">
+// //                 {myInfo?.data.USER_NAME}
+// //               </p>
+
+// //               <div className="w-full px-1 my-2 flex flex-col space-y-2 items-start">
+// //                 <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+
+// //                 <button className="px-3 font-mon text-start text-hintColor w-full h-8 hover:bg-offWhiteColor hover:rounded-sm">
+// //                   Profile
+// //                 </button>
+// //                 <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+// //                 <button
+// //                   onClick={logOut}
+// //                   className="px-3 font-mon text-start text-[#FF5630] w-full h-8 hover:bg-offWhiteColor hover:rounded-sm"
+// //                 >
+// //                   Logout
+// //                 </button>
+// //               </div>
+// //             </div>
+// //           </Popover>
+// //         </div>
+// //       </div>
+
+// //       {/* Content Container */}
+// //       <div className="flex flex-row mt-16 overflow-hidden">
+// //         {/* Side menu */}
+// //         <div
+// //           className={`${isSmall ? "w-24 " : "w-60"}  h-screen overflow-y-auto`}
+// //         >
+// //           {/* Side menu content */}
+// //           <div
+// //             className={`fixed h-screen no-scrollbar  overflow-y-auto overflow-x-hidden  bg-whiteColor ${
+// //               isSmall ? "w-24 " : "w-60"
+// //             } border-[0.5px] border-r-borderColor border-t-0 border-l-0 border-b-0`}
+// //           >
+// //             <div className="w-full  mt-2 px-4 flex flex-col items-start space-y-[10px] shadow-sm">
+// //               {isLoading ? (
+// //                 <div className=" w-full h-screen flex justify-center items-center">
+// //                   <CircularProgressIndicator />
+// //                 </div>
+// //               ) : (
+// //                 <>
+// //                   <div className=" flex flex-row w-full space-x-[2px]  ring-1 h-10 ring-borderColor rounded-sm  items-center pl-[4px] bg-white">
+// //                     <SearchIcon />
+
+// //                     <input
+// //                       onChange={handleMenuChange}
+// //                       className=" w-full px-1 focus:outline-none bg-white"
+// //                     />
+// //                   </div>
+
+// //                   {menuList.map((m, i) => (
+// //                     <Link
+// //                       to={`/buyer-home/${m.MENU_ID}`}
+// //                       key={m.MENU_ID}
+// //                       onClick={(e) => {
+// //                         e.preventDefault();
+// //                         setMenu(m.MENU_ID);
+// //                       }}
+// //                       className={`py-2 w-full flex  ${
+// //                         menu === m.MENU_ID ? "bg-lightGreen" : "bg-whiteColor"
+// //                       }  rounded-md hover:bg-lightGreen
+// //                                                  justify-start items-center
+// //                                                 `}
+// //                     >
+// //                       <div
+// //                         className={`${
+// //                           isSmall ? "px-5" : "px-4"
+// //                         }  flex flex-row space-x-2 items-center`}
+// //                       >
+// //                         <svg
+// //                           xmlns="http://www.w3.org/2000/svg"
+// //                           fill="none"
+// //                           viewBox="0 0 24 24"
+// //                           strokeWidth={1.5}
+// //                           stroke="currentColor"
+// //                           className={`w-6 h-6 ${
+// //                             menu === m.MENU_ID
+// //                               ? " text-darkGreen"
+// //                               : "text-midBlack"
+// //                           }`}
+// //                         >
+// //                           <path
+// //                             strokeLinecap="round"
+// //                             strokeLinejoin="round"
+// //                             d={menuIcons[m.MENU_ID]}
+// //                           />
+// //                         </svg>
+
+// //                         {!isSmall && (
+// //                           <div className=" w-full flex items-center space-x-2">
+// //                             <p
+// //                               className={`${
+// //                                 menu === m.MENU_ID
+// //                                   ? " text-darkGreen"
+// //                                   : "text-midBlack"
+// //                               } font-medium font-mon text-sm  text-start`}
+// //                             >
+// //                               {m.MENU_NAME}
+// //                             </p>
+// //                             {m.MENU_ID === 680 ||
+// //                             m.MENU_ID === 640 ||
+// //                             m.MENU_ID === 660 ? (
+// //                               <p className=" py-1 px-2 flex rounded-[100px] bg-redColor font-mon font-semibold justify-center items-center text-white text-xs">
+// //                                 {m.MENU_ID === 680
+// //                                   ? `${rfiSupplierListlength}`
+// //                                   : m.MENU_ID === 640
+// //                                   ? `${manageSupplierListLength}`
+// //                                   : m.MENU_ID === 660
+// //                                   ? `${profileUpdateSupplierListLength}`
+// //                                   : ""}
+// //                               </p>
+// //                             ) : null}
+// //                           </div>
+// //                         )}
+// //                       </div>
+// //                     </Link>
+// //                   ))}
+// //                   <button
+// //                     onClick={openLogOutModal}
+// //                     className=" w-full flex space-x-2 items-center font-mon h-10  hover:bg-red-200 text-sm rounded-md px-4 text-redColor "
+// //                   >
+// //                     <svg
+// //                       xmlns="http://www.w3.org/2000/svg"
+// //                       fill="none"
+// //                       viewBox="0 0 24 24"
+// //                       strokeWidth={1.5}
+// //                       stroke="currentColor"
+// //                       className="w-6 h-6 text-redColor"
+// //                     >
+// //                       <path
+// //                         strokeLinecap="round"
+// //                         strokeLinejoin="round"
+// //                         d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+// //                       />
+// //                     </svg>
+
+// //                     <p>Logout</p>
+// //                   </button>
+// //                 </>
+// //               )}
+
+// //               <div className="h-32"></div>
+// //             </div>
+// //           </div>
+// //           {/* End side menu */}
+// //         </div>
+
+// //         {/* Page Content */}
+// //         <div className="flex-1 overflow-y-auto">
+// //           {(() => {
+// //             switch (menu) {
+// //               case 500:
+// //                 return <BuyerHome />;
+// //               case 730:
+// //                 return (
+// //                   <RfqCreateProcessProvider>
+// //                     <BuyerRfqCreateProcessPage />
+// //                   </RfqCreateProcessProvider>
+// //                 ); //hide hbe
+// //               case 520:
+// //                 return (
+// //                   <RfqPageProvider>
+// //                     <RfqHomePage />
+// //                   </RfqPageProvider>
+// //                 ); //hide hbe
+// //               case 540:
+// //                 return <InviteHomePage />;
+// //               //                     "MENU_ID": 550,
+// //               // "MENU_NAME": "MANAGE SUPPLIER"
+// //               // "MENU_ID": 530,
+// //               // "MENU_NAME": "QUOTATION"
+// //               // case 560:
+// //               //     return (
+// //               //         <ManageSupplierProvider>
+// //               //             <ManageSupplierHome />
+// //               //         </ManageSupplierProvider>
+// //               //     ); //hide hbe
+// //               // case 570:
+// //               //   return (
+// //               //     <CsApprovalProvider>
+// //               //       <CsApprovalHomePage />
+// //               //     </CsApprovalProvider>
+// //               //   ); //hide hbe
+// //               case 580:
+// //                 return (
+// //                   <RoleAccessProvider>
+// //                     <RoleManagementHome />
+// //                   </RoleAccessProvider>
+// //                 );
+// //               case 600:
+// //                 return <RoleMenuPermissionManager />;
+// //               case 610:
+// //                 return <EmployeeForSyncPage />;
+// //               case 620:
+// //                 return <BuyerProfilePage />;
+// //               // case 620:
+// //               //     return <SupplierProfilePage />; //hide hbe
+// //               case 630:
+// //                 return (
+// //                   <ApprovalSetupProvider>
+// //                     <ApprovalSetupHomePage />
+// //                   </ApprovalSetupProvider>
+// //                 );
+// //               case 640:
+// //                 return (
+// //                   <ManageSupplierProvider>
+// //                     <ManageSupplierHome />
+// //                   </ManageSupplierProvider>
+// //                 );
+// //               case 660:
+// //                 return (
+// //                   <ManageSupplierProfileUpdateProvider>
+// //                     <SupplierListHomeForUpdateSupplier />
+// //                   </ManageSupplierProfileUpdateProvider>
+// //                 );
+// //               case 680:
+// //                 return (
+// //                   <RfiManageSupplierProvider>
+// //                     <RfiHomeSupplierListPage />
+// //                   </RfiManageSupplierProvider>
+// //                 );
+// //               case 700:
+// //                 return (
+// //                   <MouPageProvider>
+// //                     <SupplierOuManageHomePage />
+// //                   </MouPageProvider>
+// //                 );
+// //               case 710:
+// //                 return (
+// //                   <PoPageProvider>
+// //                     <PoHomePage />
+// //                   </PoPageProvider>
+// //                 );
+// //               case 720:
+// //                 return (
+// // <RfqPageProvider>
+// //   <RfqHomePage />
+// // </RfqPageProvider>
+// //                 );
+
+// //               default:
+// //                 return null;
+// //             }
+// //           })()}
+// //         </div>
+// //       </div>
+// //     </div>
+// //   );
+// // }
+
+// // // className={`w-6 h-6 ${menu === 2 ? " text-darkGreen" : "text-grayColor"}`}
+
+// //hemel code
+
+// import React, { useState, useEffect } from "react";
+// import Avatar from "@mui/material/Avatar";
+// import Badge from "@mui/material/Badge";
+// import Popover from "@mui/material/Popover";
+// import Box from "@mui/material/Box";
+// import Drawer from "@mui/material/Drawer";
+// import logo from "../../../public/logo512.png";
+// import List from "@mui/material/List";
+// import Divider from "@mui/material/Divider";
+// import ListItem from "@mui/material/ListItem";
+// import ListItemButton from "@mui/material/ListItemButton";
+// import ListItemIcon from "@mui/material/ListItemIcon";
+// import ListItemText from "@mui/material/ListItemText";
+
+// import DeclarationPage from "../../registration/component/DeclarationPage";
+
+// import GeneralTermsPage from "../../buyer_section/general_terms/components/GeneralTermsPage";
+// import BuyerRfqTermPage from "../../buyer_section/buyer_term/component/BuyerRfqTermPage";
+// import BuyerHome from "./BuyerHome";
+// import CreateRolePage from "../../role_access/component/CreateRolePage";
+// import RfqUnlockPage from "../../rfq_unlock/component/RfqUnlockPage";
+// import SupplierListPage from "../../manage_supplier/component/SupplierListPage";
+// import GetBuyerMenuService from "../service/GetBuyerMenuService";
+
+// import BuyerMenuInterface from "../interface/BuyerMenuInterface";
+// import ApprovedPrPage from "../../buyer_section/pr/component/ApprovedPrPage";
+// import RoleMenuPermissionManager from "../../role_access/component/RoleMenuPermissionManager";
+// import PrItemListPage from "../../buyer_section/pr_item_list/component/PrItemListPage";
+// import PageTitle from "../../common_component/PageTitle";
+// import { Dashboard } from "@mui/icons-material";
+// import InviteSupplierForRfqPage from "../../buyer_section/invite_supplier_for_rfq/component/InviteSupplierForRfqPage";
+// import RfqPreviewPage from "../../buyer_section/rfq_preview/component/RfqPreviewPage";
+// import BuyerRfqCreateProcessPage from "../../buyer_rfq_create/component/BuyerRfqCreateProcessPage";
+// import { RfqCreateProcessProvider } from "../../buyer_rfq_create/context/RfqCreateContext";
+// import RfqListPage from "../../rfq/component/RfqListPage";
+// import { RfqPageProvider } from "../../rfq/context/RfqPageContext";
+// import RfqHomePage from "../../rfq/component/RfqHomePage";
+// import CsListPage from "../../cs_admin_approval/component/CsListPage";
+// import { CsApprovalProvider } from "../../cs_admin_approval/context/CsApprovalContext";
+// import CsApprovalHomePage from "../../cs_admin_approval/component/CsApprovalHomePage";
+// import { useNavigate } from "react-router-dom";
+// import { useAuth } from "../../login_both/context/AuthContext";
+// import { isTokenValid } from "../../utils/methods/TokenValidityCheck";
+
+// import { RoleAccessProvider } from "../../role_access/context/RoleAccessContext";
+// import UserRolePage from "../../role_access/component/UserRolePage";
+// import RoleManagementHome from "../../role_access/component/RoleManagementHome";
+// import MyInfoService from "../../my_info/service/MyInfoService";
+// import {
+//   MyMenuInterface,
+//   MyPermissionInterface,
+//   MyInfoInterface,
+// } from "../../my_info/interface/MyInfoInterface";
+// import InvitationPage from "../../invitation/component/InvitationPage";
+// import { useMenuContext } from "../../my_info/context/MenuContext";
+// import CircularProgressIndicator from "../../Loading_component/CircularProgressIndicator";
+
+// import ErrorToast, { showErrorToast } from "../../Alerts_Component/ErrorToast";
+// import EmployeeForSyncPage from "../../employee_sync/component/EmployeeForSyncPage";
+// import { ManageSupplierProvider } from "../../manage_supplier/interface/ManageSupplierContext";
+// import ManageSupplierHome from "../../manage_supplier/component/ManageSupplierHome";
+// import SupplierProfilePage from "../../supplier_profile/component/SupplierProfilePage";
+// import SearchIcon from "../../icons/SearchIcon";
+// import InviteHomePage from "../../invitation/component/InviteHomePage";
+// import { Link, useParams } from "react-router-dom";
+// import BarRightIcon from "../../icons/BarRightIcon";
+// import BarLeftIcon from "../../icons/BarLeftIcon";
+// import BellIcon from "../../icons/BellIcon";
+// import ApprovalSetupPage from "../../approval_setup/component/ApprovalSetupPage";
+// import { ApprovalSetupProvider } from "../../approval_setup/context/ApprovalSetupContext";
+// import ApprovalSetupHomePage from "../../approval_setup/component/ApprovalSetupHomePage";
+// import deleteFromLocalStorage from "../../utils/methods/deleteFromLocalStorage";
+// import { ManageSupplierProfileUpdateProvider } from "../../manage_supplier_profile_update/context/ManageSupplierProfileUpdateContext";
+// import SupplierListHomeForUpdateSupplier from "../../manage_supplier_profile_update/component/SupplierListHomeForUpdateSupplier";
+// import {
+//   RfiManageSupplierProvider,
+//   useRfiManageSupplierContext,
+// } from "../../rfi_in_supplier_registration/context/RfiManageSupplierContext";
+// import RfiHomeSupplierListPage from "../../rfi_in_supplier_registration/component/RfiHomeSupplierListPage";
+// import { MouPageProvider } from "../../supplier_ou_manage/context/MouPageContext";
+// import SupplierOuManageHomePage from "../../supplier_ou_manage/component/SupplierOuManageHomePage";
+// import { PoPageProvider } from "../../po/context/PoPageContext";
+// import PoHomePage from "../../po/component/PoHomePage";
+// import LogOutModal from "../../common_component/LogoutModal";
+// import GrnHomePage from "../../grn/component/GrnHomePage";
+// import RfiSupplierInterface from "../../rfi_in_supplier_registration/interface/RfiSupplierInterface";
+// import RfiSupplierListService from "../../rfi_in_supplier_registration/service/RfiSupplierListService";
+// import useRfiStore from "../../rfi_in_supplier_registration/store/RfiStore";
+// import RegisteredSupplierListNeedToApproveService from "../../manage_supplier/service/RegisteredSupplierListNeedToApproveService";
+// import useManageSupplierStore from "../../manage_supplier/store/manageSupplierStore";
+// import useProfileUpdateStore from "../../manage_supplier_profile_update/store/profileUpdateStore";
+// import SupplierListForUpdateProfileApprovalService from "../../manage_supplier_profile_update/service/SupplierListForUpdateApprovalService";
+// import BuyerProfilePage from "../../buyer_profile/component/BuyerProfilePage";
+// import BuyerInvoiceHome from "../../buyer_invoice/component/BuyerInvoiceHome";
+// import { log } from "console";
+// import useAuthStore from "../../login_both/store/authStore";
+// import usePrItemsStore from "../../buyer_section/pr/store/prItemStore";
+// import {
+//   getNotificationDescription,
+//   NotificationLookup,
+// } from "../../manage_supplier_profile_update/utils/NotificationLookup";
+
+// const menuIcons: { [key: number]: string } = {
+//   520: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+//   530: "M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25",
+//   560: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+//   570: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+//   550: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+//   500: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
+//   540: "M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46",
+//   510: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+//   580: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+//   600: "M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5",
+//   610: "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3",
+//   620: "M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z",
+//   630: "M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z",
+
+//   640: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+//   660: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+//   680: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+//   700: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+//   710: "M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z",
+//   720: "M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75",
+//   730: "M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25",
+//   // 570: "M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5",
+// };
+
+// export default function BuyerHomePage() {
+//   // const [menu, setMenu] = useState(1);
+//   const [menuList, setMenuList] = useState<MyMenuInterface[] | []>([]);
+//   const [menuList2, setMenuList2] = useState<MyMenuInterface[] | []>([]);
+//   const [permissionList, setPermissionList] = useState<
+//     MyPermissionInterface[] | []
+//   >([]);
+//   const [myInfo, setMyInfo] = useState<MyInfoInterface | null>(null);
+//   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+//   const {
+//     token,
+//     setIsBuyer,
+//     setToken,
+//     setUserId,
+//     userId,
+//     setBgId,
+//     setSupplierId,
+//   } = useAuth();
+//   const { menu, setMenu } = useMenuContext();
+//   const [isSmall, setIsSmall] = useState<boolean>(false);
+//   const navigate = useNavigate();
+//   const { bmId } = useParams();
+//   const [supplierList, setSupplierList] = useState<
+//     {
+//       ID: number;
+//       INITIATION_DATE: string;
+//       INITIATOR_ID: number;
+//       INITIATOR_NAME: string;
+//       INITIATOR_NOTE: string;
+//       INITIATOR_PRO_PIC: string;
+//       OBJECT_ID: number;
+//       OBJECT_TYPE: string;
+//       SUPPLIER_FULL_NAME: string;
+//       SUPPLIER_ORGANIZATION_NAME: string;
+//       SUPPLIER_USER_NAME: string;
+//       VIEWER_ACTION: number;
+//       VIEWER_ID: number;
+//       VIEWER_NAME: string;
+//       VIEWER_NOTE: string;
+//       VIEWER_PRO_PIC: string;
+//       VIEW_DATE: string;
+//     }[]
+//   >([]);
+//   console.log(supplierList.length);
+//   // const navigate = useNavigate();
+//   // const {
+//   //   isActiveButtonRegistration,
+//   //   setIsActiveButtonRegistration,
+//   //   isActiveButtonRFQ,
+//   //   setIsActiveButtonRFQ,
+//   //   isActiveButtonVAT,
+//   //   setIsActiveButtonVAT,
+//   // } = useRfiManageSupplierContext();
+
+//   const { setRfqIdInStore } = usePrItemsStore(); //setRfqObjectIdInStore
+
+//   //store
+//   const { setLoggedInUserName } = useAuthStore();
+//   const { setRfiTabNo, rfiTabNo } = useRfiStore();
+//   //store
+
+//   useEffect(() => {
+//     const isTokenExpired = !isTokenValid(token!);
+//     // console.log(isTokenExpired);
+//     if (isTokenExpired) {
+//       setTimeout(() => {
+//         localStorage.removeItem("token");
+//         localStorage.removeItem("isBuyer");
+//         localStorage.removeItem("userId");
+//         localStorage.removeItem("bgId");
+//         // deleteFromLocalStorage("isBuyer");
+//         setToken(null);
+//         setIsBuyer(null);
+//         setUserId(null);
+//         navigate("/");
+//       }, 999);
+
+//       showErrorToast("Session Expired, Please Login");
+
+//       setTimeout(() => {}, 1100);
+
+//       console.log("expired");
+//     } else {
+//       getMyInfo();
+//       getRfiSupplierList();
+//       getSupplierList();
+//       getUpdateSupplierList();
+//       console.log(isTokenExpired);
+//     }
+
+//     console.log(token);
+
+//     // Perform any other initialization based on the token
+
+//     // getMenu(); // You can uncomment this line if needed
+//   }, []);
+
+//   const [state, setState] = React.useState({
+//     right: false,
+//   });
+
+//   const toggleDrawer = (open: any) => (event: any) => {
+//     if (
+//       event.type === "keydown" &&
+//       (event.key === "Tab" || event.key === "Shift")
+//     ) {
+//       return;
+//     }
+
+//     setState({ right: open });
+//   };
+
+//   useEffect(() => {
+//     // getMenu();
+//     // const storedToken = localStorage.getItem("isBuyer");
+//     console.log(token);
+
+//     console.log(userId);
+//   }, []);
+
+//   const getMyInfo = async () => {
+//     setIsLoading(true);
+//     const result = await MyInfoService(token!);
+//     if (result.data.status) {
+//       setMenuList(result.data.Menu);
+//       setMenuList2(result.data.Menu);
+//       setPermissionList(result.data.Permission);
+//       setMyInfo(result.data);
+//       setBgId(result.data.data.BUSINESS_GROUP_ID);
+//       console.log(result.data.data.BUSINESS_GROUP_ID);
+//       // myInfo?.data.FULL_NAME
+//       setLoggedInUserName(result.data.data.FULL_NAME);
+//       setUserId(result.data.data.USER_ID);
+
+//       localStorage.setItem(
+//         "bgId",
+//         result.data.data.BUSINESS_GROUP_ID.toString()
+//       );
+//       setIsLoading(false);
+//     } else {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   //rfilength
+//   const { rfiSupplierListlength, setRfiSupplierListlength } = useRfiStore();
+
+//   const getRfiSupplierList = async () => {
+//     setIsLoading(true);
+//     console.log(userId);
+
+//     try {
+//       const result = await RfiSupplierListService(
+//         token!,
+//         null,
+//         userId,
+//         0,
+//         null
+//       );
+//       console.log(result.data);
+
+//       if (result.data.status === 200) {
+//         console.log(result.data.data);
+//         setSupplierList(result.data.data);
+
+//         setRfiSupplierListlength(result.data.data.length);
+//         setIsLoading(false);
+//       } else {
+//         setIsLoading(false);
+//         showErrorToast(result.data.message);
+//       }
+//     } catch (error) {
+//       setIsLoading(false);
+//       showErrorToast("Something went wrong");
+//     }
+//   };
+
+//   console.log(supplierList);
+
+//   //rfiLength
+
+//   //manager supplier list length
+
+//   const pending = "IN PROCESS";
+//   const approved = "APPROVED";
+
+//   const { manageSupplierListLength, setManageSupplierListLength } =
+//     useManageSupplierStore();
+
+//   useEffect(() => {}, []);
+
+//   const getSupplierList = async () => {
+//     // setIsLoading(true);
+//     try {
+//       const result = await RegisteredSupplierListNeedToApproveService(
+//         token!,
+//         "IN PROCESS",
+//         ""
+//       );
+//       if (result.data.status === 200) {
+//         setManageSupplierListLength(result.data.data.length);
+//       } else {
+//         // setIsLoading(false);
+//         showErrorToast(result.data.message);
+//       }
+//     } catch (error) {
+//       // setIsLoading(false);
+//       showErrorToast("Something went wrong");
+//     }
+//   };
+
+//   //manager supplier list length
+
+//   // const { setRfiManageSupplierPageNo, setRfiId, rfiManageSupplierPageNo } =
+//   //   useRfiManageSupplierContext();
+
+//   const navigateTo = (userId: number, rfiId: number) => {
+//     console.log("userId: ", userId);
+//     console.log("rfiId: ", rfiId);
+//     console.log("clicked");
+//     // setRfiManageSupplierPageNo(2);
+//     // setSupplierId(userId);
+//     // setRfqIdInStore(userId);
+//     // setRfiId(objId);
+//     // setRfqObjectIdInStore(objId);
+
+//     // setRfiManageSupplierPageNo(2);
+//     // setSupplierId(userId);
+//     // setRfiId(rfiId);
+//   };
+//   // console.log(rfiManageSupplierPageNo);
+//   //profile update supplier list length
+
+//   const {
+//     profileUpdateSupplierListLength,
+//     setProfileUpdateSupplierListLength,
+//   } = useProfileUpdateStore();
+
+//   const getUpdateSupplierList = async () => {
+//     console.log("executed");
+
+//     setIsLoading(true);
+//     try {
+//       const result = await SupplierListForUpdateProfileApprovalService(
+//         token!,
+//         "IN PROCESS",
+//         ""
+//       );
+
+//       console.log(result.data);
+
+//       if (result.data.status === 200) {
+//       } else {
+//         setIsLoading(false);
+//         showErrorToast(result.data.message);
+//         setProfileUpdateSupplierListLength(result.data.data.length);
+//         console.log(result.data.data.length);
+//       }
+//     } catch (error) {
+//       setIsLoading(false);
+//       showErrorToast("Something went wrong");
+//     }
+//   };
+//   // const gotoVat = () => {
+//   //   setRfiManageSupplierPageNo(5);
+//   // };
+
+//   const navigateToRoute = () => {
+//     // Navigate to the route associated with the notification
+//     setMenu(680); // Use window.location.href for full page reload
+//   };
+//   // const navigateToRoute = (routeTo: string) => {
+//   //   navigate(routeTo);
+//   // };
+
+//   //profile update supplier list length
+
+//   const list = (
+//     <Box
+//       sx={{ width: 250 }}
+//       role="presentation"
+//       onClick={toggleDrawer(false)}
+//       onKeyDown={toggleDrawer(false)}
+//     >
+//       <h1 className="text-2xl font-bold text-center">Notification</h1>
+//       {/* {getNotificationDescription} */}
+//       {/* <List>
+//         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+//           <ListItem key={text} disablePadding>
+//             <ListItemButton>
+//               <ListItemIcon>
+//                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} //
+//               </ListItemIcon>
+//               <ListItemText primary={text} />
+//             </ListItemButton>
+//           </ListItem>
+//         ))}
+//       </List> */}
+//       {supplierList.map((item, index) => (
+//         <div
+//           key={index}
+//           className="my-4 cursor-pointer px-2 mx-1 hover:bg-slate-50 divide-y"
+//         >
+//           {item.OBJECT_TYPE === "Supplier Approval" && (
+//             <div
+//               onClick={() => {
+//                 navigateToRoute();
+//                 setRfiTabNo(11);
+//                 // setRfiManageSupplierPageNo(1);
+//                 // setIsActiveButtonRegistration(true);
+//                 // setIsActiveButtonRFQ(false);
+//                 // setIsActiveButtonVAT(false);
+//               }}
+//               className="flex items-center gap-1"
+//             >
+//               <img src={item?.INITIATOR_PRO_PIC} alt="" />
+//               <Avatar alt="avatar" src="images/man.png" />
+//               <div>
+//                 <h1>
+//                   <span className="font-semibold text-base text-blue-500">
+//                     {item?.SUPPLIER_ORGANIZATION_NAME}
+//                   </span>{" "}
+//                   Applied for registration
+//                 </h1>
+//                 {/* <p>Applied for registration</p> */}
+//               </div>
+//             </div>
+//           )}
+//           {/* {item.OBJECT_TYPE === NotificationLookup["Vat"] && (
+//             <div
+//               onClick={() => {
+//                 navigateToRoute(NotificationLookup["Route_to"]);
+//                 navigateTo(item.OBJECT_ID, item.ID);
+//                 console.log("clicked");
+//               }}
+//             >
+//               <img src={item?.INITIATOR_PRO_PIC} alt="" />
+//               <div>
+//                 <h1 className="font-semibold text-lg text-fuchsia-500">
+//                   {item?.INITIATOR_NAME}
+//                 </h1>
+//                 <p>{NotificationLookup["Title"]}</p>
+//               </div>
+//             </div>
+//           )} */}
+//           {item.OBJECT_TYPE === NotificationLookup["Vat"] && (
+//             <div
+//               onClick={() => {
+//                 // setIsActiveButtonRegistration(false);
+//                 // setIsActiveButtonRFQ(false);
+//                 // setIsActiveButtonVAT(true);
+//                 navigateToRoute();
+//                 setRfiTabNo(55);
+//                 // gotoVat();
+//               }}
+//               className="flex items-center gap-1"
+//             >
+//               <img src={item?.INITIATOR_PRO_PIC} alt="" />
+//               <Avatar alt="avatar" src="images/man.png" className="w-10 h-10" />
+//               <div>
+//                 <h1>
+//                   <span className="font-semibold text-base text-fuchsia-500">
+//                     {item?.INITIATOR_NAME}
+//                   </span>{" "}
+//                   {NotificationLookup["Title"]}
+//                 </h1>
+//                 {/* <p>{NotificationLookup["Title"]}</p> */}
+//               </div>
+//             </div>
+//           )}
+//           {item.OBJECT_TYPE === "RFQ" && (
+//             <div
+//               onClick={() => {
+//                 navigateToRoute();
+//                 setRfiTabNo(33);
+//                 // setRfiManageSupplierPageNo(3);
+//                 // setIsActiveButtonRegistration(false);
+//                 // setIsActiveButtonRFQ(true);
+//                 // setIsActiveButtonVAT(false);
+//               }}
+//               className="flex items-center gap-1"
+//             >
+//               <img src={item?.INITIATOR_PRO_PIC} alt="" />
+//               <div>
+//                 <h1 className="font-semibold text-lg text-green-500">
+//                   {item?.INITIATOR_NAME}
+//                 </h1>
+//                 <p>Applied for RFQ Approval</p>
+//               </div>
+//             </div>
+//           )}
+//         </div>
+//       ))}
+
+//       {/* <Divider />
+//       <List>
+//         {["All mail", "Trash", "Spam"].map((text, index) => (
+//           <ListItem key={text} disablePadding>
+//             <ListItemButton>
+//               <ListItemIcon>
+//                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} //
+//               </ListItemIcon>
+//               <ListItemText primary={text} />
+//             </ListItemButton>
+//           </ListItem>
+//         ))}
+//       </List> */}
+//     </Box>
+//   );
+
+//   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+//     null
+//   );
+
+//   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+//     setAnchorEl(event.currentTarget);
+//   };
+
+//   const handleClose = () => {
+//     setAnchorEl(null);
+//   };
+
+//   const open = Boolean(anchorEl);
+//   const id = open ? "simple-popover" : undefined;
+
+//   const logOut = () => {
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("isBuyer");
+//     localStorage.removeItem("userId");
+//     setMenu(500);
+//     setToken(null);
+//     setIsBuyer(null);
+//     setUserId(null);
+//     navigate("/");
+//   };
+
+//   const handleIsSmall = () => {
+//     setIsSmall(!isSmall);
+//   };
+
+//   const handleMenuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const value = event.target.value;
+//     if (value !== null) {
+//       const menus = menuList2.filter((menu) =>
+//         menu.MENU_NAME.toLowerCase().includes(value)
+//       );
+//       setMenuList(menus);
+//     } else {
+//       setMenuList(menuList2);
+//     }
+//   };
+
+//   useEffect(() => {
+//     // Check if the id is present in the URL params
+//     const menuId = parseInt(bmId ?? "", 10);
+
+//     // If the id is valid, set the menu
+//     if (!isNaN(menuId) && menuId >= 500 && menuId <= 100000) {
+//       setMenu(menuId);
+//     } else {
+//       // If id is not valid, set a default menu (e.g., 1)
+//       setMenu(500);
+//     }
+//   }, [bmId]);
+
+//   //logout
+
+//   const [isLogOutOpen, setIsLogOutOpen] = useState<boolean>(false);
+//   const openLogOutModal = () => {
+//     setIsLogOutOpen(true);
+//   };
+//   const closeModal = () => {
+//     setIsLogOutOpen(false);
+//   };
+
+//   return (
+//     <div>
+//       <ErrorToast />
+//       <LogOutModal
+//         isOpen={isLogOutOpen}
+//         doLogOut={logOut}
+//         closeModal={closeModal}
+//       />
+//       {/* Navbar */}
+//       <div className="fixed top-0 w-full h-16  flex  justify-between items-center z-10 bg-white border-b-[0.5px] border-borderColor shadow-sm">
+//         <div className="mx-4  w-40">
+//           <button
+//             onClick={handleIsSmall}
+//             className=" w-10 h-10 flex justify-center items-center bg-gray-200 rounded-full"
+//           >
+//             {isSmall ? <BarRightIcon /> : <BarLeftIcon />}
+//           </button>
+//         </div>
+//         <div className="w-full h-full flex flex-row-reverse items-center  mx-16 space-x-reverse space-x-10">
+//           <button onClick={handleClick}>
+//             <Avatar alt="avatar" src="images/man.png" />
+//           </button>
+
+//           <button onClick={toggleDrawer(true)}>
+//             <Badge color="warning" badgeContent={supplierList.length}>
+//               <BellIcon />
+//             </Badge>
+//           </button>
+
+//           <Drawer
+//             anchor="right"
+//             open={state.right}
+//             onClose={toggleDrawer(false)}
+//           >
+//             {list}
+//           </Drawer>
+
+//           <Popover
+//             id={id}
+//             open={open}
+//             anchorEl={anchorEl}
+//             onClose={handleClose}
+//             anchorOrigin={{
+//               vertical: "bottom",
+//               horizontal: "left",
+//             }}
+//           >
+//             <div className=" flex flex-col items-start py-2  w-44  rounded-lg backdrop-blur-lg bg-opacity-50">
+//               <p className="px-4 text-[16px] text-blackColor font-medium font-mon">
+//                 {myInfo?.data.FULL_NAME}
+//               </p>
+//               <p className="px-4 text-sm text-graishColor font-mon">
+//                 {myInfo?.data.USER_NAME}
+//               </p>
+
+//               <div className="w-full px-1 my-2 flex flex-col space-y-2 items-start">
+//                 <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+
+//                 <button className="px-3 font-mon text-start text-hintColor w-full h-8 hover:bg-offWhiteColor hover:rounded-sm">
+//                   Profile
+//                 </button>
+//                 <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+//                 <button
+//                   onClick={logOut}
+//                   className="px-3 font-mon text-start text-[#FF5630] w-full h-8 hover:bg-offWhiteColor hover:rounded-sm"
+//                 >
+//                   Logout
+//                 </button>
+//               </div>
+//             </div>
+//           </Popover>
+//         </div>
+//       </div>
+
+//       {/* Content Container */}
+//       <div className="flex flex-row mt-16 overflow-hidden">
+//         {/* Side menu */}
+//         <div
+//           className={`${isSmall ? "w-24 " : "w-60"}  h-screen overflow-y-auto`}
+//         >
+//           {/* Side menu content */}
+//           <div
+//             className={`fixed h-screen no-scrollbar  overflow-y-auto overflow-x-hidden  bg-whiteColor ${
+//               isSmall ? "w-24 " : "w-60"
+//             } border-[0.5px] border-r-borderColor border-t-0 border-l-0 border-b-0`}
+//           >
+//             <div className="w-full  mt-2 px-4 flex flex-col items-start space-y-[10px] shadow-sm">
+//               {isLoading ? (
+//                 <div className=" w-full h-screen flex justify-center items-center">
+//                   <CircularProgressIndicator />
+//                 </div>
+//               ) : (
+//                 <>
+//                   <div className=" flex flex-row w-full space-x-[2px]  ring-1 h-10 ring-borderColor rounded-sm  items-center pl-[4px] bg-white">
+//                     <SearchIcon />
+
+//                     <input
+//                       onChange={handleMenuChange}
+//                       className=" w-full px-1 focus:outline-none bg-white"
+//                     />
+//                   </div>
+
+//                   {menuList.map((m, i) => (
+//                     <Link
+//                       to={`/buyer-home/${m.MENU_ID}`}
+//                       key={m.MENU_ID}
+//                       onClick={(e) => {
+//                         e.preventDefault();
+//                         setMenu(m.MENU_ID);
+//                       }}
+//                       className={`py-2 w-full flex  ${
+//                         menu === m.MENU_ID ? "bg-lightGreen" : "bg-whiteColor"
+//                       }  rounded-md hover:bg-lightGreen
+//                                                  justify-start items-center
+//                                                 `}
+//                     >
+//                       <div
+//                         className={`${
+//                           isSmall ? "px-5" : "px-4"
+//                         }  flex flex-row space-x-2 items-center`}
+//                       >
+//                         <svg
+//                           xmlns="http://www.w3.org/2000/svg"
+//                           fill="none"
+//                           viewBox="0 0 24 24"
+//                           strokeWidth={1.5}
+//                           stroke="currentColor"
+//                           className={`w-6 h-6 ${
+//                             menu === m.MENU_ID
+//                               ? " text-darkGreen"
+//                               : "text-midBlack"
+//                           }`}
+//                         >
+//                           <path
+//                             strokeLinecap="round"
+//                             strokeLinejoin="round"
+//                             d={menuIcons[m.MENU_ID]}
+//                           />
+//                         </svg>
+
+//                         {!isSmall && (
+//                           <div className=" w-full flex items-center space-x-2">
+//                             <p
+//                               className={`${
+//                                 menu === m.MENU_ID
+//                                   ? " text-darkGreen"
+//                                   : "text-midBlack"
+//                               } font-medium font-mon text-sm  text-start`}
+//                             >
+//                               {m.MENU_NAME}
+//                             </p>
+//                             {m.MENU_ID === 680 ||
+//                             m.MENU_ID === 640 ||
+//                             m.MENU_ID === 660 ? (
+//                               <p className=" py-1 px-2 flex rounded-[100px] bg-redColor font-mon font-semibold justify-center items-center text-white text-xs">
+//                                 {m.MENU_ID === 680
+//                                   ? `${rfiSupplierListlength}`
+//                                   : m.MENU_ID === 640
+//                                   ? `${manageSupplierListLength}`
+//                                   : m.MENU_ID === 660
+//                                   ? `${profileUpdateSupplierListLength}`
+//                                   : ""}
+//                               </p>
+//                             ) : null}
+//                           </div>
+//                         )}
+//                       </div>
+//                     </Link>
+//                   ))}
+//                   <button
+//                     onClick={openLogOutModal}
+//                     className=" w-full flex space-x-2 items-center font-mon h-10  hover:bg-red-200 text-sm rounded-md px-4 text-redColor "
+//                   >
+//                     <svg
+//                       xmlns="http://www.w3.org/2000/svg"
+//                       fill="none"
+//                       viewBox="0 0 24 24"
+//                       strokeWidth={1.5}
+//                       stroke="currentColor"
+//                       className="w-6 h-6 text-redColor"
+//                     >
+//                       <path
+//                         strokeLinecap="round"
+//                         strokeLinejoin="round"
+//                         d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+//                       />
+//                     </svg>
+
+//                     <p>Logout</p>
+//                   </button>
+//                 </>
+//               )}
+
+//               <div className="h-32"></div>
+//             </div>
+//           </div>
+//           {/* End side menu */}
+//         </div>
+
+//         {/* Page Content */}
+//         <div className="flex-1 overflow-y-auto">
+//           {(() => {
+//             switch (menu) {
+//               case 500:
+//                 return <BuyerHome />;
+//               case 730:
+//                 return (
+//                   <RfqCreateProcessProvider>
+//                     <BuyerRfqCreateProcessPage />
+//                   </RfqCreateProcessProvider>
+//                 ); //hide hbe
+//               case 520:
+//                 return (
+//                   <RfqPageProvider>
+//                     <RfqHomePage />
+//                   </RfqPageProvider>
+//                 ); //hide hbe
+//               case 540:
+//                 return <InviteHomePage />;
+//               //                     "MENU_ID": 550,
+//               // "MENU_NAME": "MANAGE SUPPLIER"
+//               // "MENU_ID": 530,
+//               // "MENU_NAME": "QUOTATION"
+//               // case 560:
+//               //     return (
+//               //         <ManageSupplierProvider>
+//               //             <ManageSupplierHome />
+//               //         </ManageSupplierProvider>
+//               //     ); //hide hbe
+//               // case 570:
+//               //   return (
+//               //     <CsApprovalProvider>
+//               //       <CsApprovalHomePage />
+//               //     </CsApprovalProvider>
+//               //   ); //hide hbe
+//               case 580:
+//                 return (
+//                   <RoleAccessProvider>
+//                     <RoleManagementHome />
+//                   </RoleAccessProvider>
+//                 );
+//               case 600:
+//                 return <RoleMenuPermissionManager />;
+//               case 610:
+//                 return <EmployeeForSyncPage />;
+//               case 620:
+//                 return <BuyerProfilePage />;
+//               // case 620:
+//               //     return <SupplierProfilePage />; //hide hbe
+//               case 630:
+//                 return (
+//                   <ApprovalSetupProvider>
+//                     <ApprovalSetupHomePage />
+//                   </ApprovalSetupProvider>
+//                 );
+//               case 640:
+//                 return (
+//                   <ManageSupplierProvider>
+//                     <ManageSupplierHome />
+//                   </ManageSupplierProvider>
+//                 );
+//               case 660:
+//                 return (
+//                   <ManageSupplierProfileUpdateProvider>
+//                     <SupplierListHomeForUpdateSupplier />
+//                   </ManageSupplierProfileUpdateProvider>
+//                 );
+//               case 680:
+//                 return (
+//                   <RfiManageSupplierProvider>
+//                     <RfiHomeSupplierListPage />
+//                   </RfiManageSupplierProvider>
+//                 );
+//               case 700:
+//                 return (
+//                   <MouPageProvider>
+//                     <SupplierOuManageHomePage />
+//                   </MouPageProvider>
+//                 );
+//               case 710:
+//                 return (
+//                   <PoPageProvider>
+//                     <PoHomePage />
+//                   </PoPageProvider>
+//                 );
+//               case 720:
+//                 return <GrnHomePage />;
+//               case 570:
+//                 return (
+//                   <RfqPageProvider>
+//                     <RfqHomePage />
+//                   </RfqPageProvider>
+//                 );
+
+//               default:
+//                 return null;
+//             }
+//           })()}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// // className={`w-6 h-6 ${menu === 2 ? " text-darkGreen" : "text-grayColor"}`}
+
+// //hemel code
+
+// import React, { useState, useEffect } from "react";
+// import Avatar from "@mui/material/Avatar";
+// import Badge from "@mui/material/Badge";
+// import Popover from "@mui/material/Popover";
+// import Box from "@mui/material/Box";
+// import Drawer from "@mui/material/Drawer";
+
+// import List from "@mui/material/List";
+// import Divider from "@mui/material/Divider";
+// import ListItem from "@mui/material/ListItem";
+// import ListItemButton from "@mui/material/ListItemButton";
+// import ListItemIcon from "@mui/material/ListItemIcon";
+// import ListItemText from "@mui/material/ListItemText";
+
+// import DeclarationPage from "../../registration/component/DeclarationPage";
+
+// import GeneralTermsPage from "../../buyer_section/general_terms/components/GeneralTermsPage";
+// import BuyerRfqTermPage from "../../buyer_section/buyer_term/component/BuyerRfqTermPage";
+// import BuyerHome from "./BuyerHome";
+// import CreateRolePage from "../../role_access/component/CreateRolePage";
+// import RfqUnlockPage from "../../rfq_unlock/component/RfqUnlockPage";
+// import SupplierListPage from "../../manage_supplier/component/SupplierListPage";
+// import GetBuyerMenuService from "../service/GetBuyerMenuService";
+
+// import BuyerMenuInterface from "../interface/BuyerMenuInterface";
+// import ApprovedPrPage from "../../buyer_section/pr/component/ApprovedPrPage";
+// import RoleMenuPermissionManager from "../../role_access/component/RoleMenuPermissionManager";
+// import PrItemListPage from "../../buyer_section/pr_item_list/component/PrItemListPage";
+// import PageTitle from "../../common_component/PageTitle";
+// import { Dashboard } from "@mui/icons-material";
+// import InviteSupplierForRfqPage from "../../buyer_section/invite_supplier_for_rfq/component/InviteSupplierForRfqPage";
+// import RfqPreviewPage from "../../buyer_section/rfq_preview/component/RfqPreviewPage";
+// import BuyerRfqCreateProcessPage from "../../buyer_rfq_create/component/BuyerRfqCreateProcessPage";
+// import { RfqCreateProcessProvider } from "../../buyer_rfq_create/context/RfqCreateContext";
+// import RfqListPage from "../../rfq/component/RfqListPage";
+// import { RfqPageProvider } from "../../rfq/context/RfqPageContext";
+// import RfqHomePage from "../../rfq/component/RfqHomePage";
+// import CsListPage from "../../cs_admin_approval/component/CsListPage";
+// import { CsApprovalProvider } from "../../cs_admin_approval/context/CsApprovalContext";
+// import CsApprovalHomePage from "../../cs_admin_approval/component/CsApprovalHomePage";
+// import { useNavigate } from "react-router-dom";
+// import { useAuth } from "../../login_both/context/AuthContext";
+// import { isTokenValid } from "../../utils/methods/TokenValidityCheck";
+
+// import { RoleAccessProvider } from "../../role_access/context/RoleAccessContext";
+// import UserRolePage from "../../role_access/component/UserRolePage";
+// import RoleManagementHome from "../../role_access/component/RoleManagementHome";
+// import MyInfoService from "../../my_info/service/MyInfoService";
+// import {
+//   MyMenuInterface,
+//   MyPermissionInterface,
+//   MyInfoInterface,
+// } from "../../my_info/interface/MyInfoInterface";
+// import InvitationPage from "../../invitation/component/InvitationPage";
+// import { useMenuContext } from "../../my_info/context/MenuContext";
+// import CircularProgressIndicator from "../../Loading_component/CircularProgressIndicator";
+
+// import ErrorToast, { showErrorToast } from "../../Alerts_Component/ErrorToast";
+// import EmployeeForSyncPage from "../../employee_sync/component/EmployeeForSyncPage";
+// import { ManageSupplierProvider } from "../../manage_supplier/interface/ManageSupplierContext";
+// import ManageSupplierHome from "../../manage_supplier/component/ManageSupplierHome";
+// import SupplierProfilePage from "../../supplier_profile/component/SupplierProfilePage";
+// import SearchIcon from "../../icons/SearchIcon";
+// import InviteHomePage from "../../invitation/component/InviteHomePage";
+// import { Link, useParams } from "react-router-dom";
+// import BarRightIcon from "../../icons/BarRightIcon";
+// import BarLeftIcon from "../../icons/BarLeftIcon";
+// import BellIcon from "../../icons/BellIcon";
+// import ApprovalSetupPage from "../../approval_setup/component/ApprovalSetupPage";
+// import { ApprovalSetupProvider } from "../../approval_setup/context/ApprovalSetupContext";
+// import ApprovalSetupHomePage from "../../approval_setup/component/ApprovalSetupHomePage";
+// import deleteFromLocalStorage from "../../utils/methods/deleteFromLocalStorage";
+// import { ManageSupplierProfileUpdateProvider } from "../../manage_supplier_profile_update/context/ManageSupplierProfileUpdateContext";
+// import SupplierListHomeForUpdateSupplier from "../../manage_supplier_profile_update/component/SupplierListHomeForUpdateSupplier";
+// import { RfiManageSupplierProvider } from "../../rfi_in_supplier_registration/context/RfiManageSupplierContext";
+// import RfiHomeSupplierListPage from "../../rfi_in_supplier_registration/component/RfiHomeSupplierListPage";
+// import { MouPageProvider } from "../../supplier_ou_manage/context/MouPageContext";
+// import SupplierOuManageHomePage from "../../supplier_ou_manage/component/SupplierOuManageHomePage";
+// import { PoPageProvider } from "../../po/context/PoPageContext";
+// import PoHomePage from "../../po/component/PoHomePage";
+// import LogOutModal from "../../common_component/LogoutModal";
+// import GrnHomePage from "../../grn/component/GrnHomePage";
+// import RfiSupplierInterface from "../../rfi_in_supplier_registration/interface/RfiSupplierInterface";
+// import RfiSupplierListService from "../../rfi_in_supplier_registration/service/RfiSupplierListService";
+// import useRfiStore from "../../rfi_in_supplier_registration/store/RfiStore";
+// import RegisteredSupplierListNeedToApproveService from "../../manage_supplier/service/RegisteredSupplierListNeedToApproveService";
+// import useManageSupplierStore from "../../manage_supplier/store/manageSupplierStore";
+// import useProfileUpdateStore from "../../manage_supplier_profile_update/store/profileUpdateStore";
+// import SupplierListForUpdateProfileApprovalService from "../../manage_supplier_profile_update/service/SupplierListForUpdateApprovalService";
+// import BuyerProfilePage from "../../buyer_profile/component/BuyerProfilePage";
+// import BuyerInvoiceHome from "../../buyer_invoice/component/BuyerInvoiceHome";
+// import { log } from "console";
+// import useAuthStore from "../../login_both/store/authStore";
+// import BuyerCsListPage from "../../cs/component/BuyerCsListPage";
+// import CreateCsPage from "../../cs/component/CreateCsPage";
+
+// const menuIcons: { [key: number]: string } = {
+//   520: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+//   530: "M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25",
+//   560: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+//   570: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+//   550: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+//   500: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
+//   540: "M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46",
+//   510: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+//   580: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+//   600: "M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5",
+//   610: "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3",
+//   620: "M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z",
+//   630: "M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z",
+
+//   640: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+//   660: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+//   680: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+//   700: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+//   710: "M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z",
+//   720: "M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75",
+//   730: "M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25",
+// };
+
+// export default function BuyerHomePage() {
+//   // const [menu, setMenu] = useState(1);
+//   const [menuList, setMenuList] = useState<MyMenuInterface[] | []>([]);
+//   const [menuList2, setMenuList2] = useState<MyMenuInterface[] | []>([]);
+//   const [permissionList, setPermissionList] = useState<
+//     MyPermissionInterface[] | []
+//   >([]);
+//   const [myInfo, setMyInfo] = useState<MyInfoInterface | null>(null);
+//   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+//   const { token, setIsBuyer, setToken, setUserId, userId, setBgId } = useAuth();
+//   const { menu, setMenu } = useMenuContext();
+//   const [isSmall, setIsSmall] = useState<boolean>(false);
+//   const navigate = useNavigate();
+//   const { bmId } = useParams();
+
+//   //store
+//   const { setLoggedInUserName } = useAuthStore();
+//   //store
+
+//   useEffect(() => {
+//     const isTokenExpired = !isTokenValid(token!);
+//     // console.log(isTokenExpired);
+//     if (isTokenExpired) {
+//       setTimeout(() => {
+//         localStorage.removeItem("token");
+//         localStorage.removeItem("isBuyer");
+//         localStorage.removeItem("userId");
+//         localStorage.removeItem("bgId");
+//         // deleteFromLocalStorage("isBuyer");
+//         setToken(null);
+//         setIsBuyer(null);
+//         setUserId(null);
+//         navigate("/");
+//       }, 999);
+
+//       showErrorToast("Session Expired, Please Login");
+
+//       setTimeout(() => {}, 1100);
+
+//       console.log("expired");
+//     } else {
+//       getMyInfo();
+//       getRfiSupplierList();
+//       // getSupplierList();
+
+//       console.log(isTokenExpired);
+//     }
+
+//     console.log(token);
+
+//     // Perform any other initialization based on the token
+
+//     // getMenu(); // You can uncomment this line if needed
+//   }, []);
+
+//   const [state, setState] = React.useState({
+//     right: false,
+//   });
+
+//   const toggleDrawer = (open: any) => (event: any) => {
+//     if (
+//       event.type === "keydown" &&
+//       (event.key === "Tab" || event.key === "Shift")
+//     ) {
+//       return;
+//     }
+
+//     setState({ right: open });
+//   };
+
+//   useEffect(() => {
+//     // getMenu();
+//     // const storedToken = localStorage.getItem("isBuyer");
+//     console.log(token);
+
+//     console.log(userId);
+//   }, []);
+
+//   const getMyInfo = async () => {
+//     setIsLoading(true);
+//     const result = await MyInfoService(token!);
+//     if (result.data.status) {
+//       setMenuList(result.data.Menu);
+//       setMenuList2(result.data.Menu);
+//       setPermissionList(result.data.Permission);
+//       setMyInfo(result.data);
+//       setBgId(result.data.data.BUSINESS_GROUP_ID);
+//       console.log(result.data.data.BUSINESS_GROUP_ID);
+//       // myInfo?.data.FULL_NAME
+//       setLoggedInUserName(result.data.data.FULL_NAME);
+//       setUserId(result.data.data.USER_ID);
+
+//       localStorage.setItem(
+//         "bgId",
+//         result.data.data.BUSINESS_GROUP_ID.toString()
+//       );
+//       setIsLoading(false);
+//     } else {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   //rfilength
+//   const { rfiSupplierListlength, setRfiSupplierListlength } = useRfiStore();
+
+//   const getRfiSupplierList = async () => {
+//     setIsLoading(true);
+//     console.log(userId);
+
+//     try {
+//       const result = await RfiSupplierListService(
+//         token!,
+//         null,
+//         userId,
+//         0,
+//         null
+//       );
+//       console.log(result.data);
+
+//       if (result.data.status === 200) {
+//         console.log(result.data.data);
+
+//         setRfiSupplierListlength(result.data.data.length);
+//         await getUpdateSupplierList();
+//         setIsLoading(false);
+//       } else {
+//         setIsLoading(false);
+//         showErrorToast(result.data.message);
+//       }
+//     } catch (error) {
+//       setIsLoading(false);
+//       showErrorToast("Something went wrong");
+//     }
+//   };
+
+//   //rfiLength
+
+//   //manager supplier list length
+
+//   const pending = "IN PROCESS";
+//   const approved = "APPROVED";
+
+//   const { manageSupplierListLength, setManageSupplierListLength } =
+//     useManageSupplierStore();
+
+//   useEffect(() => {}, []);
+
+//   const getSupplierList = async () => {
+//     // setIsLoading(true);
+//     try {
+//       const result = await RegisteredSupplierListNeedToApproveService(
+//         token!,
+//         "IN PROCESS",
+//         ""
+//       );
+//       if (result.data.status === 200) {
+//         setManageSupplierListLength(result.data.data.length);
+//       } else {
+//         // setIsLoading(false);
+//         showErrorToast(result.data.message);
+//       }
+//     } catch (error) {
+//       // setIsLoading(false);
+//       showErrorToast("Something went wrong");
+//     }
+//   };
+
+//   //manager supplier list length
+
+//   //profile update supplier list length
+
+//   const {
+//     profileUpdateSupplierListLength,
+//     setProfileUpdateSupplierListLength,
+//   } = useProfileUpdateStore();
+
+//   const getUpdateSupplierList = async () => {
+//     console.log("executed");
+
+//     setIsLoading(true);
+//     try {
+//       const result = await SupplierListForUpdateProfileApprovalService(
+//         token!,
+//         "IN PROCESS",
+//         ""
+//       );
+
+//       console.log(result.data);
+
+//       if (result.data.status === 200) {
+//       } else {
+//         setIsLoading(false);
+//         showErrorToast(result.data.message);
+//         setProfileUpdateSupplierListLength(result.data.data.length);
+//         await getSupplierList();
+//         console.log(result.data.data.length);
+//       }
+//     } catch (error) {
+//       setIsLoading(false);
+//       showErrorToast("Something went wrong");
+//     }
+//   };
+
+//   //profile update supplier list length
+
+//   const list = (
+//     <Box
+//       sx={{ width: 250 }}
+//       role="presentation"
+//       onClick={toggleDrawer(false)}
+//       onKeyDown={toggleDrawer(false)}
+//     >
+//       <List>
+//         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+//           <ListItem key={text} disablePadding>
+//             <ListItemButton>
+//               <ListItemIcon>
+//                 {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+//               </ListItemIcon>
+//               <ListItemText primary={text} />
+//             </ListItemButton>
+//           </ListItem>
+//         ))}
+//       </List>
+//       <Divider />
+//       <List>
+//         {["All mail", "Trash", "Spam"].map((text, index) => (
+//           <ListItem key={text} disablePadding>
+//             <ListItemButton>
+//               <ListItemIcon>
+//                 {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+//               </ListItemIcon>
+//               <ListItemText primary={text} />
+//             </ListItemButton>
+//           </ListItem>
+//         ))}
+//       </List>
+//     </Box>
+//   );
+
+//   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+//     null
+//   );
+
+//   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+//     setAnchorEl(event.currentTarget);
+//   };
+
+//   const handleClose = () => {
+//     setAnchorEl(null);
+//   };
+
+//   const open = Boolean(anchorEl);
+//   const id = open ? "simple-popover" : undefined;
+
+//   const logOut = () => {
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("isBuyer");
+//     localStorage.removeItem("userId");
+//     setMenu(500);
+//     setToken(null);
+//     setIsBuyer(null);
+//     setUserId(null);
+//     navigate("/");
+//   };
+
+//   const handleIsSmall = () => {
+//     setIsSmall(!isSmall);
+//   };
+
+//   const handleMenuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     const value = event.target.value;
+//     if (value !== null) {
+//       const menus = menuList2.filter((menu) =>
+//         menu.MENU_NAME.toLowerCase().includes(value)
+//       );
+//       setMenuList(menus);
+//     } else {
+//       setMenuList(menuList2);
+//     }
+//   };
+
+//   useEffect(() => {
+//     // Check if the id is present in the URL params
+//     const menuId = parseInt(bmId ?? "", 10);
+
+//     // If the id is valid, set the menu
+//     if (!isNaN(menuId) && menuId >= 500 && menuId <= 100000) {
+//       setMenu(menuId);
+//     } else {
+//       // If id is not valid, set a default menu (e.g., 1)
+//       setMenu(500);
+//     }
+//   }, [bmId]);
+
+//   //logout
+
+//   const [isLogOutOpen, setIsLogOutOpen] = useState<boolean>(false);
+//   const openLogOutModal = () => {
+//     setIsLogOutOpen(true);
+//   };
+//   const closeModal = () => {
+//     setIsLogOutOpen(false);
+//   };
+
+//   return (
+//     <div>
+//       <ErrorToast />
+//       <LogOutModal
+//         isOpen={isLogOutOpen}
+//         doLogOut={logOut}
+//         closeModal={closeModal}
+//       />
+//       {/* Navbar */}
+//       <div className="fixed top-0 w-full h-16  flex  justify-between items-center z-10 bg-white border-b-[0.5px] border-borderColor shadow-sm">
+//         <div className="mx-4  w-40">
+//           <button
+//             onClick={handleIsSmall}
+//             className=" w-10 h-10 flex justify-center items-center bg-gray-200 rounded-full"
+//           >
+//             {isSmall ? <BarRightIcon /> : <BarLeftIcon />}
+//           </button>
+//         </div>
+//         <div className="w-full h-full flex flex-row-reverse items-center  mx-16 space-x-reverse space-x-10">
+//           <button onClick={handleClick}>
+//             <Avatar alt="avatar" src="images/man.png" />
+//           </button>
+
+//           {/* <button onClick={toggleDrawer(true)}>
+//                         <Badge color="warning" badgeContent={14}>
+//                             <BellIcon />
+//                         </Badge>
+//                     </button> */}
+
+//           <Drawer
+//             anchor="right"
+//             open={state.right}
+//             onClose={toggleDrawer(false)}
+//           >
+//             {list}
+//           </Drawer>
+
+//           <Popover
+//             id={id}
+//             open={open}
+//             anchorEl={anchorEl}
+//             onClose={handleClose}
+//             anchorOrigin={{
+//               vertical: "bottom",
+//               horizontal: "left",
+//             }}
+//           >
+//             <div className=" flex flex-col items-start py-2  w-44  rounded-lg backdrop-blur-lg bg-opacity-50">
+//               <p className="px-4 text-[16px] text-blackColor font-medium font-mon">
+//                 {myInfo?.data.FULL_NAME}
+//               </p>
+//               <p className="px-4 text-sm text-graishColor font-mon">
+//                 {myInfo?.data.USER_NAME}
+//               </p>
+
+//               <div className="w-full px-1 my-2 flex flex-col space-y-2 items-start">
+//                 <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+
+//                 <button className="px-3 font-mon text-start text-hintColor w-full h-8 hover:bg-offWhiteColor hover:rounded-sm">
+//                   Profile
+//                 </button>
+//                 <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+//                 <button
+//                   onClick={logOut}
+//                   className="px-3 font-mon text-start text-[#FF5630] w-full h-8 hover:bg-offWhiteColor hover:rounded-sm"
+//                 >
+//                   Logout
+//                 </button>
+//               </div>
+//             </div>
+//           </Popover>
+//         </div>
+//       </div>
+
+//       {/* Content Container */}
+//       <div className="flex flex-row mt-16 overflow-hidden">
+//         {/* Side menu */}
+//         <div
+//           className={`${isSmall ? "w-24 " : "w-60"}  h-screen overflow-y-auto`}
+//         >
+//           {/* Side menu content */}
+//           <div
+//             className={`fixed h-screen no-scrollbar  overflow-y-auto overflow-x-hidden  bg-whiteColor ${
+//               isSmall ? "w-24 " : "w-60"
+//             } border-[0.5px] border-r-borderColor border-t-0 border-l-0 border-b-0`}
+//           >
+//             <div className="w-full  mt-2 px-4 flex flex-col items-start space-y-[10px] shadow-sm">
+//               {isLoading ? (
+//                 <div className=" w-full h-screen flex justify-center items-center">
+//                   <CircularProgressIndicator />
+//                 </div>
+//               ) : (
+//                 <>
+//                   <div className=" flex flex-row w-full space-x-[2px]  ring-1 h-10 ring-borderColor rounded-sm  items-center pl-[4px] bg-white">
+//                     <SearchIcon />
+
+//                     <input
+//                       onChange={handleMenuChange}
+//                       className=" w-full px-1 focus:outline-none bg-white"
+//                     />
+//                   </div>
+
+//                   {menuList.map((m, i) => (
+//                     <Link
+//                       to={`/buyer-home/${m.MENU_ID}`}
+//                       key={m.MENU_ID}
+//                       onClick={(e) => {
+//                         e.preventDefault();
+//                         setMenu(m.MENU_ID);
+//                       }}
+//                       className={`py-2 w-full flex  ${
+//                         menu === m.MENU_ID ? "bg-lightGreen" : "bg-whiteColor"
+//                       }  rounded-md hover:bg-lightGreen
+//                                                  justify-start items-center
+//                                                 `}
+//                     >
+//                       <div
+//                         className={`${
+//                           isSmall ? "px-5" : "px-4"
+//                         }  flex flex-row space-x-2 items-center`}
+//                       >
+//                         <svg
+//                           xmlns="http://www.w3.org/2000/svg"
+//                           fill="none"
+//                           viewBox="0 0 24 24"
+//                           strokeWidth={1.5}
+//                           stroke="currentColor"
+//                           className={`w-6 h-6 ${
+//                             menu === m.MENU_ID
+//                               ? " text-darkGreen"
+//                               : "text-midBlack"
+//                           }`}
+//                         >
+//                           <path
+//                             strokeLinecap="round"
+//                             strokeLinejoin="round"
+//                             d={menuIcons[m.MENU_ID]}
+//                           />
+//                         </svg>
+
+//                         {!isSmall && (
+//                           <div className=" w-full flex items-center space-x-2">
+//                             <p
+//                               className={`${
+//                                 menu === m.MENU_ID
+//                                   ? " text-darkGreen"
+//                                   : "text-midBlack"
+//                               } font-medium font-mon text-sm  text-start`}
+//                             >
+//                               {m.MENU_NAME}
+//                             </p>
+//                             {m.MENU_ID === 680 ||
+//                             m.MENU_ID === 640 ||
+//                             m.MENU_ID === 660 ? (
+//                               <p className=" py-1 px-2 flex rounded-[100px] bg-redColor font-mon font-semibold justify-center items-center text-white text-xs">
+//                                 {m.MENU_ID === 680
+//                                   ? `${rfiSupplierListlength}`
+//                                   : m.MENU_ID === 640
+//                                   ? `${manageSupplierListLength}`
+//                                   : m.MENU_ID === 660
+//                                   ? `${profileUpdateSupplierListLength}`
+//                                   : ""}
+//                               </p>
+//                             ) : null}
+//                           </div>
+//                         )}
+//                       </div>
+//                     </Link>
+//                   ))}
+//                   <button
+//                     onClick={openLogOutModal}
+//                     className=" w-full flex space-x-2 items-center font-mon h-10  hover:bg-red-200 text-sm rounded-md px-4 text-redColor "
+//                   >
+//                     <svg
+//                       xmlns="http://www.w3.org/2000/svg"
+//                       fill="none"
+//                       viewBox="0 0 24 24"
+//                       strokeWidth={1.5}
+//                       stroke="currentColor"
+//                       className="w-6 h-6 text-redColor"
+//                     >
+//                       <path
+//                         strokeLinecap="round"
+//                         strokeLinejoin="round"
+//                         d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+//                       />
+//                     </svg>
+
+//                     <p>Logout</p>
+//                   </button>
+//                 </>
+//               )}
+
+//               <div className="h-32"></div>
+//             </div>
+//           </div>
+//           {/* End side menu */}
+//         </div>
+
+//         {/* Page Content */}
+//         <div className="flex-1 overflow-y-auto">
+//           {(() => {
+//             switch (menu) {
+//               case 500:
+//                 return <BuyerHome />;
+//               case 730:
+//                 return (
+//                   <RfqCreateProcessProvider>
+//                     <BuyerRfqCreateProcessPage />
+//                   </RfqCreateProcessProvider>
+//                 ); //hide hbe
+//               case 520:
+//                 return (
+//                   <RfqPageProvider>
+//                     <RfqHomePage />
+//                   </RfqPageProvider>
+//                 ); //hide hbe
+//               case 540:
+//                 return <InviteHomePage />;
+//               //                     "MENU_ID": 550,
+//               // "MENU_NAME": "MANAGE SUPPLIER"
+//               // "MENU_ID": 530,
+//               // "MENU_NAME": "QUOTATION"
+//               // case 560:
+//               //     return (
+//               //         <ManageSupplierProvider>
+//               //             <ManageSupplierHome />
+//               //         </ManageSupplierProvider>
+//               //     ); //hide hbe
+//               // case 570:
+//               //   return (
+//               //     <CsApprovalProvider>
+//               //       <CsApprovalHomePage />
+//               //     </CsApprovalProvider>
+//               //   ); //hide hbe
+//               case 580:
+//                 return (
+//                   <RoleAccessProvider>
+//                     <RoleManagementHome />
+//                   </RoleAccessProvider>
+//                 );
+//               case 600:
+//                 return <RoleMenuPermissionManager />;
+//               case 610:
+//                 return <EmployeeForSyncPage />;
+//               case 620:
+//                 return <BuyerProfilePage />;
+//               // case 620:
+//               //     return <SupplierProfilePage />; //hide hbe
+//               case 630:
+//                 return (
+//                   <ApprovalSetupProvider>
+//                     <ApprovalSetupHomePage />
+//                   </ApprovalSetupProvider>
+//                 );
+//               case 640:
+//                 return (
+//                   <ManageSupplierProvider>
+//                     <ManageSupplierHome />
+//                   </ManageSupplierProvider>
+//                 );
+//               case 660:
+//                 return (
+//                   <ManageSupplierProfileUpdateProvider>
+//                     <SupplierListHomeForUpdateSupplier />
+//                   </ManageSupplierProfileUpdateProvider>
+//                 );
+//               case 680:
+//                 return (
+//                   <RfiManageSupplierProvider>
+//                     <RfiHomeSupplierListPage />
+//                   </RfiManageSupplierProvider>
+//                 );
+//               case 700:
+//                 return (
+//                   <MouPageProvider>
+//                     <SupplierOuManageHomePage />
+//                   </MouPageProvider>
+//                 );
+//               case 710:
+//                 return (
+//                   <PoPageProvider>
+//                     <PoHomePage />
+//                   </PoPageProvider>
+//                 );
+//               case 720:
+//                 return (
+// <RfqPageProvider>
+//   <RfqHomePage />
+// </RfqPageProvider>
+//                 );
+
+//               default:
+//                 return null;
+//             }
+//           })()}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// // className={`w-6 h-6 ${menu === 2 ? " text-darkGreen" : "text-grayColor"}`}
+
+//hemel code
+
+import React, { useState, useEffect } from "react";
+import Avatar from "@mui/material/Avatar";
+import Badge from "@mui/material/Badge";
+import Popover from "@mui/material/Popover";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import logo from "../../../public/logo512.png";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+
+import DeclarationPage from "../../registration/component/DeclarationPage";
+
+import GeneralTermsPage from "../../buyer_section/general_terms/components/GeneralTermsPage";
+import BuyerRfqTermPage from "../../buyer_section/buyer_term/component/BuyerRfqTermPage";
+import BuyerHome from "./BuyerHome";
+import CreateRolePage from "../../role_access/component/CreateRolePage";
+import RfqUnlockPage from "../../rfq_unlock/component/RfqUnlockPage";
+import SupplierListPage from "../../manage_supplier/component/SupplierListPage";
+import GetBuyerMenuService from "../service/GetBuyerMenuService";
+
+import BuyerMenuInterface from "../interface/BuyerMenuInterface";
+import ApprovedPrPage from "../../buyer_section/pr/component/ApprovedPrPage";
+import RoleMenuPermissionManager from "../../role_access/component/RoleMenuPermissionManager";
+import PrItemListPage from "../../buyer_section/pr_item_list/component/PrItemListPage";
+import PageTitle from "../../common_component/PageTitle";
+import { Dashboard } from "@mui/icons-material";
+import InviteSupplierForRfqPage from "../../buyer_section/invite_supplier_for_rfq/component/InviteSupplierForRfqPage";
+import RfqPreviewPage from "../../buyer_section/rfq_preview/component/RfqPreviewPage";
+import BuyerRfqCreateProcessPage from "../../buyer_rfq_create/component/BuyerRfqCreateProcessPage";
+import { RfqCreateProcessProvider } from "../../buyer_rfq_create/context/RfqCreateContext";
+import RfqListPage from "../../rfq/component/RfqListPage";
+import { RfqPageProvider } from "../../rfq/context/RfqPageContext";
+import RfqHomePage from "../../rfq/component/RfqHomePage";
+import CsListPage from "../../cs_admin_approval/component/CsListPage";
+import { CsApprovalProvider } from "../../cs_admin_approval/context/CsApprovalContext";
+import CsApprovalHomePage from "../../cs_admin_approval/component/CsApprovalHomePage";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../login_both/context/AuthContext";
+import { isTokenValid } from "../../utils/methods/TokenValidityCheck";
+
+import { RoleAccessProvider } from "../../role_access/context/RoleAccessContext";
+import UserRolePage from "../../role_access/component/UserRolePage";
+import RoleManagementHome from "../../role_access/component/RoleManagementHome";
+import MyInfoService from "../../my_info/service/MyInfoService";
+import {
+  MyMenuInterface,
+  MyPermissionInterface,
+  MyInfoInterface,
+} from "../../my_info/interface/MyInfoInterface";
+import InvitationPage from "../../invitation/component/InvitationPage";
+import { useMenuContext } from "../../my_info/context/MenuContext";
+import CircularProgressIndicator from "../../Loading_component/CircularProgressIndicator";
+
+import ErrorToast, { showErrorToast } from "../../Alerts_Component/ErrorToast";
+import EmployeeForSyncPage from "../../employee_sync/component/EmployeeForSyncPage";
+import { ManageSupplierProvider } from "../../manage_supplier/interface/ManageSupplierContext";
+import ManageSupplierHome from "../../manage_supplier/component/ManageSupplierHome";
+import SupplierProfilePage from "../../supplier_profile/component/SupplierProfilePage";
+import SearchIcon from "../../icons/SearchIcon";
+import InviteHomePage from "../../invitation/component/InviteHomePage";
+import { Link, useParams } from "react-router-dom";
+import BarRightIcon from "../../icons/BarRightIcon";
+import BarLeftIcon from "../../icons/BarLeftIcon";
+import BellIcon from "../../icons/BellIcon";
+import ApprovalSetupPage from "../../approval_setup/component/ApprovalSetupPage";
+import { ApprovalSetupProvider } from "../../approval_setup/context/ApprovalSetupContext";
+import ApprovalSetupHomePage from "../../approval_setup/component/ApprovalSetupHomePage";
+import deleteFromLocalStorage from "../../utils/methods/deleteFromLocalStorage";
+import { ManageSupplierProfileUpdateProvider } from "../../manage_supplier_profile_update/context/ManageSupplierProfileUpdateContext";
+import SupplierListHomeForUpdateSupplier from "../../manage_supplier_profile_update/component/SupplierListHomeForUpdateSupplier";
+import {
+  RfiManageSupplierProvider,
+  useRfiManageSupplierContext,
+} from "../../rfi_in_supplier_registration/context/RfiManageSupplierContext";
+import RfiHomeSupplierListPage from "../../rfi_in_supplier_registration/component/RfiHomeSupplierListPage";
+import { MouPageProvider } from "../../supplier_ou_manage/context/MouPageContext";
+import SupplierOuManageHomePage from "../../supplier_ou_manage/component/SupplierOuManageHomePage";
+import { PoPageProvider } from "../../po/context/PoPageContext";
+import PoHomePage from "../../po/component/PoHomePage";
+import LogOutModal from "../../common_component/LogoutModal";
+import GrnHomePage from "../../grn/component/GrnHomePage";
+import RfiSupplierInterface from "../../rfi_in_supplier_registration/interface/RfiSupplierInterface";
+import RfiSupplierListService from "../../rfi_in_supplier_registration/service/RfiSupplierListService";
+import useRfiStore from "../../rfi_in_supplier_registration/store/RfiStore";
+import RegisteredSupplierListNeedToApproveService from "../../manage_supplier/service/RegisteredSupplierListNeedToApproveService";
+import useManageSupplierStore from "../../manage_supplier/store/manageSupplierStore";
+import useProfileUpdateStore from "../../manage_supplier_profile_update/store/profileUpdateStore";
+import SupplierListForUpdateProfileApprovalService from "../../manage_supplier_profile_update/service/SupplierListForUpdateApprovalService";
+import BuyerProfilePage from "../../buyer_profile/component/BuyerProfilePage";
+import BuyerInvoiceHome from "../../buyer_invoice/component/BuyerInvoiceHome";
+import { log } from "console";
+import useAuthStore from "../../login_both/store/authStore";
+import usePrItemsStore from "../../buyer_section/pr/store/prItemStore";
+import {
+  getNotificationDescription,
+  NotificationLookup,
+} from "../../manage_supplier_profile_update/utils/NotificationLookup";
+import SupplierInterface from "../../manage_supplier/interface/SupplierInterface";
+import CsAndRfqHomePage from "../../cs_and_rfq/component/CsAndRfqHomePage";
+import usePermissionStore from "../../utils/store/PermissionStore";
+import useCountStore from "../store/countStore";
+import SupplierListForProfileUpdatePage from "../../manage_supplier_profile_update/component/SupplierListForProfileUpdatePage";
+import SupplierListForUpdateProfileInfoService from "../../manage_supplier_profile_update/service/SupplierListForUpdateProfileInfoService";
+import SystemSetupPage from "../../system_setup/component/SystemSetupPage";
+
+const menuIcons: { [key: number]: string } = {
+  520: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+  530: "M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25",
+  560: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+  570: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+  550: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+  500: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
+  540: "M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46",
+  510: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+  580: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+  600: "M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5",
+  610: "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3",
+  620: "M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z",
+  630: "M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z",
+
+  640: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+  660: "M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25",
+  680: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+  700: "m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z",
+  710: "M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z",
+  720: "M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75",
+  730: "M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15M9 12l3 3m0 0 3-3m-3 3V2.25",
+  760: "M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z",
+  780: "M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z",
+};
+
+export default function BuyerHomePage() {
+  // const [menu, setMenu] = useState(1);
+  const [menuList, setMenuList] = useState<MyMenuInterface[] | []>([]);
+  const [menuList2, setMenuList2] = useState<MyMenuInterface[] | []>([]);
+  const [permissionList, setPermissionList] = useState<
+    MyPermissionInterface[] | []
+  >([]);
+  const [myInfo, setMyInfo] = useState<MyInfoInterface | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [supplierListProfileUpdate, setSUpplierListProfileUpdate] = useState<
+    {
+      ORGANIZATION_NAME: string;
+    }[]
+  >([]);
+  const [
+    registersupplierListProfileUpdate,
+    setRegisterSUpplierListProfileUpdate,
+  ] = useState<
+    {
+      ORGANIZATION_NAME: string;
+    }[]
+  >([]);
+
+  const {
+    token,
+    setIsBuyer,
+    setToken,
+    setUserId,
+    userId,
+    setBgId,
+    setSupplierId,
+    setBuyerId,
+  } = useAuth();
+  const { menu, setMenu } = useMenuContext();
+  const [isSmall, setIsSmall] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const { bmId } = useParams();
+  const [supplierList, setSupplierList] = useState<
+    {
+      ID: number;
+      INITIATION_DATE: string;
+      INITIATOR_ID: number;
+      INITIATOR_NAME: string;
+      INITIATOR_NOTE: string;
+      INITIATOR_PRO_PIC: string;
+      OBJECT_ID: number;
+      OBJECT_TYPE: string;
+      SUPPLIER_FULL_NAME: string;
+      SUPPLIER_ORGANIZATION_NAME: string;
+      SUPPLIER_USER_NAME: string;
+      VIEWER_ACTION: number;
+      VIEWER_ID: number;
+      VIEWER_NAME: string;
+      VIEWER_NOTE: string;
+      VIEWER_PRO_PIC: string;
+      VIEW_DATE: string;
+    }[]
+  >([]);
+  // console.log(supplierList.length);
+  // const navigate = useNavigate();
+  // const {
+  //   isActiveButtonRegistration,
+  //   setIsActiveButtonRegistration,
+  //   isActiveButtonRFQ,
+  //   setIsActiveButtonRFQ,
+  //   isActiveButtonVAT,
+  //   setIsActiveButtonVAT,
+  // } = useRfiManageSupplierContext();
+
+  const { setRfqIdInStore } = usePrItemsStore(); //setRfqObjectIdInStore
+
+  //store
+  const { setLoggedInUserName } = useAuthStore();
+  const { setRfiTabNo, rfiTabNo } = useRfiStore();
+  //store
+  const { appStatus, setAppStatus, setIsApprovedSupplier, isApprovedSupplier } =
+    useProfileUpdateStore();
+  const {
+    isRegisterApprovedSupplier,
+    setisRegisterApprovedSupplier,
+    registerAppStatus,
+    setRegisterAppStatus,
+  } = useManageSupplierStore();
+  useEffect(() => {
+    const isTokenExpired = !isTokenValid(token!);
+    // console.log(isTokenExpired);
+    if (isTokenExpired) {
+      setTimeout(() => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("isBuyer");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("bgId");
+        localStorage.removeItem("buyerId");
+        // deleteFromLocalStorage("isBuyer");
+        setToken(null);
+        setIsBuyer(null);
+        setUserId(null);
+        setBuyerId(null);
+        navigate("/");
+      }, 999);
+
+      showErrorToast("Session Expired, Please Login");
+
+      setTimeout(() => {}, 1100);
+
+      console.log("expired");
+    } else {
+      getMyInfo();
+      allFunctionCall();
+      console.log(isTokenExpired);
+    }
+
+    console.log(token);
+
+    // Perform any other initialization based on the token
+
+    // getMenu(); // You can uncomment this line if needed
+  }, []);
+
+  const allFunctionCall = async () => {
+    getRfiSupplierList();
+    getSupplierList();
+    getUpdateSupplierList();
+    getSupplierNewInfo();
+  };
+
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
+  const toggleDrawer = (open: any) => (event: any) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ right: open });
+  };
+
+  //permission store
+
+  const { setIsByerNameSearchPermission } = usePermissionStore();
+
+  interface Permission {
+    PERMISSION_ID: number;
+    PERMISSION_NAME: string;
+    P_DESCRIPTION: string;
+  }
+
+  //permission store
+
+  const getMyInfo = async () => {
+    setIsLoading(true);
+    const result = await MyInfoService(token!);
+    if (result.data.status) {
+      setMenuList(result.data.Menu);
+      setMenuList2(result.data.Menu);
+      setPermissionList(result.data.Permission);
+      setMyInfo(result.data);
+      setBgId(result.data.data.BUSINESS_GROUP_ID);
+      console.log(result.data.data.BUSINESS_GROUP_ID);
+      // myInfo?.data.FULL_NAME
+      setLoggedInUserName(result.data.data.FULL_NAME);
+      setUserId(result.data.data.USER_ID);
+
+      localStorage.setItem(
+        "bgId",
+        result.data.data.BUSINESS_GROUP_ID.toString()
+      );
+
+      const isBuyer = checkPermission(result.data.Permission, "BuyerSearch");
+      setIsByerNameSearchPermission(isBuyer);
+
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  };
+  function checkPermission(
+    permissions: Permission[],
+    permissionName: string
+  ): boolean {
+    for (const permission of permissions) {
+      if (permission.PERMISSION_NAME === permissionName) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  //rfilength
+  const { rfiSupplierListlength, setRfiSupplierListlength } = useRfiStore();
+
+  const getRfiSupplierList = async () => {
+    setIsLoading(true);
+    console.log(userId);
+
+    try {
+      const result = await RfiSupplierListService(
+        token!,
+        null,
+        userId,
+        0,
+        null
+      );
+      console.log(result.data);
+
+      if (result.data.status === 200) {
+        console.log(result.data.data);
+        setSupplierList(result.data.data);
+
+        setRfiSupplierListlength(result.data.data.length);
+        console.log("rfi list len", result.data.data.length);
+
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      showErrorToast("Something went wrong");
+    }
+  };
+
+  console.log(supplierList);
+
+  //rfiLength
+
+  //manager supplier list length
+
+  const pending = "IN PROCESS";
+  const approved = "APPROVED";
+
+  const { manageSupplierListLength, setManageSupplierListLength } =
+    useManageSupplierStore();
+
+  useEffect(() => {}, []);
+
+  const getSupplierList = async () => {
+    // setIsLoading(true);
+    try {
+      const result = await RegisteredSupplierListNeedToApproveService(
+        token!,
+        "IN PROCESS",
+        ""
+      );
+      setRegisterSUpplierListProfileUpdate(result.data.data);
+      if (result.data.status === 200) {
+        setRegisterSUpplierListProfileUpdate(result.data.data);
+        setManageSupplierListLength(result.data.data.length);
+        console.log("regitration list", result.data.data.length);
+      } else {
+        // setIsLoading(false);
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      // setIsLoading(false);
+      showErrorToast("Something went wrong");
+    }
+  };
+
+  //manager supplier list length
+
+  // const { setRfiManageSupplierPageNo, setRfiId, rfiManageSupplierPageNo } =
+  //   useRfiManageSupplierContext();
+
+  const navigateTo = (userId: number, rfiId: number) => {
+    console.log("userId: ", userId);
+    console.log("rfiId: ", rfiId);
+    console.log("clicked");
+    // setRfiManageSupplierPageNo(2);
+    // setSupplierId(userId);
+    // setRfqIdInStore(userId);
+    // setRfiId(objId);
+    // setRfqObjectIdInStore(objId);
+
+    // setRfiManageSupplierPageNo(2);
+    // setSupplierId(userId);
+    // setRfiId(rfiId);
+  };
+  // console.log(rfiManageSupplierPageNo);
+  //profile update supplier list length
+
+  const {
+    profileUpdateSupplierListLength,
+    setProfileUpdateSupplierListLength,
+  } = useProfileUpdateStore();
+
+  // const getRegisterSupplierList = async (approvalStatus: string) => {
+  //   setIsLoading(true);
+  //   try {
+  //     const result = await RegisteredSupplierListNeedToApproveService(
+  //       token!,
+  //       "IN PROCESS",
+  //       ""
+  //     );
+  //     console.log(result.data.data);
+  //     setRegisterSUpplierListProfileUpdate(result.data.data);
+  //     if (result.data.status === 200) {
+  //       // setProfilePicOnePath(result.data.profile_pic1);
+  //       // setProfilePicTwoPath(result.data.profile_pic2);
+  //       setRegisterSUpplierListProfileUpdate(result.data.data);
+  //       setManageSupplierListLength(result.data.data.length);
+  //       setIsLoading(false);
+  //     } else {
+  //       setIsLoading(false);
+  //       showErrorToast(result.data.message);
+  //     }
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     showErrorToast("Something went wrong");
+  //   }
+  // };
+
+  const getUpdateSupplierList = async () => {
+    // console.log("executed");
+
+    setIsLoading(true);
+    try {
+      const result = await SupplierListForUpdateProfileApprovalService(
+        token!,
+        "IN PROCESS",
+        ""
+      );
+
+      console.log(result.data.data);
+      setSUpplierListProfileUpdate(result.data.data);
+
+      if (result.data.status === 200) {
+        setIsLoading(false);
+
+        setSUpplierListProfileUpdate(result.data.data);
+        setProfileUpdateSupplierListLength(result.data.data.length);
+        console.log("profile update len", result.data.data.length);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      showErrorToast("Something went wrong");
+    }
+  };
+  // const gotoVat = () => {
+  //   setRfiManageSupplierPageNo(5);
+  // };
+
+  const { setProfileSupplierNewAddLength, profileNewAddSupplierLength } =
+    useCountStore();
+
+  const getSupplierNewInfo = async () => {
+    try {
+      const result = await SupplierListForUpdateProfileInfoService(
+        token!,
+        "IN PROCESS",
+        ""
+      );
+
+      console.log(result.data);
+
+      if (result.data.status === 200) {
+        setProfileSupplierNewAddLength(result.data.data.length);
+        // setProfileUpdateSupplierListLengthNew(result.data.data.length);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      showErrorToast("Something went wrong");
+    }
+  };
+
+  const navigateToRoute = (route: number) => {
+    // Navigate to the route associated with the notification
+    setMenu(route); // Use window.location.href for full page reload
+  };
+  // const navigateToRoute = (routeTo: string) => {
+  //   navigate(routeTo);
+  // };
+  console.log(registersupplierListProfileUpdate);
+  //profile update supplier list length
+  console.log(supplierListProfileUpdate);
+  const list = (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <h1 className="text-2xl font-bold text-center">Notification</h1>
+      {/* {getNotificationDescription} */}
+      {/* <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} //
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List> */}
+      {registersupplierListProfileUpdate.map((item, index) => (
+        <div
+          key={index}
+          className="my-4 cursor-pointer px-2 mx-1 hover:bg-slate-50 divide-y"
+        >
+          <div
+            onClick={() => {
+              navigateToRoute(640);
+              setisRegisterApprovedSupplier(isRegisterApprovedSupplier);
+              setRegisterAppStatus("IN PROCESS");
+              // setRfiTabNo(11);
+              // setRfiManageSupplierPageNo(1);
+              // setIsActiveButtonRegistration(true);
+              // setIsActiveButtonRFQ(false);
+              // setIsActiveButtonVAT(false);
+            }}
+            className="flex items-center gap-1"
+          >
+            <Avatar alt="avatar" src="images/man.png" />
+            <div>
+              <h1>
+                <span className="font-semibold text-base text-blue-500">
+                  {item?.ORGANIZATION_NAME}
+                </span>{" "}
+                Applied for Register Approval
+              </h1>
+            </div>
+          </div>
+        </div>
+      ))}
+      {supplierListProfileUpdate.map((item, index) => (
+        <div
+          key={index}
+          className="my-4 cursor-pointer px-2 mx-1 hover:bg-slate-50 divide-y"
+        >
+          <div
+            onClick={() => {
+              navigateToRoute(660);
+              setIsApprovedSupplier(isApprovedSupplier);
+              setAppStatus("IN PROCESS");
+              // setRfiTabNo(11);
+              // setRfiManageSupplierPageNo(1);
+              // setIsActiveButtonRegistration(true);
+              // setIsActiveButtonRFQ(false);
+              // setIsActiveButtonVAT(false);
+            }}
+            className="flex items-center gap-1"
+          >
+            <Avatar alt="avatar" src="images/man.png" />
+            <div>
+              <h1>
+                <span className="font-semibold text-base text-blue-500">
+                  {item?.ORGANIZATION_NAME}
+                </span>{" "}
+                Applied for Approval
+              </h1>
+            </div>
+          </div>
+        </div>
+      ))}
+      {supplierList.map((item, index) => (
+        <div
+          key={index}
+          className="my-4 cursor-pointer px-2 mx-1 hover:bg-slate-50 divide-y"
+        >
+          {item.OBJECT_TYPE === "Supplier Approval" && (
+            <div
+              onClick={() => {
+                navigateToRoute(680);
+                setRfiTabNo(11);
+                // setRfiManageSupplierPageNo(1);
+                // setIsActiveButtonRegistration(true);
+                // setIsActiveButtonRFQ(false);
+                // setIsActiveButtonVAT(false);
+              }}
+              className="flex items-center gap-1"
+            >
+              <img src={item?.INITIATOR_PRO_PIC} alt="" />
+              <Avatar alt="avatar" src="images/man.png" />
+              <div>
+                <h1>
+                  <span className="font-semibold text-base text-blue-500">
+                    {item?.SUPPLIER_ORGANIZATION_NAME}
+                  </span>{" "}
+                  Applied for registration
+                </h1>
+                {/* <p>Applied for registration</p> */}
+              </div>
+            </div>
+          )}
+          {/* {item.OBJECT_TYPE === NotificationLookup["Vat"] && (
+            <div
+              onClick={() => {
+                navigateToRoute(NotificationLookup["Route_to"]);
+                navigateTo(item.OBJECT_ID, item.ID);
+                console.log("clicked");
+              }}
+            >
+              <img src={item?.INITIATOR_PRO_PIC} alt="" />
+              <div>
+                <h1 className="font-semibold text-lg text-fuchsia-500">
+                  {item?.INITIATOR_NAME}
+                </h1>
+                <p>{NotificationLookup["Title"]}</p>
+              </div>
+            </div>
+          )} */}
+          {item.OBJECT_TYPE === NotificationLookup["Vat"] && (
+            <div
+              onClick={() => {
+                // setIsActiveButtonRegistration(false);
+                // setIsActiveButtonRFQ(false);
+                // setIsActiveButtonVAT(true);
+                navigateToRoute(680);
+                setRfiTabNo(55);
+                // gotoVat();
+              }}
+              className="flex items-center gap-1"
+            >
+              <img src={item?.INITIATOR_PRO_PIC} alt="" />
+              <Avatar alt="avatar" src="images/man.png" className="w-10 h-10" />
+              <div>
+                <h1>
+                  <span className="font-semibold text-base text-fuchsia-500">
+                    {item?.INITIATOR_NAME}
+                  </span>{" "}
+                  {NotificationLookup["Title"]}
+                </h1>
+                {/* <p>{NotificationLookup["Title"]}</p> */}
+              </div>
+            </div>
+          )}
+          {item.OBJECT_TYPE === "RFQ" && (
+            <div
+              onClick={() => {
+                navigateToRoute(680);
+                setRfiTabNo(33);
+                // setRfiManageSupplierPageNo(3);
+                // setIsActiveButtonRegistration(false);
+                // setIsActiveButtonRFQ(true);
+                // setIsActiveButtonVAT(false);
+              }}
+              className="flex items-center gap-1"
+            >
+              <img src={item?.INITIATOR_PRO_PIC} alt="" />
+              <div>
+                <h1 className="font-semibold text-lg text-green-500">
+                  {item?.INITIATOR_NAME}
+                </h1>
+                <p>Applied for RFQ Approval</p>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+
+      {/* <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} //
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List> */}
+    </Box>
+  );
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("isBuyer");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isByerNameSearchPermission");
+    setIsByerNameSearchPermission(null);
+    setMenu(500);
+    setToken(null);
+    setIsBuyer(null);
+    setUserId(null);
+    navigate("/");
+  };
+
+  const handleIsSmall = () => {
+    setIsSmall(!isSmall);
+  };
+
+  const handleMenuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value !== null) {
+      const menus = menuList2.filter((menu) =>
+        menu.MENU_NAME.toLowerCase().includes(value)
+      );
+      setMenuList(menus);
+    } else {
+      setMenuList(menuList2);
+    }
+  };
+
+  useEffect(() => {
+    // Check if the id is present in the URL params
+    const menuId = parseInt(bmId ?? "", 10);
+
+    // If the id is valid, set the menu
+    if (!isNaN(menuId) && menuId >= 500 && menuId <= 100000) {
+      setMenu(menuId);
+    } else {
+      // If id is not valid, set a default menu (e.g., 1)
+      setMenu(500);
+    }
+  }, [bmId]);
+
+  //logout
+
+  const [isLogOutOpen, setIsLogOutOpen] = useState<boolean>(false);
+  const openLogOutModal = () => {
+    setIsLogOutOpen(true);
+  };
+  const closeModal = () => {
+    setIsLogOutOpen(false);
+  };
+
+  return (
+    <div>
+      <ErrorToast />
+      <LogOutModal
+        isOpen={isLogOutOpen}
+        doLogOut={logOut}
+        closeModal={closeModal}
+      />
+      {/* Navbar */}
+      <div className="fixed top-0 w-full h-16  flex  justify-between items-center z-10 bg-white border-b-[0.5px] border-borderColor shadow-sm">
+        <div className="mx-4  w-40">
+          <button
+            onClick={handleIsSmall}
+            className=" w-10 h-10 flex justify-center items-center bg-gray-200 rounded-full"
+          >
+            {isSmall ? <BarRightIcon /> : <BarLeftIcon />}
+          </button>
+        </div>
+        <div className="w-full h-full flex flex-row-reverse items-center  mx-16 space-x-reverse space-x-10">
+          <button onClick={handleClick}>
+            <Avatar alt="avatar" src="images/man.png" />
+          </button>
+
+          <button onClick={toggleDrawer(true)}>
+            <Badge
+              color="warning"
+              badgeContent={
+                rfiSupplierListlength! +
+                manageSupplierListLength! +
+                profileUpdateSupplierListLength!
+              }
+            >
+              <BellIcon />
+            </Badge>
+          </button>
+
+          <Drawer
+            anchor="right"
+            open={state.right}
+            onClose={toggleDrawer(false)}
+          >
+            {list}
+          </Drawer>
+
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <div className=" flex flex-col items-start py-2  w-44  rounded-lg backdrop-blur-lg bg-opacity-50">
+              <p className="px-4 text-[16px] text-blackColor font-medium font-mon">
+                {myInfo?.data.FULL_NAME}
+              </p>
+              <p className="px-4 text-sm text-graishColor font-mon">
+                {myInfo?.data.USER_NAME}
+              </p>
+
+              <div className="w-full px-1 my-2 flex flex-col space-y-2 items-start">
+                <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+
+                <button className="px-3 font-mon text-start text-hintColor w-full h-8 hover:bg-offWhiteColor hover:rounded-sm">
+                  Profile
+                </button>
+                <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+                <button
+                  onClick={logOut}
+                  className="px-3 font-mon text-start text-[#FF5630] w-full h-8 hover:bg-offWhiteColor hover:rounded-sm"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </Popover>
+        </div>
+      </div>
+
+      {/* Content Container */}
+      <div className="flex flex-row mt-16 overflow-hidden">
+        {/* Side menu */}
+        <div
+          className={`${isSmall ? "w-24 " : "w-60"}  h-screen overflow-y-auto`}
+        >
+          {/* Side menu content */}
+          <div
+            className={`fixed h-screen no-scrollbar  overflow-y-auto overflow-x-hidden  bg-whiteColor ${
+              isSmall ? "w-24 " : "w-60"
+            } border-[0.5px] border-r-borderColor border-t-0 border-l-0 border-b-0`}
+          >
+            <div className="w-full  mt-2 px-4 flex flex-col items-start space-y-[10px] shadow-sm">
+              {isLoading ? (
+                <div className=" w-full h-screen flex justify-center items-center">
+                  <CircularProgressIndicator />
+                </div>
+              ) : (
+                <>
+                  <div className=" flex flex-row w-full space-x-[2px]  ring-1 h-10 ring-borderColor rounded-sm  items-center pl-[4px] bg-white">
+                    <SearchIcon />
+
+                    <input
+                      onChange={handleMenuChange}
+                      className=" w-full px-1 focus:outline-none bg-white"
+                    />
+                  </div>
+
+                  {menuList.map((m, i) => (
+                    <Link
+                      to={`/buyer-home/${m.MENU_ID}`}
+                      key={m.MENU_ID}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMenu(m.MENU_ID);
+                      }}
+                      className={`py-2 w-full flex  ${
+                        menu === m.MENU_ID ? "bg-lightGreen" : "bg-whiteColor"
+                      }  rounded-md hover:bg-lightGreen
+                                                 justify-start items-center 
+                                                `}
+                    >
+                      <div
+                        className={`${
+                          isSmall ? "px-5" : "px-4"
+                        }  flex flex-row space-x-2 items-center`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className={`w-6 h-6 ${
+                            menu === m.MENU_ID
+                              ? " text-darkGreen"
+                              : "text-midBlack"
+                          }`}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d={menuIcons[m.MENU_ID]}
+                          />
+                        </svg>
+
+                        {!isSmall && (
+                          <div className=" w-full flex items-center space-x-2">
+                            <p
+                              className={`${
+                                menu === m.MENU_ID
+                                  ? " text-darkGreen"
+                                  : "text-midBlack"
+                              } font-medium font-mon text-sm  text-start`}
+                            >
+                              {m.MENU_NAME}
+                            </p>
+                            {m.MENU_ID === 680 ||
+                            m.MENU_ID === 640 ||
+                            m.MENU_ID === 660 ? (
+                              <p className=" py-1 px-2 flex rounded-[100px] bg-redColor font-mon font-semibold justify-center items-center text-white text-xs">
+                                {m.MENU_ID === 680
+                                  ? `${rfiSupplierListlength}`
+                                  : m.MENU_ID === 640
+                                  ? `${
+                                      manageSupplierListLength! +
+                                      profileNewAddSupplierLength!
+                                    }`
+                                  : m.MENU_ID === 660
+                                  ? `${profileUpdateSupplierListLength}`
+                                  : ""}
+                              </p>
+                            ) : null}
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                  <button
+                    onClick={openLogOutModal}
+                    className=" w-full flex space-x-2 items-center font-mon h-10  hover:bg-red-200 text-sm rounded-md px-4 text-redColor "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6 text-redColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+                      />
+                    </svg>
+
+                    <p>Logout</p>
+                  </button>
+                </>
+              )}
+
+              <div className="h-32"></div>
+            </div>
+          </div>
+          {/* End side menu */}
+        </div>
+
+        {/* Page Content */}
+        <div className="flex-1 overflow-y-auto">
+          {(() => {
+            switch (menu) {
+              case 500:
+                return <BuyerHome />;
+              case 730:
+                return (
+                  <RfqCreateProcessProvider>
+                    <BuyerRfqCreateProcessPage />
+                  </RfqCreateProcessProvider>
+                ); //hide hbe
+              case 520:
+                return (
+                  <RfqPageProvider>
+                    <RfqHomePage />
+                  </RfqPageProvider>
+                ); //hide hbe
+              case 540:
+                return <InviteHomePage />;
+              //                     "MENU_ID": 550,
+              // "MENU_NAME": "MANAGE SUPPLIER"
+              // "MENU_ID": 530,
+              // "MENU_NAME": "QUOTATION"
+              case 560:
+                return (
+                  <ManageSupplierProvider>
+                    <ManageSupplierHome />
+                  </ManageSupplierProvider>
+                ); //hide hbe
+              // case 570:
+              //   return (
+              //     <CsApprovalProvider>
+              //       <CsApprovalHomePage />
+              //     </CsApprovalProvider>
+              //   ); //hide hbe
+              case 580:
+                return (
+                  <RoleAccessProvider>
+                    <RoleManagementHome />
+                  </RoleAccessProvider>
+                );
+              case 600:
+                return <RoleMenuPermissionManager />;
+              case 610:
+                return <EmployeeForSyncPage />;
+              case 620:
+                return <BuyerProfilePage />;
+              // case 620:
+              //     return <SupplierProfilePage />; //hide hbe
+              case 630:
+                return (
+                  <ApprovalSetupProvider>
+                    <ApprovalSetupHomePage />
+                  </ApprovalSetupProvider>
+                );
+              case 640:
+                return (
+                  <ManageSupplierProvider>
+                    <ManageSupplierHome />
+                  </ManageSupplierProvider>
+                );
+              case 660:
+                return (
+                  <ManageSupplierProfileUpdateProvider>
+                    <SupplierListHomeForUpdateSupplier />
+                  </ManageSupplierProfileUpdateProvider>
+                );
+              case 680:
+                return (
+                  <RfiManageSupplierProvider>
+                    <RfiHomeSupplierListPage />
+                  </RfiManageSupplierProvider>
+                );
+              case 700:
+                return (
+                  <MouPageProvider>
+                    <SupplierOuManageHomePage />
+                  </MouPageProvider>
+                );
+              case 710:
+                return (
+                  <PoPageProvider>
+                    <PoHomePage />
+                  </PoPageProvider>
+                );
+              case 570:
+                return (
+                  // <RfqPageProvider>
+                  //   <RfqHomePage />
+                  // </RfqPageProvider>
+                  <CsAndRfqHomePage />
+                );
+              case 760:
+                return <CsApprovalHomePage />;
+              case 780:
+                return <SystemSetupPage />;
+
+              default:
+                return null;
+            }
+          })()}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// className={`w-6 h-6 ${menu === 2 ? " text-darkGreen" : "text-grayColor"}`}
+
+//hemel code

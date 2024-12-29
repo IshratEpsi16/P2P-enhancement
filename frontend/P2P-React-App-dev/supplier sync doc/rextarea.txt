@@ -1,0 +1,25 @@
+
+
+const ttt = `Terms that you have to follow.
+Lorem ipsum dolor sit amet consectetur. Pretium vulputate phasellus cras placerat eget. Venenatis ultrices nulla pretium et consectetur erat quam. Fermentum sit hac lacus at neque justo aenean morbi dapibus. Tellus magna molestie laoreet cursus. Congue elit velit nullam turpis at eget fusce. Vel nunc turpis sed sit enim varius magnis adipiscing. Quis aliquet etiam lectus augue odio. Laoreet enim egestas id iaculis lectus lacus tincidunt. Suscipit blandit sagittis nibh commodo nisl.
+Lorem ipsum dolor sit amet consectetur. Viverra pharetra consectetur sit tempus morbi nisl sed quis. Feugiat fermentum odio eleifend quam non tellus lectus.
+`;
+
+
+const [termText, setTermText] = useState(ttt);
+
+
+    const handleInputChange = (e: any) => {
+        const inputText = e.target.value;
+        if (inputText.length <= 1500) {
+            setTermText(inputText);
+        } else {
+            setTermText(inputText.slice(0, 1500));
+        }
+    }
+
+ <textarea
+                    value={termText}
+                    onChange={handleInputChange}
+                    className='w-3/4 h-screen bg-inputBg mt-2 rounded-md shadow-sm focus:outline-none p-8'
+                />

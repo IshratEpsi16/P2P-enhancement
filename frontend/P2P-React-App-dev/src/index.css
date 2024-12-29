@@ -1,0 +1,56 @@
+@import "keep-react/src/main.min.css";
+@font-face {
+  font-family: "Rubik";
+  src: url("./fonts/Rubik-VariableFont_wght.ttf") format("truetype");
+  /* You can add more font weights and styles if you have different font files */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  letter-spacing: 0.5;
+}
+
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+  .exportToExcel {
+    @apply w-36 h-8 rounded-[4px] bg-midGreen text-whiteColor text-sm  font-mon font-bold flex justify-center items-center;
+  }
+  .largeText {
+    @apply text-lg font-medium  font-mon text-midBlack;
+  }
+  .mediumText {
+    @apply text-[16px] font-medium  font-mon text-midBlack;
+  }
+  .smallText {
+    @apply text-sm font-medium  font-mon text-midBlack;
+  }
+  .extraSmallText {
+    @apply text-xs font-medium  font-mon text-midBlack;
+  }
+  .denyButton {
+    @apply h-8 rounded-sm ring-[1px] ring-orange-500 text-redColor font-mon font-medium;
+  }
+  .dashedButton {
+    @apply h-10 text-center flex justify-center  items-center border-gray-400 border-dashed border-[1px] rounded-[4px] mediumText;
+  }
+  .grayCard {
+    @apply w-full flex  items-start justify-center shadow-sm rounded-md bg-inputBg my-4 border-[1px] border-borderColor;
+  }
+  .smallViewButton {
+    @apply py-1 px-4  border-dashed border-[1px] border-borderColor rounded-md text-sm text-midBlack;
+  }
+}

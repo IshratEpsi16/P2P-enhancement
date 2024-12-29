@@ -1,0 +1,23 @@
+const [startDate, setStartDate] = useState<{
+        startDate: Date | null;
+        endDate: Date | null;
+    }>({
+        startDate: null,
+        endDate: new Date(new Date().getFullYear(), 11, 31), // Set the endDate to the end of the current year
+    });
+
+const handleStartDateChange = (newValue: any) => {
+        setStartDate(newValue)
+        // Handle the selected date here
+        setAddUpdateStartDate(moment(newValue.startDate).format("YYYY-MM-DD"))
+    };
+
+<DateRangePicker
+    onChange={handleStartDateChange}
+    width='w-96'
+    placeholder='DD/MM/YYYY'
+    value={startDate}
+    signle={true}
+    useRange={false}
+    disable={isDisable}
+/>

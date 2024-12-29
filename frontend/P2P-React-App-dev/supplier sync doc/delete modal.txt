@@ -1,0 +1,16 @@
+ const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);
+ const openDeleteModal = () => {
+    
+    setIsDeleteOpen(true);
+  };
+  const closeModal = () => {
+  
+    setIsDeleteOpen(false);
+  };
+
+<DeleteModal
+        isOpen={isDeleteOpen}
+        doDelete={deleteRole}
+        closeModal={closeModal}
+        message="Do you want to Delete Role ?"
+      />

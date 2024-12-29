@@ -1,0 +1,924 @@
+import React, { useState, useEffect } from "react";
+
+import Avatar from "@mui/material/Avatar";
+import Badge from "@mui/material/Badge";
+import Popover from "@mui/material/Popover";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import RfqListPageSupplier from "../../supplier_rfq_section/component/RfqListPageSupplier";
+import RfqHomePageFromSupplier from "../../supplier_rfq_section/component/RfqHomePageForSupplier";
+import { PoPageProvider } from "../../po/context/PoPageContext";
+import PoHomePage from "../../po/component/PoHomePage";
+import { useAuth } from "../../login_both/context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { isTokenValid } from "../../utils/methods/TokenValidityCheck";
+
+import {
+  SupplierRfqPageProvider,
+  useSupplierRfqPageContext,
+} from "../../supplier_rfq_section/context/SupplierRfqPageContext";
+
+import {
+  MyMenuInterface,
+  MyPermissionInterface,
+  MyInfoInterface,
+} from "../../my_info/interface/MyInfoInterface";
+import MyInfoService from "../../my_info/service/MyInfoService";
+import { useMenuContext } from "../../my_info/context/MenuContext";
+import { domain } from "../../utils/domainPath";
+import CircularProgressIndicator from "../../Loading_component/CircularProgressIndicator";
+import ErrorToast, { showErrorToast } from "../../Alerts_Component/ErrorToast";
+import SupplierProfilePage from "../../supplier_profile/component/SupplierProfilePage";
+import SearchIcon from "../../icons/SearchIcon";
+import { Link, useParams } from "react-router-dom";
+import BarRightIcon from "../../icons/BarRightIcon";
+import BarLeftIcon from "../../icons/BarLeftIcon";
+import BellIcon from "../../icons/BellIcon";
+import WarningModal from "../../common_component/WarningModal";
+import ProfileUpdateSubmissionService from "../../registration/service/profile_update_submission/ProfileUpdateSubmissionService";
+import { showSuccessToast } from "../../Alerts_Component/SuccessToast";
+import LogOutModal from "../../common_component/LogoutModal";
+import TechnicalQuotationSubmissionPage from "../../supplier_rfq_section/component/TechnicalQuotationSubmissionPage";
+import SupplierPoHome from "../../po_supplier/component/SupplierPoHome";
+import RfqItemListFoeSupplier from "../../supplier_rfq_section/component/RfqItemListForSupplier";
+import { SupplierRfqIdProvider } from "../../supplier_rfq_section/context/SupplierRfqIdContext";
+import RfqListSupplierService from "../../supplier_rfq_section/service/RfqListSupplierService";
+import useAuthStore from "../../login_both/store/authStore";
+import useSupplierRfqStore from "../../supplier_rfq_section/store/supplierRfqStore";
+import useSupplierRfqPageStore from "../../supplier_rfq_section/store/SupplierRfqPageStore";
+import isoToDateTime from "../../utils/methods/isoToDateTime";
+import Supplierhome from "./Supplierhome";
+
+const menuIcons: { [key: number]: string } = {
+  520: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+  530: "M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25",
+  560: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+  570: "M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z",
+  550: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+  500: "M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
+  540: "M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46",
+  510: "M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5",
+  580: "M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z",
+  600: "M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5",
+  610: "M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3",
+  620: "M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z",
+  740: "M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z",
+};
+
+export default function SupplierHomePage() {
+  const [menuList, setMenuList] = useState<MyMenuInterface[] | []>([]);
+  const [menuList2, setMenuList2] = useState<MyMenuInterface[] | []>([]);
+  const [permissionList, setPermissionList] = useState<
+    MyPermissionInterface[] | []
+  >([]);
+  const [myInfo, setMyInfo] = useState<MyInfoInterface | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSmall, setIsSmall] = useState<boolean>(false);
+  const [rfqListLength, setRfqListLength] = useState(0);
+  const [rfqListNew, setRfqListNew] = useState<
+    {
+      RFQ_SUBJECT: string;
+      OPEN_DATE: string;
+    }[]
+  >([]);
+  const [rfqListOpen, setRfqListOpen] = useState<
+    {
+      RFQ_SUBJECT: string;
+      OPEN_DATE: string;
+    }[]
+  >([]);
+
+  const [rfqListOpenLength, setRfqListOpenLength] = useState<number>(0);
+
+  const [rfqListAll, setRfqListAll] = useState<
+    {
+      RFQ_SUBJECT: string;
+      OPEN_DATE: string;
+    }[]
+  >([]);
+  const { appStatus, setAppStatus, handleButtonClick } =
+    useSupplierRfqPageStore();
+  const {
+    token,
+    setIsBuyer,
+    setToken,
+    userId,
+    setUserId,
+    setRegToken,
+    setIsRegCompelte,
+    setSubmissionStatus,
+    setBgId,
+    setBuyerId,
+  } = useAuth();
+  const navigate = useNavigate();
+  const { smId } = useParams();
+  const { menu, setMenu } = useMenuContext();
+  // SupplierHomePage.tsx
+
+  //store
+  const { setLoggedInUserName } = useAuthStore();
+  //store
+  useEffect(() => {
+    console.log(`userId in home: ${userId}`);
+    console.log("smId", smId);
+
+    const isTokenExpired = !isTokenValid(token!);
+    // console.log(isTokenExpired);
+    if (isTokenExpired) {
+      setTimeout(() => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("isBuyer");
+        localStorage.removeItem("isRegCompelte");
+        localStorage.removeItem("submissionStatus");
+        localStorage.removeItem("regToken");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("bgId");
+
+        setToken(null);
+        setIsBuyer(null);
+        setUserId(null);
+        setRegToken(null);
+        setIsRegCompelte(null);
+        setSubmissionStatus(null);
+        navigate("/");
+      }, 999);
+
+      showErrorToast("Session Expired, Please Login");
+
+      console.log("expired");
+    } else {
+      getMyInfo();
+      console.log(isTokenExpired);
+    }
+
+    // Perform any other initialization based on the token
+
+    // getMenu(); // You can uncomment this line if needed
+  }, []);
+
+  useEffect(() => {
+    getRfqListLength("NEW", "0");
+    getRfqListNew("NEW", "0");
+    getRfqListOpen("OPEN");
+    getRfqListAll("ALL");
+  }, []);
+
+  const getRfqListAll = async (status: string) => {
+    try {
+      setIsLoading(true);
+      const result = await RfqListSupplierService(token!, status, "", 0, 1000);
+
+      if (result.data.status === 200) {
+        setIsLoading(false);
+
+        console.log("rfqListall: ", result.data.data);
+
+        setRfqListAll(result.data.data);
+        // const convertedData = result.data.data.map(
+        //   (org: CommonOrgInterface) => ({
+        //     value: org.ORGANIZATION_ID.toString(),
+        //     label: org.NAME,
+        //   })
+        // );
+        // setConvertedOrgList(convertedData);
+        setIsLoading(false);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      showErrorToast("Organization Load Failed");
+    }
+  };
+  const getRfqListOpen = async (status: string) => {
+    try {
+      setIsLoading(true);
+      const result = await RfqListSupplierService(token!, status, "", 0, 1000);
+      const sortedRfqList = result.data.data.sort(
+        (a: { OPEN_DATE: string }, b: { OPEN_DATE: string }) => {
+          return (
+            new Date(b.OPEN_DATE).getTime() - new Date(a.OPEN_DATE).getTime()
+          );
+        }
+      );
+      setRfqListOpenLength(result.data.data.length);
+
+      if (result.data.status === 200) {
+        setIsLoading(false);
+
+        console.log("rfqListopen: ", result.data.data.length);
+
+        setRfqListOpen(sortedRfqList);
+        setRfqListOpenLength(result.data.data.length);
+        // const convertedData = result.data.data.map(
+        //   (org: CommonOrgInterface) => ({
+        //     value: org.ORGANIZATION_ID.toString(),
+        //     label: org.NAME,
+        //   })
+        // );
+        // setConvertedOrgList(convertedData);
+        setIsLoading(false);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      showErrorToast("Organization Load Failed");
+    }
+  };
+  const getRfqListNew = async (status: string, value: string) => {
+    try {
+      setIsLoading(true);
+      const result = await RfqListSupplierService(
+        token!,
+        status,
+        value,
+        0,
+        1000
+      );
+      const sortedRfqList = result.data.data.sort(
+        (a: { OPEN_DATE: string }, b: { OPEN_DATE: string }) => {
+          return (
+            new Date(b.OPEN_DATE).getTime() - new Date(a.OPEN_DATE).getTime()
+          );
+        }
+      );
+
+      if (result.data.status === 200) {
+        setIsLoading(false);
+
+        console.log("rfqListnew: ", result.data.data.length);
+
+        setRfqListNew(sortedRfqList);
+        // const convertedData = result.data.data.map(
+        //   (org: CommonOrgInterface) => ({
+        //     value: org.ORGANIZATION_ID.toString(),
+        //     label: org.NAME,
+        //   })
+        // );
+        // setConvertedOrgList(convertedData);
+        setIsLoading(false);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      showErrorToast("Organization Load Failed");
+    }
+  };
+  const getRfqListLength = async (status: string, value: string) => {
+    try {
+      setIsLoading(true);
+      const result = await RfqListSupplierService(
+        token!,
+        status,
+        value,
+        0,
+        1000
+      );
+
+      if (result.data.status === 200) {
+        setIsLoading(false);
+        console.log("rfqListLength: ", result.data.data.length);
+        console.log("rfqList: ", result.data.data);
+
+        setRfqListLength(result.data.data.length);
+        // const convertedData = result.data.data.map(
+        //   (org: CommonOrgInterface) => ({
+        //     value: org.ORGANIZATION_ID.toString(),
+        //     label: org.NAME,
+        //   })
+        // );
+        // setConvertedOrgList(convertedData);
+        setIsLoading(false);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      showErrorToast("Organization Load Failed");
+    }
+  };
+
+  const navigateToRoute = () => {
+    // Navigate to the route associated with the notification
+    setMenu(740); // Use window.location.href for full page reload
+  };
+
+  const getMyInfo = async () => {
+    setIsLoading(true);
+    const result = await MyInfoService(token!);
+    if (result.data.status === 200) {
+      setMenuList(result.data.Menu);
+      setMenuList2(result.data.Menu);
+      setPermissionList(result.data.Permission);
+      setMyInfo(result.data);
+      setBgId(result.data.data.BUSINESS_GROUP_ID);
+      // console.log(result.data.data.BUSINESS_GROUP_ID);
+
+      setLoggedInUserName(result.data.data.FULL_NAME);
+
+      localStorage.setItem(
+        "bgId",
+        result.data.data.BUSINESS_GROUP_ID.toString()
+      );
+
+      setIsLoading(false);
+      if (result.data.data.PROFILE_UPDATE_STATUS === "INCOMPLETE") {
+        // showErrorToast("You have updated your profile, please submit for approval");
+        openWarningModal();
+      }
+    } else {
+      setIsLoading(false);
+    }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("isBuyer");
+    localStorage.removeItem("isRegCompelte");
+    localStorage.removeItem("submissionStatus");
+    localStorage.removeItem("regToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("buyerId");
+    setMenu(500);
+    setToken(null);
+    setIsBuyer(null);
+    setRegToken(null);
+    setIsRegCompelte(null);
+    setSubmissionStatus(null);
+    setUserId(null);
+    setBuyerId(null);
+
+    navigate("/");
+  };
+
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
+  const toggleDrawer = (open: any) => (event: any) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ right: open });
+  };
+
+  // useEffect(() => {
+  //   // getMenu();
+  // }, []);
+  // // const userId = "B001";
+
+  //token vangbo
+
+  const [menuIdInToken, setMenuIdInToken] = useState<number | null>(null);
+
+  //store
+  const {
+    setRfqIdInStore,
+    setRfqTypeInStore,
+    setRfqCloseDateInStore,
+    setRfqTitleInStore,
+  } = useSupplierRfqStore();
+  const { setPageNoRfq } = useSupplierRfqPageStore();
+  //store
+
+  //context
+  // const { setSupplierRfqPage } = useSupplierRfqPageContext();
+  //context
+
+  const [isExpired, setIsExpired] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Get the token from the URL
+    const token = new URLSearchParams(window.location.search).get("token");
+
+    const isTokenExpired = !isTokenValid(token!);
+    if (isTokenExpired) {
+      setIsExpired(true);
+    } else {
+      if (token) {
+        try {
+          const decodedToken = decodeJWT(token);
+
+          // Extract USER_ID from the decoded payload
+          const rfqId = decodedToken?.decodedPayload?.RFQ_ID;
+          const rfqTitle = decodedToken?.decodedPayload?.RFQ_TITLE;
+          const rfqType = decodedToken?.decodedPayload?.RFQ_TYPE;
+          const rfqCloseDate = decodedToken?.decodedPayload?.CLOSE_DATE;
+          const menuId = decodedToken?.decodedPayload?.MENU_ID;
+          // console.log(menuId);
+          // console.log(typeof menuId);
+          setRfqIdInStore(rfqId);
+          setRfqCloseDateInStore(rfqCloseDate);
+          setRfqTitleInStore(rfqTitle);
+          setRfqTypeInStore(rfqType);
+
+          // setMenu(menuId);
+          setMenuIdInToken(menuId);
+          // setSupplierRfqPage(2);
+        } catch (error) {
+          console.error("Error decoding token:", error);
+        }
+      }
+    }
+  }, []);
+
+  const decodeJWT = (token: string) => {
+    try {
+      // Split the token into header, payload, and signature (assuming they are separated by dots)
+      const [encodedHeader, encodedPayload] = token.split(".");
+
+      // Decode base64-encoded header and payload
+      const decodedHeader = JSON.parse(window.atob(encodedHeader));
+      const decodedPayload = JSON.parse(window.atob(encodedPayload));
+
+      // Log the decoded header and payload
+      console.log("Decoded Header:", decodedHeader);
+      console.log("Decoded Payload:", decodedPayload);
+
+      // Make sure that the decoded payload has the expected structure
+      if (
+        decodedPayload &&
+        decodedPayload.hasOwnProperty("RFQ_ID") &&
+        decodedPayload.hasOwnProperty("RFQ_TITLE") &&
+        decodedPayload.hasOwnProperty("RFQ_TYPE") &&
+        decodedPayload.hasOwnProperty("CLOSE_DATE") &&
+        decodedPayload.hasOwnProperty("MENU_ID")
+      ) {
+        const rfqId = decodedPayload.RFQ_ID;
+        const rfqTitle = decodedPayload.RFQ_TITLE;
+        const rfqType = decodedPayload.RFQ_TYPE;
+        const rfqCloseDate = decodedPayload.CLOSE_DATE;
+        const menuId = decodedPayload.MENU_ID;
+
+        return {
+          decodedHeader,
+          decodedPayload,
+          rfqId,
+          rfqTitle,
+          rfqType,
+          rfqCloseDate,
+          menuId,
+        };
+      } else {
+        console.error(
+          "Error: Decoded payload does not have the expected structure."
+        );
+        return null;
+      }
+    } catch (error) {
+      console.error("Error decoding JWT:", error);
+      return null;
+    }
+  };
+
+  //token vangbo
+
+  const handleIsSmall = () => {
+    setIsSmall(!isSmall);
+  };
+
+  const list = (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(false)}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <div className="flex justify-center items-center gap-2 mt-2">
+        <h1 className="text-2xl font-bold text-center">Notification</h1>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5"
+          />
+        </svg>
+      </div>
+      {/* {getNotificationDescription} */}
+      {/* <List>
+      {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        <ListItem key={text} disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} //
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List> */}
+      {rfqListNew.map((item, index) => (
+        <div
+          key={index}
+          onClick={() => {
+            navigateToRoute();
+            // setAppStatus("NEW");
+            handleButtonClick("NEW");
+          }}
+          className="my-4 cursor-pointer px-2 mx-1 hover:bg-slate-50 divide-y"
+        >
+          <div className="flex items-center gap-1">
+            <Avatar alt="avatar" src="images/man.png" />
+            <p className="text-sm">
+              <span className="text-[#2e3191] font-semibold">NEW</span> RFQ{" "}
+              <span className="text-[#2e3191] font-semibold">
+                {item?.RFQ_SUBJECT}
+              </span>{" "}
+              published at {isoToDateTime(item.OPEN_DATE)}
+            </p>
+          </div>
+        </div>
+      ))}
+      {rfqListOpen.map((item, index) => (
+        <div
+          key={index}
+          onClick={() => {
+            navigateToRoute();
+            // setAppStatus("OPEN");
+            handleButtonClick("OPEN");
+          }}
+          className="my-4 cursor-pointer px-2 mx-1 hover:bg-slate-50 divide-y"
+        >
+          <div className="flex items-center gap-1">
+            <Avatar alt="avatar" src="images/man.png" />
+            <p className="text-sm">
+              <span className="text-[#2e3191] text font-semibold">OPEN</span>{" "}
+              RFQ{" "}
+              <span className="text-[#2e3191] font-semibold">
+                {item?.RFQ_SUBJECT}
+              </span>{" "}
+              has Opened at {isoToDateTime(item.OPEN_DATE)}
+            </p>
+          </div>
+        </div>
+      ))}
+      {/* {rfqListAll.map((item, index) => (
+        <div
+          key={index}
+          onClick={() => {
+            navigateToRoute();
+            // setAppStatus("ALL");
+            handleButtonClick("ALL");
+          }}
+          className="my-4 cursor-pointer px-2 mx-1 hover:bg-slate-50 divide-y"
+        >
+          <div className="flex items-center gap-1">
+            <Avatar alt="avatar" src="images/man.png" />
+            <p>{item?.RFQ_SUBJECT}</p>
+          </div>
+        </div>
+      ))} */}
+    </Box>
+  );
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const handleMenuChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    if (value !== null) {
+      const menus = menuList2.filter((menu) =>
+        menu.MENU_NAME.toLowerCase().includes(value)
+      );
+      setMenuList(menus);
+    } else {
+      setMenuList(menuList2);
+    }
+  };
+
+  useEffect(() => {
+    // Check if the id is present in the URL params
+    const menuId = parseInt(smId ?? "", 10);
+
+    if (isExpired) {
+      // showErrorToast(`RFQ Date Has Expired`);
+    } else {
+      // If the id is valid, set the menu
+      if (!isNaN(menuId) && menuId >= 500 && menuId <= 100000) {
+        setMenu(menuId);
+      } else if (
+        !isNaN(menuIdInToken!) &&
+        menuIdInToken! >= 500 &&
+        menuIdInToken! <= 100000
+      ) {
+        setMenu(menuIdInToken!);
+        setPageNoRfq(2);
+      } else {
+        // If id is not valid, set a default menu (e.g., 1)
+        setMenu(500);
+      }
+    }
+  }, [smId, menuIdInToken]);
+
+  const [isWarningShow, setIsWarningShow] = useState(false);
+  const openWarningModal = () => {
+    setIsWarningShow(true);
+  };
+  const closeWarningModal = () => {
+    setIsWarningShow(false);
+  };
+
+  const profileUpdateSubmission = async () => {
+    try {
+      const result = await ProfileUpdateSubmissionService(token!);
+      console.log(result.data);
+
+      if (result.data.status === 200) {
+        showSuccessToast(result.data.message);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {}
+  };
+
+  const [isLogOutOpen, setIsLogOutOpen] = useState<boolean>(false);
+  const openLogOutModal = () => {
+    setIsLogOutOpen(true);
+  };
+  const closeModal = () => {
+    setIsLogOutOpen(false);
+  };
+
+  return (
+    <div className="w-full flex flex-col">
+      <LogOutModal
+        isOpen={isLogOutOpen}
+        doLogOut={logOut}
+        closeModal={closeModal}
+      />
+      <WarningModal
+        isOpen={isWarningShow}
+        closeModal={closeWarningModal}
+        action={profileUpdateSubmission}
+        message="You have updated your profile, please submit for approval."
+        imgSrc="/images/warning.png"
+      />
+      <ErrorToast />
+      {/* navbar */}
+      <div className="fixed top-0 w-full h-16  flex  justify-between items-center z-10  bg-white border-b-[0.5px] border-borderColor shadow-sm">
+        <div className="mx-4  w-40">
+          <button
+            onClick={handleIsSmall}
+            className=" w-10 h-10 flex justify-center items-center bg-gray-200 rounded-full"
+          >
+            {isSmall ? <BarRightIcon /> : <BarLeftIcon />}
+          </button>
+        </div>
+        <div className="w-full h-full flex flex-row-reverse items-center  mx-16 space-x-reverse space-x-10">
+          <button onClick={handleClick}>
+            <Avatar
+              alt="avatar"
+              src="images/man.png"
+              // src={`${myInfo?.profile_pic_supplier}/${myInfo?.data.PROFILE_PIC_FILE_NAME}`}
+            />
+          </button>
+
+          <button onClick={toggleDrawer(true)}>
+            <Badge
+              color="warning"
+              badgeContent={rfqListLength + rfqListOpenLength}
+            >
+              <BellIcon />
+            </Badge>
+          </button>
+
+          <Drawer
+            anchor="right"
+            open={state.right}
+            onClose={toggleDrawer(false)}
+          >
+            {list}
+          </Drawer>
+
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <div className=" flex flex-col items-start py-2  w-44  rounded-lg backdrop-blur-lg bg-opacity-50">
+              <p className="px-4 text-[16px] text-blackColor font-medium font-mon">
+                {myInfo?.data.FULL_NAME}
+              </p>
+              <p className="px-4 text-sm text-graishColor font-mon">
+                {myInfo?.data.USER_NAME}
+              </p>
+
+              <div className="w-full px-1 my-2 flex flex-col space-y-2 items-start">
+                <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+
+                <button className="px-3 font-mon text-start text-hintColor w-full h-8 hover:bg-offWhiteColor hover:rounded-sm">
+                  Profile
+                </button>
+                <div className=" w-full h-[0.2px]  bg-borderColor my-1"></div>
+                <button
+                  onClick={logOut}
+                  className="px-3 font-mon text-start text-[#FF5630] w-full h-8 hover:bg-offWhiteColor hover:rounded-sm"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </Popover>
+        </div>
+      </div>
+
+      {/* end navbar */}
+
+      <div className="flex flex-row mt-16 overflow-hidden">
+        {/* Side menu */}
+        <div
+          className={`${isSmall ? "w-24 " : "w-60"}  h-screen overflow-y-auto`}
+        >
+          {/* Side menu content */}
+          <div
+            className={`fixed h-screen no-scrollbar  overflow-y-auto overflow-x-hidden  bg-whiteColor ${
+              isSmall ? "w-24 " : "w-60"
+            } border-[0.5px] border-r-borderColor border-t-0 border-l-0 border-b-0`}
+          >
+            <div className="w-full  mt-2 px-4 flex flex-col items-start space-y-[10px]">
+              {isLoading ? (
+                <div className=" w-full h-screen flex justify-center items-center">
+                  <CircularProgressIndicator />
+                </div>
+              ) : (
+                <>
+                  <div className=" flex flex-row w-full space-x-[2px]  ring-1 h-10 ring-borderColor rounded-sm  items-center pl-[4px] bg-white">
+                    <SearchIcon />
+
+                    <input
+                      onChange={handleMenuChange}
+                      className=" w-full px-1 focus:outline-none bg-white"
+                    />
+                  </div>
+
+                  {menuList.map((m, i) => (
+                    <Link
+                      to={`/supplier-home/${m.MENU_ID}`}
+                      key={m.MENU_ID}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setMenu(m.MENU_ID);
+                      }}
+                      className={`py-2 w-full flex  ${
+                        menu === m.MENU_ID ? "bg-lightGreen" : "bg-whiteColor"
+                      }  rounded-md hover:bg-lightGreen
+                                         justify-start items-center 
+                                        `}
+                    >
+                      <div
+                        className={`${
+                          isSmall ? "px-5" : "px-4"
+                        }  flex flex-row space-x-2 items-center`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className={`w-6 h-6 ${
+                            menu === m.MENU_ID
+                              ? " text-darkGreen"
+                              : "text-midBlack"
+                          }`}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d={menuIcons[m.MENU_ID]}
+                          />
+                        </svg>
+
+                        {!isSmall && (
+                          <div className=" w-full flex items-center space-x-10">
+                            <p
+                              className={`${
+                                menu === m.MENU_ID
+                                  ? " text-darkGreen"
+                                  : "text-midBlack"
+                              } font-medium font-mon text-sm  text-start`}
+                            >
+                              {m.MENU_NAME}
+                            </p>
+
+                            {m.MENU_ID === 740 ? (
+                              <p className=" py-1 px-2 flex rounded-[100px] bg-redColor font-mon font-semibold justify-center items-center text-white text-xs">
+                                {m.MENU_ID === 740
+                                  ? `${rfqListLength + rfqListOpenLength}`
+                                  : null}
+                              </p>
+                            ) : null}
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+
+                  {/* <button
+                onClick={() => {
+                  setMenu(5000);
+                }}
+                className="text-sm"
+              >
+                <h5>RFQ LIST</h5>
+              </button> */}
+
+                  <button
+                    onClick={openLogOutModal}
+                    className=" w-full flex space-x-2 items-center font-mon h-10  hover:bg-red-200 text-sm rounded-md px-4 text-redColor "
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6 text-redColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+                      />
+                    </svg>
+
+                    <p>Logout</p>
+                  </button>
+                </>
+              )}
+              <div className=" h-32"></div>
+            </div>
+          </div>
+        </div>
+        {/* end side menu */}
+
+        {/* page area */}
+        <div className="flex-1 overflow-y-auto">
+          {(() => {
+            switch (menu) {
+              case 500:
+                return <Supplierhome />;
+              case 520:
+                return (
+                  // <SupplierRfqPageProvider>
+                  //   <RfqHomePageFromSupplier />
+                  // </SupplierRfqPageProvider>
+                  // <TechnicalQuotationSubmissionPage />
+                  <SupplierPoHome />
+                );
+              case 710:
+                return <SupplierPoHome />;
+              case 620:
+                return <SupplierProfilePage />;
+              case 740:
+                return (
+                  <SupplierRfqPageProvider>
+                    <SupplierRfqIdProvider>
+                      <RfqHomePageFromSupplier />
+                    </SupplierRfqIdProvider>
+                  </SupplierRfqPageProvider>
+                );
+
+              default:
+                return null;
+            }
+          })()}
+        </div>
+        {/* end page area */}
+      </div>
+    </div>
+  );
+}

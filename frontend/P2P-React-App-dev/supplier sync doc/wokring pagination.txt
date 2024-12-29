@@ -1,0 +1,171 @@
+  const [total, setTotal] = useState<number | null>(null);
+ const [limit, setLimit] = useState<number>(10);
+  const [pageNo, setPageNo] = useState<number>(1);
+  const [offset, setOffSet] = useState<number>(0);
+  const [isSearch, setIsSearch] = useState<boolean>(false);
+
+
+
+
+const handleStartDateChange = (newValue: any) => {
+    setStartDate(newValue);
+    // Handle the selected date here
+    console.log(newValue);
+
+    setSearchStartDate(moment(newValue.startDate).format("YYYY-MM-DD"));
+    setSearchEndDate(moment(newValue.endDate).format("YYYY-MM-DD"));
+    if (newValue.startDate == null && newValue.endaDate == null) {
+      setIsSearch(false);
+      const offs = 0;
+      setOffSet(offs);
+      const lmt = 10;
+      setLimit(lmt);
+      getHistory("", "", offs, lmt);
+      console.log("cleared");
+    }
+  };
+
+
+
+
+
+
+
+const getHistory = async (
+    f: string,
+    l: string,
+    offset: number,
+    limit: number
+  ) => {
+    setIsLoading(true);
+    const result = await InvitationHistoryService(token!, f, l, offset, limit); //"2023-12-01" "2023-12-31"
+    console.log(result.data.data);
+
+    dividePage(result.data.total, limit);
+
+    if (result.data.status === 200) {
+      setIsLoading(false);
+      setInvitationList(result.data.data);
+    } else {
+      setIsLoading(false);
+    }
+  };
+
+  const search = () => {
+    setIsSearch(true);
+    const offs = 0;
+    setOffSet(offs);
+    const lmt = 10;
+    setLimit(lmt);
+    setPageNo(1);
+    console.log(startDate);
+    console.log(searchEndDate);
+
+    getHistory(searchStartDate, searchEndDate, offs, lmt);
+  };
+
+  const dividePage = (number: number, lmt: number) => {
+    console.log(number);
+    if (typeof number !== "number") {
+      throw new Error("Input must be a number");
+    }
+
+    const re = Math.ceil(number / lmt);
+    console.log(number);
+    console.log(re);
+    setTotal(re);
+  };
+
+  const next = () => {
+    let newOff;
+
+    newOff = offset + limit;
+    console.log(newOff);
+    setOffSet(newOff);
+
+    setPageNo((pre) => pre + 1);
+    console.log(limit);
+    getHistory("", "", newOff, limit);
+  };
+  const searchNext = () => {
+    const newOff = offset + limit;
+    setOffSet(newOff);
+    setPageNo((pre) => pre + 1);
+    getHistory(searchStartDate, searchEndDate, newOff, limit);
+  };
+  const previous = () => {
+    let newOff = offset - limit;
+    console.log(newOff);
+    if (newOff < 0) {
+      newOff = 0;
+      console.log(newOff);
+    }
+
+    setOffSet(newOff);
+    setPageNo((pre) => pre - 1);
+    console.log(limit);
+
+    getHistory("", "", newOff, limit);
+  };
+   const searchPrevious = () => {
+    let newOff = offset - limit;
+    if (newOff < 0) {
+        newOff = 0;
+        console.log(newOff);
+      }
+    setOffSet(newOff);
+    setPageNo((pre) => pre - 1);
+    getHistory(searchStartDate, searchEndDate, newOff, limit);
+  };
+
+  const handleLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(event.target.value);
+
+    const newLimit = parseInt(event.target.value, 10);
+    console.log(newLimit);
+
+    setLimit(newLimit);
+    getHistory(
+      isSearch ? searchStartDate : "",
+      isSearch ? searchEndDate : "",
+      offset,
+      newLimit
+    );
+  };
+
+................ui.........................................
+
+<div className=" w-full flex justify-center items-center my-2">
+            <div className=" flex space-x-2">
+              <p className=" smallText">Rows per page: </p>
+              <select
+                value={limit}
+                onChange={handleLimitChange}
+                className="  w-10"
+              >
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+              </select>
+              <div>
+                {pageNo} of {total}
+              </div>
+
+              <button
+                disabled={pageNo === 1 ? true : false}
+                onClick={isSearch ? searchPrevious : previous}
+                className=" w-6 h-6"
+              >
+                <ArrowLeftIcon className=" w-full h-full" />
+              </button>
+
+              <button
+                disabled={pageNo === total ? true : false}
+                onClick={isSearch ? searchNext : next}
+              >
+                <ArrowRightIcon />
+              </button>
+            </div>
+          </div>

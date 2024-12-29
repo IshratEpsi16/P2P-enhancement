@@ -1,0 +1,27 @@
+ const [limit, setLimit] = useState(10);
+const [offset, setOffSet] = useState(0);
+const [pageNo, setPageNo] = useState(1);
+<div className=" w-full flex space-x-2 items-center border-b-[0.2px] border-r-[0.2px] border-l-[0.2px] border-borderColor px-8 py-2">
+                                    <ReusablePopperComponent
+                                        id={id}
+                                        open={open}
+                                        anchorEl={anchorEl}
+                                        handleClick={handleClick}
+                                        setLimit={setLimit}
+                                        limit={limit}
+                                    />
+
+                                    <ReusablePaginationComponent
+                                        pageNo={pageNo === 1 ? pageNo : offset + 1}
+                                        limit={
+                                            offset === 0
+                                                ? offset + limit
+                                                : newOffset! !== undefined
+                                                    ? newOffset
+                                                    : offset + limit
+                                        }
+                                        total={roleData?.total}
+                                        previous={previous}
+                                        next={next}
+                                    />
+                                </div>

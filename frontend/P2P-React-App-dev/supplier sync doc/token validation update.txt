@@ -1,0 +1,19 @@
+
+import { useNavigate } from 'react-router-dom';
+
+ const navigate=useNavigate();
+
+
+ const isTokenExpired = !isTokenValid(regToken!);
+        if (isTokenExpired) {
+            localStorage.removeItem("regToken");
+            showErrorToast("Please Login Again..");
+            setTimeout(() => {
+                navigate("/");
+            }, 1200)
+
+        }
+        else {
+           
+            
+        }

@@ -1,0 +1,27 @@
+  function getCurrentMonthFirstAndLast(): {
+    firstDay: string;
+    lastDay: string;
+  } {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1; // Month is zero-based, so we add 1
+
+    // Get the first day of the current month
+    const firstDay = new Date(year, month - 1, 1);
+    const formattedFirstDay = formatDate(firstDay);
+
+    // Get the last day of the current month
+    const lastDay = new Date(year, month, 0);
+    const formattedLastDay = formatDate(lastDay);
+
+    return { firstDay: formattedFirstDay, lastDay: formattedLastDay };
+  }
+
+  function formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Add leading zero if necessary
+    const day = String(date.getDate()).padStart(2, "0"); // Add leading zero if necessary
+    return `${year}-${month}-${day}`;
+  }
+
+  const { firstDay, lastDay } = getCurrentMonthFirstAndLast();

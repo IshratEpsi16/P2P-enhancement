@@ -1,0 +1,13 @@
+ //token validation
+    useEffect(() => {
+        const isTokenExpired = !isTokenValid(regToken!);
+        if (isTokenExpired) {
+            localStorage.removeItem("regToken");
+            showErrorToast("Please Login Again..");
+            setTimeout(()=>{
+                navigate("/");
+            },1001)
+            
+        }
+    }, [regToken]);
+    //token validation

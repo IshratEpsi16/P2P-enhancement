@@ -1,0 +1,11 @@
+  const options = [
+        { value: 'option1', label: 'Option 1' },
+        { value: 'option2', label: 'Option 2' },
+        { value: 'option3', label: 'Option 3' },
+    ];
+    const handleSelect = (value: string) => {
+        console.log(`Selected: ${value}`);
+        // Do something with the selected value
+    };
+
+<DropDown options={options} onSelect={handleSelect} width='w-60' />

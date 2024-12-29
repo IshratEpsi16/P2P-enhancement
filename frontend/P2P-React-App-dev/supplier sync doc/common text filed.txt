@@ -1,0 +1,9 @@
+const emailRef = useRef<HTMLInputElement | null>(null);
+ const [email, setEmail] = useState<string>('');
+ const handleEmailChange = (value: string) => {
+        setEmail(value);
+
+
+    };
+
+<CommonInputField inputRef={emailRef} onChangeData={handleEmailChange} hint="Email address" type="text" />

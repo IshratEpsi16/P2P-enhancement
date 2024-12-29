@@ -1,0 +1,38 @@
+ const [limit, setLimit] = useState(5);
+    const [pageNo, setPageNo] = useState(1);   
+
+ // aita holo popper er jonno
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+    };
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popper' : undefined;
+    //end poppoer
+
+	//pagination 
+    const next = async () => {
+
+    }
+    const previous = async () => {
+
+    }
+
+
+ <ReusablePopperComponent
+                                id={id}
+                                open={open}
+                                anchorEl={anchorEl}
+                                handleClick={handleClick}
+                                setLimit={setLimit}
+                                limit={limit}
+                            />
+
+<ReusablePaginationComponent
+                                pageNo={pageNo}
+                                limit={limit}
+                                list={list}
+                                previous={previous}
+                                next={next}
+                            />

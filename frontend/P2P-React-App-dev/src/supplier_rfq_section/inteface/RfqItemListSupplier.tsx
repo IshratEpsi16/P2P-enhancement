@@ -1,0 +1,64 @@
+interface RfqItemListSupplier {
+  RFQ_LINE_ID: number;
+  RFQ_ID: number;
+  REQUISITION_HEADER_ID: number;
+  REQUISITION_LINE_ID: number;
+  PR_NUMBER: number;
+  LINE_NUM: string;
+  LINE_TYPE_ID: string;
+  ITEM_CODE: string;
+  ITEM_DESCRIPTION: string;
+  ITEM_SPECIFICATION: string;
+  WARRANTY_DETAILS: string;
+  PACKING_TYPE: string;
+  PROJECT_NAME: string;
+  EXPECTED_QUANTITY: string;
+  EXPECTED_BRAND_NAME: string;
+  EXPECTED_ORIGIN: string;
+  LCM_ENABLE_FLAG: string;
+  UNIT_MEAS_LOOKUP_CODE: string;
+  NEED_BY_DATE: string;
+  ORG_ID: string;
+  ATTRIBUTE_CATEGORY: string;
+  PR_FROM_DFF: string;
+  AUTHORIZATION_STATUS: string;
+  NOTE_TO_SUPPLIER: string;
+  WARRANTY_ASK_BY_BUYER: string;
+  WARRANTY_BY_SUPPLIER: string;
+  BUYER_VAT_APPLICABLE: string;
+  SUPPLIER_VAT_APPLICABLE: string;
+  UNIT_PRICE: string;
+  OFFERED_QUANTITY: string;
+  TOLERANCE: string;
+  PROMISE_DATE: string;
+  DELIVER_TO_LOCATION_ID: string;
+  DESTINATION_ORGANIZATION_ID: string;
+  CS_STATUS: string;
+  CREATION_DATE: string;
+  CREATED_BY: string;
+  LAST_UPDATED_BY: string;
+  LAST_UPDATE_DATE: string;
+  BUYER_FILE_ORG_NAME: string;
+  BUYER_FILE_NAME: string;
+  SUP_FILE_ORG_NAME: string;
+  SUPPLIER_FILE: File | null;
+  ITEM_ID: string;
+
+  AVAILABLE_SPECS: string;
+  AVAILABLE_ORIGIN: string;
+  AVAILABLE_BRAND_NAME: string;
+  QUOT_LINE_ID: number;
+
+  TOTAL_LINE_AMOUNT: string;
+  VAT_TYPE: string;
+  VAT_VALUE: string;
+  VAT_AMOUNT: string;
+  SUBMISSION_STATUS: string;
+  isSelected?: boolean;
+  FREIGHT_CHARGE: string;
+  COUNTRY_CODE: string;
+  COUNTRY_NAME: string;
+  SUPPLIER_WARRANTY_DETAILS: string;
+}
+
+export default RfqItemListSupplier;

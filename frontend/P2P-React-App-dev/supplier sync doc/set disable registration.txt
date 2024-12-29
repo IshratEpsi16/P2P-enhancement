@@ -1,0 +1,16 @@
+//disabling field
+     const [isDisable, setIsDisable] = useState<boolean>(false);
+     //disabling field
+
+    //set disable
+
+    useEffect(() => {
+        if (submissionStatus === "DRAFT") {
+            setIsDisable(false);
+        }
+        else {
+            setIsDisable(true);
+        }
+    },
+        [submissionStatus]
+    )

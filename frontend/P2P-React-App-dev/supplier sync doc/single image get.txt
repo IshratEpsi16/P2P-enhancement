@@ -1,0 +1,42 @@
+const [profilePicSrc, setProfilePicSrc] = useState<string | null>(null);
+
+  const getImage = async () => {
+    const url = await fetchFileUrlService(
+      myInfo?.profile_pic_buyer!,
+      myInfo?.data.PROFILE_PIC_FILE_NAME!,
+      token!
+    );
+    console.log("url img:", url);
+
+    setProfilePicSrc(url);
+  };
+
+  <button
+                onClick={() => {
+                  handleViewFile(
+                    headerTermFilePath!,
+                    singlePo?.RFQ_DETAILS.BUYER_ATTACHMENT_FILE_NAME!,
+                    setBuyerAttachmentLoading
+                  );
+                }}
+                className="smallViewButton"
+                rel="noreferrer"
+              >
+                view
+              </button>
+
+
+handleViewFile(
+                          declarationInfo?.supplier_signature_file_path!,
+                          declarationInfo?.data.SIGNATURE_FILE_NAME!,
+                          setSignatureFileLoading
+                        );
+
+const handleViewFile = (
+    filePath: string,
+    fileName: string,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    const tokenSelection = isRegCompelte === "1" ? token : regToken;
+    fetchFileService(filePath, fileName, tokenSelection!, setLoading);
+  };

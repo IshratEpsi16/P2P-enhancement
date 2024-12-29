@@ -1,0 +1,27 @@
+
+	const options = [
+    { value: "", label: "ALL" },
+    { value: "buyer", label: "Buyer" },
+    { value: "supplier", label: "Supplier" },
+    { value: "admin", label: "Admin" },
+];
+
+ const [selectedDropDown, setSelectedDropDown] = useState<string>("");
+
+ //drop
+    const handleSelect = (value: string) => {
+        console.log(`Selected: ${value}`);
+        setSearchKey(value);
+        setSelectedDropDown(value);
+        getData(offset, value);
+        // Do something with the selected value
+    };
+    //drop
+
+
+<DropDown
+                                options={options}
+                                onSelect={handleSelect}
+                                width="w-60"
+                                sval={selectedDropDown}
+                            />

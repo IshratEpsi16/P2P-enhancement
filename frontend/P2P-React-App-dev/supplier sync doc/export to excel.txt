@@ -1,0 +1,40 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let fileName = moment(Date()).format("DD/MM/YYYY");
+  const headers = [
+    { label: "SUPPLIER_ID", key: "SUPPLIER_ID" },
+    { label: "SUPPLIER_FULL_NAME", key: "SUPPLIER_FULL_NAME" },
+    { label: "SUPPLIER_USER_NAME", key: "SUPPLIER_USER_NAME" },
+    { label: "EMAIL_ADDRESS", key: "EMAIL_ADDRESS" },
+    { label: "APPROVAL_STATUS", key: "APPROVAL_STATUS" },
+    { label: "MODULE_ID", key: "MODULE_ID" },
+    { label: "STAGE_ID", key: "STAGE_ID" },
+    { label: "STAGE_LEVEL", key: "STAGE_LEVEL" },
+    { label: "STAGE_SEQ", key: "STAGE_SEQ" },
+    { label: "IS_MUST_APPROVE", key: "IS_MUST_APPROVE" },
+  ];
+
+
+
+
+
+<CSVLink
+          data={supplierList!}
+          headers={headers}
+          filename={`supplier_list_${fileName}.csv`}
+        >
+         
+          <div className=" exportToExcel ">Export to Excel</div>
+        </CSVLink>

@@ -1,0 +1,48 @@
+
+
+
+
+  const [countryList, setCountryList] = useState<Country | null>(null);
+  //  const [country, setCountry] = useState('');
+
+  const [countryListFromOracle, setCountryListFromOracle] = useState<
+    Country[] | []
+  >([]);
+
+
+
+
+  const countryGet = async () => {
+    try {
+      const result = await CountryListFromOracleService(regToken!);
+      console.log(result.data);
+
+      if (result.data.status === 200) {
+        const transformedData = result.data.data.map((item: CountryApi) => ({
+          value: item.VALUE,
+          label: item.LABEL,
+        }));
+        setCountryListFromOracle(transformedData);
+      } else {
+        showErrorToast(result.data.message);
+      }
+    } catch (error) {
+      showErrorToast("Something went wrong");
+    }
+  };
+
+
+
+
+
+
+
+
+<CommonDropDownSearch
+                placeholder="Select Country"
+                onChange={handleCountryChange}
+                value={countryList}
+                options={countryListFromOracle}
+                width="w-96"
+                disable={isDisable}
+              />

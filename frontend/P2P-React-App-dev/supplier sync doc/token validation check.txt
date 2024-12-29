@@ -1,0 +1,23 @@
+ const isTokenExpired = !isTokenValid(token!);
+        // console.log(isTokenExpired);
+        if (isTokenExpired) {
+            setTimeout(() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('isBuyer');
+                setToken(null);
+                setIsBuyer(null);
+                setUserId(null);
+                navigate('/');
+            }, 999)
+
+            showErrorToast("Session Expired, Please Login");
+
+
+            console.log('expired');
+
+        }
+        else {
+          
+            console.log(isTokenExpired);
+
+        }

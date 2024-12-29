@@ -1,0 +1,43 @@
+  interface ImageUrls {
+    [key: number]: string | null;
+  }
+
+  const [imageUrls, setImageUrls] = useState<ImageUrls>({});
+
+  // ... other state and functions
+
+  const getImage2 = async (
+    filePath: string,
+    fileName: string
+  ): Promise<string | null> => {
+    try {
+      const url = await fetchFileUrlService(filePath, fileName, token!);
+      return url;
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (invoiceList) {
+      const fetchImages = async () => {
+        const newImageUrls: ImageUrls = {};
+        for (let index = 0; index < invoiceList.length; index++) {
+          const element = invoiceList[index];
+          const url = await getImage2(
+            profilePicPath,
+            element.PROFILE_PIC1_FILE_NAME
+          );
+          newImageUrls[element.INV_ID] = url;
+        }
+        setImageUrls(newImageUrls);
+        // setIsLoading(false);
+      };
+      fetchImages();
+    }
+  }, [invoiceList, profilePicPath]);
+
+
+
+ src={imageUrls[e.INV_ID]!}

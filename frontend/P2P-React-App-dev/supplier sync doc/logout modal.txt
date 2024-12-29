@@ -1,0 +1,19 @@
+const [isLogOutOpen, setIsLogOutOpen] = useState<boolean>(false);
+    const openLogOutModal = () => {
+
+        setIsLogOutOpen(true);
+    };
+    const closeModal = () => {
+
+        setIsLogOutOpen(false);
+    };
+
+    const logout = () => {
+        localStorage.removeItem("regToken");
+        navigate("/");
+    }
+
+ <LogOutModal isOpen={isLogOutOpen}
+                doLogOut={logout}
+                closeModal={closeModal}
+            />

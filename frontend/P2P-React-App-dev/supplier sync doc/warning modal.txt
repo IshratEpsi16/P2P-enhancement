@@ -1,0 +1,21 @@
+<WarningModal
+            isOpen={isWarningShow}
+            closeModal={closeWarningModal}
+            action={supplierProfileUpdateSubmit}
+            message="you have updated your profile, please submit for approval"
+            imgSrc="/images/warning.png"
+            />
+
+const [isWarningShow,setIsWarningShow]=useState(false);
+    const openWarningModal = () => {
+
+        setIsWarningShow(true);
+    };
+    const closeWarningModal = () => {
+
+        setIsWarningShow(false);
+    };
+
+    const supplierProfileUpdateSubmit=async()=>{
+
+    }

@@ -1,0 +1,32 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "xprotocol",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "ess.tmsslpg.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "myess",
+            "username": "tmsslpg-ess-adm",
+            "name": "My ESS",
+            "password": "kvG5L5Y4cSMXToDX6BSB"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled",
+                "ssl": {}
+            },
+            "previewLimit": 500,
+            "server": "ess.tmsslpg.com",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "tlpgapp",
+            "database": "myess",
+            "username": "tmsslpg-ess-adm"
+        }
+    ]
+}

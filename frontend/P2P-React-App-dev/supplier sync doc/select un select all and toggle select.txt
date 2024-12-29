@@ -1,0 +1,70 @@
+
+  const [supplierList, setSupplierList] = useState<SupplierInterface[] | []>(
+    []
+  );
+  const [selectedSupplierList, setSelectedSupplierList] = useState<
+    SupplierInterface[] | []
+  >([]);
+  const [isSelectedAll, setIsSelectAll] = useState<boolean>(false);
+
+
+const selectAll = () => {
+    setIsSelectAll(true);
+    setSelectedSupplierList([...selectedSupplierList, ...supplierList]);
+  };
+  const unselectAll = () => {
+    setIsSelectAll(false);
+    setSelectedSupplierList([]);
+  };
+
+  const toggleSupplierSelection = (supplier: SupplierInterface) => {
+    setSelectedSupplierList((prevSelectedList) => {
+      const isSupplierSelected = prevSelectedList.some(
+        (emp) => emp.USER_ID === supplier.USER_ID
+      );
+
+      if (isSupplierSelected) {
+        // If the employee is already selected, remove it
+        return prevSelectedList.filter(
+          (emp) => emp.USER_ID !== supplier.USER_ID
+        );
+      } else {
+        // If the employee is not selected, add it
+        return [...prevSelectedList, supplier];
+      }
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button
+                        onClick={() => {
+                          toggleSupplierSelection(e);
+                        }}
+                        className={`${
+                          selectedSupplierList.some(
+                            (emp) => emp.USER_ID === e.USER_ID
+                          )
+                            ? "bg-midGreen "
+                            : "bg-whiteColor border-[1px] border-borderColor"
+                        } rounded-[4px] w-4 h-4 flex justify-center items-center`}
+                      >
+                        <img
+                          src="/images/check.png"
+                          alt="check"
+                          className=" w-2 h-2"
+                        />
+                      </button>

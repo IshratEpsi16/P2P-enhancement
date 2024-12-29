@@ -1,0 +1,13 @@
+ const [isLogOutOpen, setIsLogOutOpen] = useState<boolean>(false);
+  const openLogOutModal = () => {
+    setIsLogOutOpen(true);
+  };
+  const closeModal = () => {
+    setIsLogOutOpen(false);
+  };
+
+<WarningModal
+        isOpen={isLogOutOpen}
+        closeModal={closeModal}
+        action={logOut}
+      />

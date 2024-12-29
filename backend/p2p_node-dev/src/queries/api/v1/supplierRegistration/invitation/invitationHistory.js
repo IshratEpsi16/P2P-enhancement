@@ -1,0 +1,52 @@
+let invitationHistory = async (DATE_FROM, DATE_TO, P_OFFSET, P_LIMIT) => {
+  let query = `
+    SELECT
+      SIH.ID,
+      SIH.SUPPLIER_INVITATION_TYPE,
+      SIH.SUPPLIER_NAME,
+      SIH.SUPPLIER_TYPE,
+      SIH.INVITED_EMAIL,
+      SIH.INVITED_BY_BUYER_ID,
+      SIH.BUSINESS_GROUP_ID,
+      U.FULL_NAME,
+      SIH.IS_VIEWED,
+      SIH.VIEW_DATE,
+      SIH.CREATION_DATE
+  FROM
+      XXP2P.XXP2P_SUPPLIER_INVITATION_HISTORY SIH 
+      LEFT JOIN XXP2P.XXP2P_USER U ON U.USER_ID = SIH.INVITED_BY_BUYER_ID
+  WHERE 
+      TRUNC(SIH.CREATION_DATE) BETWEEN 
+      TRUNC(NVL(TO_DATE(:DATE_FROM, 'YYYY-MM-DD'), SYSDATE - 365)) -- Default value for DATE_FROM is one year ago
+      AND 
+      TRUNC(NVL(TO_DATE(:DATE_TO, 'YYYY-MM-DD'), SYSDATE)) -- Default value for DATE_TO is today
+      AND SIH.SUPPLIER_INVITATION_TYPE = 'GENERAL'
+      ORDER BY 
+      SIH.CREATION_DATE DESC
+  OFFSET :P_OFFSET ROWS 
+  FETCH NEXT :P_LIMIT ROWS ONLY
+      `;
+  return query;
+};
+let invitationHistoryTotal = async (DATE_FROM, DATE_TO) => {
+  let query = `
+  SELECT
+  count(SIH.ID) as TOTAL
+FROM
+  XXP2P.XXP2P_SUPPLIER_INVITATION_HISTORY SIH 
+  LEFT JOIN XXP2P.XXP2P_USER U ON U.USER_ID = SIH.INVITED_BY_BUYER_ID
+WHERE 
+  TRUNC(SIH.CREATION_DATE) BETWEEN 
+  TRUNC(NVL(TO_DATE(:DATE_FROM, 'YYYY-MM-DD'), SYSDATE - 365)) -- Default value for DATE_FROM is one year ago
+  AND 
+  TRUNC(NVL(TO_DATE(:DATE_TO, 'YYYY-MM-DD'), SYSDATE)) -- Default value for DATE_TO is today
+ORDER BY 
+  SIH.CREATION_DATE DESC
+      `;
+  return query;
+};
+
+module.exports = {
+  invitationHistory,
+  invitationHistoryTotal,
+};

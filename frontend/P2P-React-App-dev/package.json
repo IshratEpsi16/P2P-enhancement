@@ -1,0 +1,97 @@
+{
+  "name": "supplysync",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@iconify/react": "^4.1.1",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@material-tailwind/react": "^2.1.4",
+    "@mui/icons-material": "^5.14.0",
+    "@mui/joy": "^5.0.0-alpha.86",
+    "@mui/material": "^5.13.6",
+    "@mui/x-date-pickers": "^6.10.2",
+    "@radix-ui/react-select": "^2.0.0",
+    "@react-pdf/renderer": "^4.0.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/blob-stream": "^0.1.33",
+    "@types/jest": "^27.5.2",
+    "@types/jspdf": "^2.0.0",
+    "@types/lodash": "^4.17.1",
+    "@types/node": "^16.18.38",
+    "@types/pdfkit": "^0.13.5",
+    "@types/react": "^18.2.14",
+    "@types/react-csv": "^1.1.9",
+    "@types/react-dom": "^18.2.6",
+    "blob-stream": "^0.1.3",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.9",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.3",
+    "jwt-decode": "^3.1.2",
+    "keep-react": "^1.0.2",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.45",
+    "oracledb": "^6.6.0",
+    "pdfkit": "^0.15.0",
+    "react": "^18.2.0",
+    "react-cache-buster": "^0.1.8",
+    "react-csv": "^2.2.2",
+    "react-daisyui": "^4.0.0",
+    "react-datepicker": "^4.15.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-loader-spinner": "^6.1.6",
+    "react-router-dom": "^6.15.0",
+    "react-scripts": "5.0.1",
+    "react-slideshow-image": "^4.3.1",
+    "react-tailwindcss-datepicker": "^1.6.6",
+    "react-tailwindcss-select": "^1.8.5",
+    "react-toastify": "^9.1.3",
+    "simplebar-react": "^3.2.4",
+    "socket.io-client": "^4.8.0",
+    "tailwind-datepicker-react": "^1.4.3",
+    "typescript": "^4.9.5",
+    "uuid": "^10.0.0",
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.5.1"
+  },
+  "scripts": {
+    "start": "set PORT=3000 && react-scripts start",
+    "build": "npm run generate-meta-tag && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "generate-meta-tag": "node ./node_modules/react-cache-buster/dist/generate-meta-tag.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/react-datepicker": "^4.11.2",
+    "@types/uuid": "^10.0.0",
+    "autoprefixer": "^10.4.20",
+    "daisyui": "^4.12.13",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
+  }
+}

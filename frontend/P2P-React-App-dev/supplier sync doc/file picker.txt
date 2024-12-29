@@ -1,0 +1,21 @@
+
+
+ const [tradeLicenseFileName, setTradeLicenseFileName] = useState<string | null>('' || null);
+    const [tradeLicenseFile, setTradeLicenseFile] = useState<File | null>(null);
+
+    const handleTradeLicense = (file: File | null) => {
+        if (file) {
+            // Handle the selected file here
+            console.log('Selected file:', file);
+            setTradeLicenseFile(file);
+        } else {
+            // No file selected
+            console.log('No file selected');
+        }
+    };
+
+
+
+
+
+ <FilePickerInput onFileSelect={handleTradeLicense} mimeType='.pdf, image/*' initialFileName={tradeLicenseFileName!} maxSize={5 * 1024 * 1024} disable={isDisable} />

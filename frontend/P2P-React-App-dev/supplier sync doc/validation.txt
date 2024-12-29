@@ -1,0 +1,20 @@
+const [loginError, setLoginError] = useState<{ email?: string; password?: string; }>({});
+
+ {loginError.email && <ValidationError title={loginError.email} />}
+
+ //validation 
+    const validateLogin = () => {
+        const errors: { email?: string; password?: string } = {};
+
+        if (!email.trim()) {
+            errors.email = 'Please Enter Username/Email';
+        }
+        if (!password.trim()) {
+            errors.password = 'Please Enter Password';
+        }
+
+
+        setLoginError(errors);
+
+        return Object.keys(errors).length === 0;
+    };

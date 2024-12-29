@@ -1,0 +1,14 @@
+
+ const searchInputRef = useRef<HTMLInputElement | null>(null);
+    const [searchInput, setSearchInput] = useState('');
+
+
+    const handleSearchInputChange = (val: string) => {
+        setSearchInput(val);
+    }
+
+    const search=async()=>{
+
+    }
+
+ <CommonSearchField onChangeData={handleSearchInputChange} search={search} placeholder='Search Here' inputRef={searchInputRef } width='w-60' />

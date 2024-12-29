@@ -1,0 +1,53 @@
+
+
+ setIsActiveBank(
+        bankDetails.data.ACTIVE_STATUS === "ACTIVE" ? true : false
+      );
+
+ const [isActiveBank, setIsActiveBank] = useState<boolean>(true);
+
+
+  const [isActiveBank, setIsActiveBank] = useState<boolean>(true);
+  
+
+  const handleActivation = () => {
+    setIsActiveBank(!isActiveBank);
+    
+    openWarningModal();
+  };
+
+  const [isWarningShow, setIsWarningShow] = useState(false);
+
+  const openWarningModal = () => {
+    setIsWarningShow(true);
+  };
+
+ 
+
+  const closeWarningModal = () => {
+    setIsActiveBank(!isActiveBank);
+    setIsWarningShow(false);
+     };
+
+
+<WarningModal
+        isOpen={isWarningShow}
+        closeModal={closeWarningModal}
+        action={submit}
+        message={`Do you want to ${
+          isActiveBank ? "Activate" : "Deactivate"
+        } Bank`}
+        imgSrc="/images/warning.png"
+      />
+
+
+ let statusValue;
+        if (isRegCompelte === "0") {
+          statusValue = "ACTIVE";
+        } else if (isRegCompelte === "1" && bankAccId === null) {
+          statusValue = "IN PROCESS";
+        } else {
+          statusValue = isActiveBank ? "ACTIVE" : "DEACTIVE";
+        }
+        console.log("status value", statusValue);
+

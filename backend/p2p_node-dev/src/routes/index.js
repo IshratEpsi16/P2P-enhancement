@@ -1,0 +1,103 @@
+require("dotenv").config();
+
+const AuthRoute = require("./api/v1/authentication/authRoutes");
+const RoleAccess = require("./api/v1/roleManagement/role_access");
+const OnlyRole = require("./api/v1/roleManagement/role");
+const Uploads = require("./api/v1/uploadImage");
+const UploadPDF = require("./api/v1/uploadPDF");
+const SupOrgTypes = require("./api/v1/supplierRegistration/basicInfo/supplierOrgTypes");
+const SupBasicInfoInsert = require("./api/v1/supplierRegistration/basicInfo/supplierBasicInfoInsert");
+const SupplierInvitation = require("./api/v1/supplierRegistration/invitation/supplier_invitation");
+const GetBasicInfo = require("./api/v1/supplierRegistration/basicInfo/getBasicInfo");
+const UploadRegPdf = require("./api/v1/supplierRegistration/regDocuments/uploadRegPdf");
+const PasswordRecoveryOTPSend = require("./api/v1/passwordRecovery/pass_recovery_otp_send");
+const PasswordVerification = require("./api/v1/passwordRecovery/otp_verification");
+const PasswordResendOTP = require("./api/v1/passwordRecovery/resend_otp");
+const UpdatePassword = require("./api/v1/passwordRecovery/update_password");
+const EmployeeSyncFromEBS = require("./api/v1/employeeSync/employee_from_ebs");
+const RoleCreation = require("./api/v1/roleManagement/role_creation");
+const RoleDeletion = require("./api/v1/roleManagement/role_delete");
+const RoleMenuPermissionInsertDelete = require("./api/v1/roleManagement/role_wise_menu_permission_insert_delete");
+const UserActivationDeactivation = require("./api/v1/roleManagement/user_active_deactivation");
+const RoleMenuPermissionToUser = require("./api/v1/roleManagement/role_permission_to_user");
+const UserRoleList = require("./api/v1/roleManagement/user_role_list");
+const UserRoles = require("./api/v1/roleManagement/user_roles");
+const AllMenuPermissions = require("./api/v1/roleManagement/menu_n_permissions");
+const ORGList = require("./api/v1/roleManagement/org_list");
+const InsertDeleteORG = require("./api/v1/roleManagement/insert_delete_org");
+const PasswordUpdateNewUser = require("./api/v1/authentication/update_password");
+const MyInfo = require("./api/v1/authentication/my_info");
+const SupplierAccountCreation = require("./api/v1/supplierRegistration/authentication/account_creation");
+const SupplierInvitationView = require("./api/v1/supplierRegistration/invitation/invitation_view");
+const SupplierInvitationHistory = require("./api/v1/supplierRegistration/invitation/invitation_history");
+const BuyerSyncToWeb = require("./api/v1/employeeSync/sync_to_web");
+const supplierRegistrationRoute = require("./api/v1/supplierRegistrationMain");
+const supplierApprovalRoute = require("./api/v1/supplierApproval");
+const approvalTemplateManageModuleListRoute = require("./api/v1/approvalTemplate/index");
+const commonRoute = require("./api/v1/common");
+const pendingApplications = require("./api/v1/pendingApplication");
+const rfiRoute = require("./api/v1/rfi");
+const Login2 = require("./api/v1/authentication/login");
+const profileUpdateSupplier = require("./api/v1/supplierProfileUpdate");
+const supplierSiteOUManage = require("./api/v1/supplierSiteOUManage");
+const pr2po = require("./api/v1/pr2po");
+const cs = require("./api/v1/csCreation");
+const supplierInvitationIndex = require("./api/v1/supplierRegistration/invitation/index");
+const shipment = require("./api/v1/supplierShipment/index");
+const invoice = require("./api/v1/supplierInvoice");
+
+
+const mountRoutes = (app) => {
+  const baseurl = process.env.VERSION_1;
+  /** Routes  */
+  app.use(`${baseurl}`, AuthRoute);
+  app.use(`${baseurl}`, RoleAccess);
+  app.use(`${baseurl}`, OnlyRole);
+  app.use(`${baseurl}`, Uploads);
+  app.use(`${baseurl}`, UploadPDF);
+  app.use(`${baseurl}`, SupOrgTypes);
+  app.use(`${baseurl}`, SupBasicInfoInsert);
+  app.use(`${baseurl}`, GetBasicInfo);
+  app.use(`${baseurl}`, UploadRegPdf);
+  app.use(`${baseurl}`, PasswordRecoveryOTPSend);
+  app.use(`${baseurl}`, UpdatePassword);
+  app.use(`${baseurl}`, EmployeeSyncFromEBS);
+  app.use(`${baseurl}`, RoleCreation);
+  app.use(`${baseurl}`, RoleDeletion);
+  app.use(`${baseurl}`, RoleMenuPermissionInsertDelete);
+  app.use(`${baseurl}`, PasswordVerification);
+  app.use(`${baseurl}`, PasswordResendOTP);
+  app.use(`${baseurl}`, RoleMenuPermissionToUser);
+  app.use(`${baseurl}`, PasswordUpdateNewUser);
+  app.use(`${baseurl}`, UserRoleList);
+  app.use(`${baseurl}`, SupplierAccountCreation);
+  app.use(`${baseurl}`, UserActivationDeactivation);
+  app.use(`${baseurl}`, UserRoles);
+  app.use(`${baseurl}`, AllMenuPermissions);
+  app.use(`${baseurl}`, MyInfo);
+  app.use(`${baseurl}`, BuyerSyncToWeb);
+  app.use(`${baseurl}`, SupplierInvitation);
+  app.use(`${baseurl}`, ORGList);
+  app.use(`${baseurl}`, InsertDeleteORG);
+  app.use(`${baseurl}`, SupplierInvitationView);
+  app.use(`${baseurl}`, SupplierInvitationHistory);
+  app.use(`${baseurl}`, Login2);
+  app.use(`${baseurl}`, rfiRoute);
+  app.use(`${baseurl}/supplier-registration`, supplierRegistrationRoute);
+  app.use(`${baseurl}/supplier-approval`, supplierApprovalRoute);
+  app.use(`${baseurl}/supplier-approval`, pendingApplications);
+  app.use(`${baseurl}/supplier-profile`, profileUpdateSupplier);
+  app.use(`${baseurl}/supplier-site-ou-manage`, supplierSiteOUManage);
+  app.use(`${baseurl}/cs`, cs);
+  app.use(`${baseurl}`, pr2po);
+  app.use(`${baseurl}`, supplierInvitationIndex);
+  app.use(`${baseurl}/invoice`, invoice);
+  app.use(
+    `${baseurl}/approval-template`,
+    approvalTemplateManageModuleListRoute
+  );
+  app.use(`${baseurl}`, commonRoute);
+  app.use(`${baseurl}`, shipment);
+};
+
+module.exports = mountRoutes;

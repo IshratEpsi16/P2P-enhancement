@@ -1,0 +1,72 @@
+ const [limit, setLimit] = useState(5);
+    const [pageNo, setPageNo] = useState(1);
+    const [offset, setOffSet] = useState(0);
+ const getEmployee = async (offs: number) => {
+        setIsLoading(true);
+        const result = await EmployeeFromEbsService(token!, empId!, offs, limit);
+        console.log(result.data.total);
+
+        if (result.data.status === 200) {
+            setTotal(result.data.total);
+            setEmployeeList(result.data.data[0].Employees);
+            setIsLoading(false);
+        }
+        else {
+            setIsLoading(false);
+        }
+    }
+
+let newOffset: number;
+    const next = async () => {
+        newOffset = offset + limit;
+        const newPage = pageNo + 1;
+        setPageNo(newPage);
+        setOffSet(newOffset);
+        getEmployee(newOffset);
+    }
+    const previous = async () => {
+        newOffset = offset - limit;
+        const newPage = pageNo - 1;
+        setPageNo(newPage);
+        setOffSet(newOffset);
+        getEmployee(newOffset);
+    }
+
+  {pageNo === 1 ? pageNo + i : (offset + 1) + i}
+ <tfoot>
+                        <td className=''>
+
+                        </td>
+
+                        <td className="pl-6 py-3 whitespace-normal   " >
+                            <div className=' w-[136px]'>
+                                <ReusablePopperComponent
+                                    id={id}
+                                    open={open}
+                                    anchorEl={anchorEl}
+                                    handleClick={handleClick}
+                                    setLimit={setLimit}
+                                    limit={limit}
+                                />
+                            </div>
+                        </td>
+                        <td className=" py-3   pr-6  whitespace-normal ">
+                            <div className=' w-36'>
+                                <ReusablePaginationComponent
+                                    pageNo={pageNo === 1 ? pageNo : offset + 1}
+                                    limit={
+                                        offset === 0
+                                            ? offset + limit
+                                            : newOffset! !== undefined
+                                                ? newOffset
+                                                : offset + limit
+                                    }
+                                    total={total!}
+                                    // list={list}
+                                    previous={previous}
+                                    next={next}
+                                />
+                            </div>
+                        </td>
+
+                    </tfoot>
